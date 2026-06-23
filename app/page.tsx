@@ -171,6 +171,7 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
+            <p className="footnote mt-4">Education figures are approximate.</p>
           </div>
         </div>
       </section>

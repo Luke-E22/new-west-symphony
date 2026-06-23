@@ -14,18 +14,26 @@ export const SITE = {
   tagline: "Your Symphony. Your Choice. The Sound of California.",
   taglineShort: "Exceptional music, exceptionally close.",
   description:
-    "New West Symphony is the professional orchestra of Ventura County and the Conejo Valley — six Masterpiece concerts a year across Thousand Oaks and Camarillo, plus music education for 8,000+ students.",
+    "New West Symphony is the professional orchestra of Ventura County and the Conejo Valley — six Masterpiece concerts a year across Thousand Oaks and Camarillo, plus music education reaching thousands of students.",
   serviceArea: "Ventura County and the Conejo Valley",
   ein: "77-0406042",
   nonprofitStatus: "501(c)(3)",
   founded: 1995,
   musicDirector: "Michael Christie",
   musicDirectorTitle: "Artistic & Music Director",
-  // Set to the production origin before launch (used for canonical URLs, OG,
-  // sitemap, JSON-LD). Override with NEXT_PUBLIC_SITE_URL in the environment.
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-    "https://newwestsymphony.org",
+  // Canonical origin (canonical URLs, OG, sitemap, JSON-LD). Audit M2: a
+  // production build MUST set NEXT_PUBLIC_SITE_URL — otherwise a staging build
+  // would silently emit prod canonicals. Fail the build instead of falling back
+  // to a hardcoded prod origin; dev keeps a harmless localhost default.
+  url: (() => {
+    const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+    if (!fromEnv && process.env.NODE_ENV === "production") {
+      throw new Error(
+        "NEXT_PUBLIC_SITE_URL is required for a production build. Set it in the environment before running `next build`.",
+      );
+    }
+    return fromEnv || "http://localhost:3000";
+  })(),
   ticketOfficeHours: "Tue–Fri 10–4",
   ticketOfficePhone: "(805) 497-5800",
   ticketOfficeEmail: "boxoffice@newwestsymphony.org",
