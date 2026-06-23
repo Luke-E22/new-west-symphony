@@ -2,6 +2,41 @@ import type { NextConfig } from "next";
 import { LEGACY_EXACT, LEGACY_PREFIX, VALID_ROUTES } from "./lib/redirects";
 
 /**
+ * Security headers (audit H4). This is a fully static/SSG marketing site, so a
+ * nonce-based CSP is deliberately avoided — nonces require dynamic rendering
+ * (per the Next CSP guide) and would deopt every page. Instead: a static CSP
+ * scoped to the site's real sources ('unsafe-inline' for Next's inline hydration
+ * scripts and the app's inline style props; dev also needs 'unsafe-eval' + ws
+ * for React Fast Refresh / HMR). External origins allowed: Mailchimp (the e-news
+ * form posts directly to *.list-manage.com) and Google Analytics (H5). All other
+ * third parties (Salesforce, Ticketmaster, social) are <a> navigations, not
+ * resource loads, so they need no CSP entry.
+ */
+const isDev = process.env.NODE_ENV !== "production";
+const csp = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "frame-ancestors 'none'",
+  "form-action 'self' https://*.list-manage.com",
+  "img-src 'self' data: blob:",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://*.google-analytics.com`,
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'",
+  `connect-src 'self'${isDev ? " ws: http://localhost:*" : ""} https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com`,
+  "frame-src 'self'",
+].join("; ");
+
+const securityHeaders = [
+  { key: "Content-Security-Policy", value: csp },
+  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), browsing-topics=()" },
+];
+
+/**
  * 301 redirect map (audit B1 — launch blocker). Built from a full crawl of the
  * live WordPress sitemap (306 URLs). Every indexed old URL 301s to its new home
  * so search equity survives; unknown URLs fall through to the branded 404.
@@ -12,8 +47,12 @@ import { LEGACY_EXACT, LEGACY_PREFIX, VALID_ROUTES } from "./lib/redirects";
  */
 const nextConfig: NextConfig = {
   skipTrailingSlashRedirect: true,
+  poweredByHeader: false, // drop the X-Powered-By: Next.js info leak (H4)
   images: {
     formats: ["image/avif", "image/webp"], // AVIF/WebP for every photograph (§10)
+  },
+  async headers() {
+    return [{ source: "/:path*", headers: securityHeaders }];
   },
   async redirects() {
     const rules: {
