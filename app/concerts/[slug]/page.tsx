@@ -140,7 +140,8 @@ export default async function ConcertDetailPage({
               <div>
                 <div className="minilabel">Getting there</div>
                 <p className="muted">
-                  Free parking at both venues, steps from the doors. Doors open 60 minutes ahead.
+                  Parking is $16 per vehicle in the Thousand Oaks structure and free
+                  on-campus in Camarillo. Doors open 60 minutes ahead.
                 </p>
               </div>
               <div>
@@ -152,8 +153,9 @@ export default async function ConcertDetailPage({
             </div>
           </div>
 
-          {/* Right — sticky ticket panel (desktop) */}
-          <aside className="ticket-panel detail-ticket-desktop">
+          {/* Right — sticky ticket panel (desktop). A div, not <aside>: a
+              complementary landmark must be top-level, not nested in <main>. */}
+          <div className="ticket-panel detail-ticket-desktop">
             <Card accent padding="var(--space-6)">
               <div
                 style={{
@@ -215,7 +217,7 @@ export default async function ConcertDetailPage({
                 </>
               )}
             </Card>
-          </aside>
+          </div>
         </div>
       </section>
 
