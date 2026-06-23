@@ -15,8 +15,8 @@ export const metadata: Metadata = buildMetadata({
 });
 
 const VENUE_PHOTOS = {
-  to: "/assets/photos/photo-hero-hall.jpg",
-  cam: "/assets/photos/photo-concerts.jpg",
+  to: "/assets/venues/bofa-pac-thousand-oaks.jpg",
+  cam: "/assets/venues/rancho-campana-camarillo.jpg",
 } as const;
 
 const mapsHref = (addressLine: string) =>
