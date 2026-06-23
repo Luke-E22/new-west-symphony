@@ -50,6 +50,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false, // drop the X-Powered-By: Next.js info leak (H4)
   images: {
     formats: ["image/avif", "image/webp"], // AVIF/WebP for every photograph (§10)
+    qualities: [50, 55, 75], // allow a lighter hero encode (audit H8); 75 default elsewhere
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

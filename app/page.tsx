@@ -27,6 +27,7 @@ export default function HomePage() {
             alt="Michael Christie conducting the New West Symphony before a full house"
             fill
             priority
+            quality={55}
             sizes="100vw"
             style={{ objectFit: "cover" }}
           />

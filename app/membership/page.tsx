@@ -34,6 +34,7 @@ export default function MembershipPage() {
             alt="A full concert hall before a New West Symphony performance"
             fill
             priority
+            quality={55}
             sizes="100vw"
             style={{ objectFit: "cover" }}
           />
