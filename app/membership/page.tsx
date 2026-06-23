@@ -122,6 +122,14 @@ export default function MembershipPage() {
                     <span className="tier-feature__v">{tier.seating}</span>
                   </div>
                   <div className="tier-feature">
+                    <span className="tier-feature__k">Seating by venue</span>
+                    <span className="tier-feature__v">
+                      Thousand Oaks · {tier.seatingByVenue.to}
+                      <br />
+                      Camarillo · {tier.seatingByVenue.cam}
+                    </span>
+                  </div>
+                  <div className="tier-feature">
                     <span className="tier-feature__k">Member events</span>
                     <span className="tier-feature__v">{tier.memberEvents}</span>
                   </div>
