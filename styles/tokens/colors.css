@@ -1,0 +1,54 @@
+/* New West Symphony — Color tokens
+   Brand: deep symphony Navy + antique Gold, sampled from the official logo.
+   Palette is warm-neutral and editorial: ivory paper, ink text, gold accent. */
+
+:root {
+  /* ---- Brand core ---- */
+  --nws-navy:        #1E2A6E;  /* primary — logo blue */
+  --nws-navy-deep:   #141C4C;  /* darker navy for large fields / footers */
+  --nws-navy-ink:    #0E1433;  /* near-black navy, deepest */
+  --nws-gold:        #C0903F;  /* primary accent — logo gold */
+  --nws-gold-bright: #D6A954;  /* lifted gold for hovers / highlights */
+  --nws-gold-deep:   #8A6526;  /* pressed / underline gold */
+
+  /* ---- Neutrals (warm ivory → ink) ---- */
+  --nws-ivory:       #FBF8F1;  /* primary page background — warm paper */
+  --nws-cream:       #F4EEE1;  /* secondary surface / section banding */
+  --nws-sand:        #E8DFCB;  /* hairline cards on ivory, muted fields */
+  --nws-stone:       #C9BFA8;  /* borders, dividers on warm grounds */
+  --nws-slate:       #6B6754;  /* muted/caption text on light */
+  --nws-ink:         #211F1A;  /* primary body text — warm near-black */
+  --nws-white:       #FFFFFF;
+
+  /* ---- Semantic accents ---- */
+  --nws-burgundy:    #7A2230;  /* secondary brand accent — deep theatre red */
+  --nws-sage:        #4F6B52;  /* success / education program accent */
+  --nws-error:       #A32B26;
+  --nws-warning:     #B8841F;
+
+  /* ====== Semantic aliases ====== */
+  --surface-page:        var(--nws-ivory);
+  --surface-raised:      var(--nws-white);
+  --surface-sunken:      var(--nws-cream);
+  --surface-card:        var(--nws-white);
+  --surface-inverse:     var(--nws-navy);
+  --surface-inverse-deep:var(--nws-navy-deep);
+  --surface-band:        var(--nws-cream);
+
+  --text-strong:    var(--nws-ink);
+  --text-body:      #34302A;
+  --text-muted:     var(--nws-slate);
+  --text-on-dark:   #F3EFE6;
+  --text-on-dark-muted: #B9BFD6;
+  --text-accent:    var(--nws-gold-deep);
+
+  --border-subtle:  var(--nws-sand);
+  --border-default: var(--nws-stone);
+  --border-strong:  var(--nws-slate);
+  --border-on-dark: rgba(255,255,255,0.16);
+
+  --accent-primary:   var(--nws-navy);
+  --accent-secondary: var(--nws-gold);
+
+  --focus-ring: rgba(192,144,63,0.55);
+}

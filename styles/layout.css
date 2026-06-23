@@ -1,0 +1,271 @@
+/* New West Symphony — header & footer shell. Token-only. */
+
+/* =========================================================== Header ======= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(251, 248, 241, 0.86); /* frosted ivory — the only blur */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: var(--border-hairline) solid var(--border-subtle);
+}
+.site-header__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 72px;
+  padding-block: var(--space-3);
+  /* The header needs more room than the 1200 content container for the
+     brand + 7-item nav + action cluster, so it spans a little wider. */
+  max-width: 1340px;
+}
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  flex: none;
+}
+.brand-lockup__divider {
+  width: 1px;
+  height: 34px;
+  background: var(--border-default);
+}
+.brand-lockup__wordmark {
+  font: 700 13px/1.18 var(--font-sans);
+  letter-spacing: 0.16em;
+  color: var(--nws-navy);
+  text-transform: uppercase;
+}
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-inline: auto;
+}
+.site-nav__link {
+  font: 600 12.5px/1 var(--font-sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-strong);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.site-nav__link:hover {
+  color: var(--nws-gold-deep);
+}
+.site-nav__link[aria-current="page"] {
+  color: var(--nws-gold-deep);
+}
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: none;
+}
+.site-header__menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: var(--border-hairline) solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--nws-navy);
+  cursor: pointer;
+}
+
+/* Mobile menu panel */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(14, 20, 51, 0.5);
+  display: none;
+}
+.mobile-menu[data-open="true"] {
+  display: block;
+}
+.mobile-menu__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(360px, 86vw);
+  height: 100%;
+  background: var(--surface-page);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-6) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  overflow-y: auto;
+}
+.mobile-menu__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+.mobile-menu__close {
+  width: 44px;
+  height: 44px;
+  border: var(--border-hairline) solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--nws-navy);
+  cursor: pointer;
+  font-size: 20px;
+}
+.mobile-menu__link {
+  font: 600 15px/1 var(--font-sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-strong);
+  text-decoration: none;
+  padding: var(--space-4) 0;
+  border-bottom: var(--border-hairline) solid var(--border-subtle);
+}
+.mobile-menu__link[aria-current="page"] {
+  color: var(--nws-gold-deep);
+}
+.mobile-menu__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+/* Buy Tickets (the lowest-priority action) only appears when the bar is wide
+   enough for all three; below that, Become a Member + Donate stay visible. */
+@media (max-width: 1340px) {
+  .site-header__actions .action--buy {
+    display: none;
+  }
+}
+/* Collapse the nav to a hamburger before the nav + buttons would crowd
+   (the 7-item nav + Member + Donate needs ~1240px to fit). */
+@media (max-width: 1240px) {
+  .site-nav {
+    display: none;
+  }
+  .site-header__menu-toggle {
+    display: inline-flex;
+    order: 3;
+  }
+  .site-header__actions {
+    margin-inline-start: auto;
+  }
+}
+@media (max-width: 520px) {
+  .brand-lockup__wordmark {
+    display: none;
+  }
+  .site-header__actions .btn {
+    padding-inline: var(--space-3);
+    font-size: 12px;
+  }
+}
+
+/* =========================================================== Footer ======= */
+.site-footer {
+  background: var(--nws-navy-ink);
+  color: var(--text-on-dark);
+}
+.site-footer a {
+  color: var(--text-on-dark);
+}
+.site-footer a:hover {
+  color: var(--nws-gold-bright);
+}
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: var(--space-7);
+  padding-block: var(--space-8);
+}
+.footer-col__title {
+  font: var(--type-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--nws-gold-bright);
+  margin-bottom: var(--space-4);
+}
+.footer-col p,
+.footer-col address {
+  font: var(--type-body-s);
+  color: var(--text-on-dark-muted);
+  font-style: normal;
+  line-height: 1.7;
+}
+.footer-col__tagline {
+  font: 500 italic 1.25rem/1.4 var(--font-display);
+  color: var(--text-on-dark);
+  margin: var(--space-4) 0;
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  font: var(--type-body-s);
+}
+.footer-socials {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+.social-pill {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  border: var(--border-hairline) solid var(--border-on-dark);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nws-gold-bright);
+  font: 600 12px/1 var(--font-sans);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+.social-pill:hover {
+  background: var(--nws-gold);
+  color: var(--nws-navy-ink);
+}
+.enews-form {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+.enews-form .field {
+  flex: 1;
+}
+.site-footer__bottom {
+  border-top: var(--border-hairline) solid var(--border-on-dark);
+  padding-block: var(--space-5);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  justify-content: space-between;
+  font: var(--type-caption);
+  color: var(--text-on-dark-muted);
+}
+.site-footer__bottom a {
+  color: var(--text-on-dark-muted);
+}
+
+@media (max-width: 960px) {
+  .site-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+}
+@media (max-width: 560px) {
+  .site-footer__grid {
+    grid-template-columns: 1fr;
+  }
+}
