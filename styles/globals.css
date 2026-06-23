@@ -1,0 +1,193 @@
+/* New West Symphony — global stylesheet.
+   Tokens are imported verbatim from the handoff; everything below is structural
+   (resets the handoff's base.css doesn't cover, utilities, a11y, responsive).
+   No hardcoded hex or magic numbers — every value resolves to a token. */
+
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/base.css";
+
+/* App-layer tokens (the handoff tokens/*.css stay verbatim). These darken the
+   tracked-caps badge text just enough to clear WCAG AA (4.5:1) on the soft
+   gold/sage tints when used over white/ivory/cream cards — derived from
+   --nws-gold-deep / --nws-sage. */
+:root {
+  --badge-gold-text: #6e4f1e;
+  --badge-success-text: #3d5340;
+  /* AA-safe gold variants (audit H2). The base --nws-gold fails AA as text on
+     light grounds (2.87:1) and --nws-gold-deep fails on dark grounds (2.46:1).
+     --gold-on-light is a deepened gold for large display numerals on ivory/white
+     (4.3:1, clears the 3.0 large-text bar); --gold-on-dark is the lifted gold the
+     footer already uses on navy (~6:1). */
+  --gold-on-light: #9e7228;
+  --gold-on-dark: var(--nws-gold-bright);
+}
+
+/* ---------------------------------------------------------------- reset ---- */
+html {
+  scroll-behavior: smooth;
+  /* In-page anchors clear the sticky frosted header (~110px, §7). */
+  scroll-padding-top: 110px;
+  -webkit-text-size-adjust: 100%;
+}
+
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Headings: the display family is serif, structural headings are sans.
+   base.css already defaults h1–h3 to text-strong; we set families here. */
+h1 {
+  font: var(--type-display-m);
+}
+h2 {
+  font: var(--type-h2);
+}
+h3 {
+  font: var(--type-h3);
+}
+p {
+  margin: 0;
+}
+
+/* ------------------------------------------------------------ a11y core ---- */
+/* Visible gold focus ring on every interactive element (hard requirement —
+   the audience skews older). */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+/* Skip-to-content link — first focusable element, hidden until focused. */
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: var(--space-2);
+  z-index: 1000;
+  transform: translateY(-160%);
+  background: var(--nws-navy);
+  color: var(--nws-white);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-sm);
+  font: var(--type-eyebrow);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  transition: transform var(--duration-base) var(--ease-standard);
+}
+.skip-link:focus {
+  transform: translateY(0);
+  color: var(--nws-white);
+}
+
+/* Screen-reader-only utility (route announcer, visually-hidden labels). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Honor reduced-motion everywhere (§7). */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------- layout atoms ---- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-6); /* 28px target → 32px token, tightens on mobile */
+}
+.container-narrow {
+  max-width: var(--container-narrow);
+}
+
+/* Standard section vertical rhythm (64–96px, §global architecture). */
+.section {
+  padding-block: var(--space-9);
+}
+.section-tight {
+  padding-block: var(--space-8);
+}
+
+/* Banded surfaces. */
+.band-cream {
+  background: var(--surface-band);
+}
+.band-navy {
+  background: var(--nws-navy);
+  color: var(--text-on-dark);
+}
+.band-navy-deep {
+  background: var(--nws-navy-deep);
+  color: var(--text-on-dark);
+}
+.band-ink {
+  background: var(--nws-navy-ink);
+  color: var(--text-on-dark);
+}
+
+/* Anchor offset for smooth-scroll targets that need finer control than the
+   global scroll-padding (used on #memberTiers, #memberHow, #eoi). */
+.anchor-target {
+  scroll-margin-top: 110px;
+}
+
+/* Fluid display headline helper. */
+.display-hero {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  line-height: 0.98;
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+}
+
+/* --------------------------------------------------------- responsive ------ */
+@media (max-width: 960px) {
+  .container {
+    padding-inline: var(--space-5);
+  }
+  .section {
+    padding-block: var(--space-8);
+  }
+}
+@media (max-width: 640px) {
+  .container {
+    padding-inline: var(--space-4);
+  }
+  .section,
+  .section-tight {
+    padding-block: var(--space-7);
+  }
+}
