@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   title: `${SITE.name} — ${SITE.tagline}`,
   description: SITE.description,
   applicationName: SITE.name,
+  // Beta/staging deploys set SITE_NOINDEX=true → every page emits noindex.
+  robots:
+    process.env.SITE_NOINDEX === "true"
+      ? { index: false, follow: false }
+      : undefined,
   openGraph: {
     type: "website",
     siteName: SITE.name,

@@ -1,0 +1,19 @@
+# Netlify deploy config — New West Symphony (Next.js 16, server-rendered).
+# The @netlify/plugin-nextjs runtime builds SSR, server actions, dynamic OG
+# images, and next/image optimization into Netlify Functions. Do NOT set a
+# static `publish` dir — the plugin wires the output automatically.
+
+[build]
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Required/optional environment variables are set in the Netlify dashboard
+# (Site settings → Environment variables), NOT here — see BETA-DEPLOY.md:
+#   NEXT_PUBLIC_SITE_URL   (REQUIRED — the build fails without it)
+#   SITE_NOINDEX=true      (recommended for the beta so Google won't index it)
+#   NEXT_PUBLIC_GA_ID, BOARD_INTEREST_ENDPOINT, BOARD_INTEREST_TOKEN (optional)
