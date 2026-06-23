@@ -57,7 +57,9 @@ export default function Header() {
     <header className="site-header">
       <div className="container site-header__bar">
         <Link href="/" className="brand-lockup" aria-label="New West Symphony — home">
-          <Logo variant="mark" height={42} priority />
+          {/* Decorative: the link's aria-label + visible wordmark name the lockup,
+              so an alt here would be redundant (axe image-redundant-alt). */}
+          <Logo variant="mark" height={42} priority alt="" />
           <span className="brand-lockup__divider" aria-hidden="true" />
           <span className="brand-lockup__wordmark">
             New West
