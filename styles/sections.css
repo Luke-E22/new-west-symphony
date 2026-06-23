@@ -910,7 +910,8 @@
   flex-direction: column;
   gap: var(--space-2);
 }
-.amount-card[aria-pressed="true"] {
+.amount-card[aria-pressed="true"],
+.amount-card[data-active="true"] {
   border: var(--border-thick) solid var(--nws-gold);
   box-shadow: var(--shadow-gold);
 }
@@ -918,7 +919,8 @@
   font: 600 30px/1 var(--font-display);
   color: var(--nws-navy);
 }
-.amount-card[aria-pressed="true"] .amount-card__n {
+.amount-card[aria-pressed="true"] .amount-card__n,
+.amount-card[data-active="true"] .amount-card__n {
   color: var(--nws-gold-deep);
 }
 .amount-card__impact {
