@@ -51,7 +51,7 @@ export default function MembershipPage() {
             </p>
             <p className="hero__clarifier">Not a fixed subscription. Not a donation.</p>
             <div className="hero__actions">
-              <Button href="#memberTiers" variant="gold" size="lg">
+              <Button href="#memberTiers" variant="gold" size="lg" track="become_member_click" trackParams={{ location: "membership-hero" }}>
                 Become a Member
               </Button>
               <Button href="#memberHow" variant="ghost" size="lg" onDark>
@@ -134,6 +134,8 @@ export default function MembershipPage() {
                     href={MEMBERSHIP_PURCHASE_URL}
                     variant={tier.featured ? "gold" : "ghost"}
                     fullWidth
+                    track="membership_tier_selected"
+                    trackParams={{ tier: tier.name, price: tier.priceAmount }}
                   >
                     Choose {tier.name}
                   </Button>
@@ -192,7 +194,7 @@ export default function MembershipPage() {
             className="hero__actions"
             style={{ justifyContent: "center", marginTop: "var(--space-7)" }}
           >
-            <Button href={MEMBERSHIP_PURCHASE_URL} variant="gold" size="lg">
+            <Button href={MEMBERSHIP_PURCHASE_URL} variant="gold" size="lg" track="become_member_click" trackParams={{ location: "membership-footer-cta" }}>
               Become a Member
             </Button>
             <Button href="/concerts" variant="ghost" size="lg" onDark>

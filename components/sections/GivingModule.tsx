@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Button from "@/components/core/Button";
+import { track } from "@/lib/analytics";
 import { EXTERNAL } from "@/lib/config";
 import { MONTHLY_AMOUNTS, ONE_TIME_AMOUNTS } from "@/lib/data";
 
@@ -71,6 +72,7 @@ export default function GivingModule() {
             onClick={() => {
               setAmount(a.value);
               setCustom("");
+              track("donation_amount_selected", { amount: a.value, freq });
             }}
           >
             <span className="amount-card__n">
@@ -121,6 +123,8 @@ export default function GivingModule() {
         variant="gold"
         size="lg"
         fullWidth
+        track="donate_click"
+        trackParams={{ location: "giving-module", amount: effectiveAmount, freq, custom: customActive }}
         aria-label={`Continue to give $${effectiveAmount}${suffix}`}
       >
         Continue to Give
