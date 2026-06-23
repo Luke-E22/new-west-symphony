@@ -46,9 +46,13 @@ export default async function ConcertDetailPage({
 
   const more = CONCERTS.filter((c) => c.slug !== concert.slug).slice(0, 3);
   const lowest = Math.min(...concert.priceTiers.map((t) => t.amount));
-  const ticketUrl = concert.venueKeys.includes("to")
-    ? EXTERNAL.ticketsThousandOaks
-    : EXTERNAL.ticketsCamarillo;
+  // Prefer the real per-concert ticketing URL once NWS supplies it (audit M1);
+  // until then fall back to the venue's provider URL (a placeholder).
+  const ticketUrl =
+    concert.ticketUrl ??
+    (concert.venueKeys.includes("to")
+      ? EXTERNAL.ticketsThousandOaks
+      : EXTERNAL.ticketsCamarillo);
   const isPast = isConcertPast(concert);
 
   return (
@@ -186,14 +190,20 @@ export default async function ConcertDetailPage({
                   <h2 style={{ font: "var(--type-h2)", color: "var(--text-strong)", margin: "var(--space-2) 0 0" }}>
                     Choose your seats
                   </h2>
+                  {/* Seating tiers are real categories; the 2026 single-ticket
+                      prices are unconfirmed (audit H7), so we show the tiers and
+                      a "from" anchor but not hard per-tier prices. */}
                   <ul className="price-list">
                     {concert.priceTiers.map((t) => (
                       <li key={t.tier}>
                         <span>{t.tier}</span>
-                        <span className="price">{t.price}</span>
                       </li>
                     ))}
                   </ul>
+                  <p className="footnote">
+                    Seating tiers are representative; 2026 single-ticket prices are
+                    subject to change.
+                  </p>
                   <Button href={ticketUrl} variant="gold" size="lg" fullWidth track="buy_tickets_click" trackParams={{ location: "concert-detail", concert: concert.slug }}>
                     Buy Tickets
                   </Button>

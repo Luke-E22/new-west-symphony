@@ -54,10 +54,14 @@ export const MEMBERSHIP_PURCHASE_URL = "/membership#purchase-tbc";
 
 /** External ticketing & giving providers (the site links out; it sells nothing). */
 export const EXTERNAL = {
-  // Tickets — Ticketmaster for Thousand Oaks (BAPAC), Salesforce Sites for Camarillo.
+  // Tickets — venue-level fallbacks only. TODO(NWS): replace with the REAL
+  // per-concert ticketing URLs (set Concert.ticketUrl on each concert). The
+  // Thousand Oaks value is a provider HOMEPAGE placeholder, not an event page,
+  // so "Buy Tickets" is a dead-end until real links are supplied (audit M1).
   ticketsThousandOaks: "https://www.ticketmaster.com/",
   ticketsCamarillo: "https://nws.my.salesforce-sites.com/tickets",
   // Donations — the Salesforce donation form (the separate, tax-deductible flow).
+  // TODO(NWS): confirm this is the live donation URL.
   donate: "https://nws.my.salesforce-sites.com/donate",
   // Existing Salesforce patron portal (kept live through cutover, §11).
   patronLogin: "https://nws.my.salesforce-sites.com/patron",
