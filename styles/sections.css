@@ -893,9 +893,16 @@
 }
 .amount-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* minmax(0,1fr), not 1fr: the "Other amount" input's intrinsic min-width
+     would otherwise blow out its column and make the boxes uneven at wide widths. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: 1fr; /* every amount box the same height */
   gap: var(--space-3);
+}
+/* Let the custom-amount input shrink to its column instead of forcing it wider. */
+.amount-card .field__control {
+  width: 100%;
+  min-width: 0;
 }
 .amount-card {
   background: var(--surface-card);
