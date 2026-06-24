@@ -54,8 +54,9 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className="site-header">
-      <div className="container site-header__bar">
+    <>
+      <header className="site-header">
+        <div className="container site-header__bar">
         <Link href="/" className="brand-lockup" aria-label="New West Symphony — home">
           {/* Decorative: the link's aria-label + visible wordmark name the lockup,
               so an alt here would be redundant (axe image-redundant-alt). */}
@@ -106,8 +107,12 @@ export default function Header() {
             ☰
           </span>
         </button>
-      </div>
+        </div>
+      </header>
 
+      {/* Rendered OUTSIDE <header>: the header's backdrop-filter would otherwise
+          make this fixed overlay positioned/clipped to the header strip (a known
+          iOS Safari containing-block quirk), trapping the menu behind the hero. */}
       <div
         id="mobile-menu"
         className="mobile-menu"
@@ -152,6 +157,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }

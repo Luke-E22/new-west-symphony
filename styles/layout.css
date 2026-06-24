@@ -159,13 +159,20 @@
     margin-inline-start: auto;
   }
 }
-@media (max-width: 520px) {
-  .brand-lockup__wordmark {
+/* Phones: the bar can't hold the brand + two text CTAs + the hamburger, so the
+   CTAs (which also live in the menu) drop out and only the hamburger remains. */
+@media (max-width: 640px) {
+  .site-header__actions {
     display: none;
   }
-  .site-header__actions .btn {
-    padding-inline: var(--space-3);
-    font-size: 12px;
+  .site-header__menu-toggle {
+    margin-inline-start: auto;
+  }
+}
+@media (max-width: 520px) {
+  .brand-lockup__wordmark,
+  .brand-lockup__divider {
+    display: none;
   }
 }
 
