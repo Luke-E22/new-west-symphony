@@ -72,6 +72,13 @@ p {
   outline-offset: 2px;
   border-radius: var(--radius-xs);
 }
+/* The route-change <h1> gets tabindex="-1" and is focused for screen readers
+   (RouteFocus). It isn't keyboard-reachable, so it must not show the ring —
+   iOS Safari otherwise paints it as a gold box around the page title. */
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
 
 /* Skip-to-content link — first focusable element, hidden until focused. */
 .skip-link {
