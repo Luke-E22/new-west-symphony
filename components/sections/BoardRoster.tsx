@@ -5,6 +5,7 @@ import { SocialIcon } from "@/components/Icons";
 const LINK_LABELS = {
   linkedin: "on LinkedIn",
   instagram: "on Instagram",
+  facebook: "on Facebook",
   website: "— personal website",
 } as const;
 

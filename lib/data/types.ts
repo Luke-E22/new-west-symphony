@@ -113,7 +113,7 @@ export interface EducationDetail {
 }
 
 export interface PersonLink {
-  kind: "linkedin" | "instagram" | "website";
+  kind: "linkedin" | "instagram" | "facebook" | "website";
   href: string;
 }
 
