@@ -1063,6 +1063,21 @@
   font: var(--type-caption);
   color: var(--text-muted);
 }
+.roster-person__links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+.roster-person__link {
+  display: inline-flex;
+  color: var(--text-muted);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.roster-person__link:hover,
+.roster-person__link:focus-visible {
+  color: var(--nws-gold-deep);
+}
 
 /* =============================================== Icon chips / benefits ==== */
 .icon-chip {

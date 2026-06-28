@@ -1,5 +1,12 @@
 import Image from "next/image";
 import { BOARD_MEMBERS, AVATAR_GRADIENTS } from "@/lib/data";
+import { SocialIcon } from "@/components/Icons";
+
+const LINK_LABELS = {
+  linkedin: "on LinkedIn",
+  instagram: "on Instagram",
+  website: "— personal website",
+} as const;
 
 /**
  * Board of Directors roster with real headshots. The data order centers Luke
@@ -34,6 +41,22 @@ export default function BoardRoster() {
           <figcaption>
             <div className="roster-person__name">{m.name}</div>
             <div className="roster-person__role">{m.role}</div>
+            {m.links && m.links.length > 0 && (
+              <div className="roster-person__links">
+                {m.links.map((link) => (
+                  <a
+                    key={link.kind}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="roster-person__link"
+                    aria-label={`${m.name} ${LINK_LABELS[link.kind]}`}
+                  >
+                    <SocialIcon name={link.kind} size={16} />
+                  </a>
+                ))}
+              </div>
+            )}
           </figcaption>
         </figure>
       ))}

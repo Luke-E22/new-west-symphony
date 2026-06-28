@@ -8,7 +8,16 @@ export const BOARD_MEMBERS: Person[] = [
   { name: "Anthony Vasquez", role: "Chair", photo: "/assets/board/anthony-vasquez.jpg" },
   { name: "Cathy Lichtenberger, Ed.D.", role: "Director", photo: "/assets/board/cathy-lichtenberger.jpg" },
   { name: "Phil Lichtenberger", role: "Director", photo: "/assets/board/phil-lichtenberger.jpg" },
-  { name: "Luke Erickson", role: "Director", photo: "/assets/board/luke-erickson-v3.jpg" },
+  {
+    name: "Luke Erickson",
+    role: "Director",
+    photo: "/assets/board/luke-erickson-v3.jpg",
+    links: [
+      { kind: "linkedin", href: "https://www.linkedin.com/in/luke-erickson/" },
+      { kind: "instagram", href: "https://www.instagram.com/luke_erickson/" },
+      { kind: "website", href: "https://lukeerickson.com" },
+    ],
+  },
   { name: "Marijane Unter", role: "Director", photo: "/assets/board/marijane-unter.png" },
   { name: "Gary Wartik", role: "Director", photo: "/assets/board/gary-wartik-v5.jpg" },
   { name: "Erin Pohl", role: "Director", photo: "/assets/board/erin-pohl.png" },

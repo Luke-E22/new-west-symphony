@@ -112,11 +112,18 @@ export interface EducationDetail {
   photo: string;
 }
 
+export interface PersonLink {
+  kind: "linkedin" | "instagram" | "website";
+  href: string;
+}
+
 export interface Person {
   name: string;
   role: string;
   /** Headshot path under /assets/board (real board photos). */
   photo?: string;
+  /** Optional personal links shown on the board card. */
+  links?: PersonLink[];
 }
 
 export interface OrchestraSection {
