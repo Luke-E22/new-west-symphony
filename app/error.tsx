@@ -7,7 +7,7 @@ import Button from "@/components/core/Button";
 /**
  * Branded route error boundary (audit Low). Catches runtime errors in page
  * segments and offers a retry. Next 16 passes `unstable_retry` (not `reset`).
- * Root-layout errors would need a separate global-error.tsx.
+ * Root-layout errors are handled by the sibling app/global-error.tsx.
  */
 export default function Error({
   error,

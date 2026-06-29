@@ -24,7 +24,7 @@ export default function ConcertsPage() {
             src="/assets/photos/christie-conducting.jpg"
             alt="The New West Symphony performing under Michael Christie"
             fill
-            priority
+            preload
             quality={55}
             sizes="100vw"
             style={{ objectFit: "cover" }}

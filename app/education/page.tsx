@@ -23,7 +23,8 @@ export default function EducationPage() {
             src="/assets/photos/education-harmony.jpg"
             alt="Students of the Laby Harmony Project performing together"
             fill
-            priority
+            preload
+            quality={55}
             sizes="100vw"
             style={{ objectFit: "cover", objectPosition: "center 40%" }}
           />

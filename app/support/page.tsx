@@ -30,7 +30,8 @@ export default function SupportPage() {
                 src="/assets/photos/photo-donate.jpg"
                 alt="A young student holding a violin at a New West Symphony education program"
                 fill
-                priority
+                preload
+                quality={55}
                 sizes="(max-width: 960px) 100vw, 45vw"
                 style={{ objectFit: "cover" }}
               />

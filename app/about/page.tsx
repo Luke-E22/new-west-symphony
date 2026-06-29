@@ -52,6 +52,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="media-frame">
+            {/* TODO(audit P2): the only above-the-fold hero without preload/quality (support's identical 45vw media-frame sets priority). Add preload + quality={55} for consistency. (Not the LCP element — the H1 column renders first.) — see AUDIT.md */}
             <Image
               src="/assets/photos/christie-conducting.jpg"
               alt="Michael Christie conducting the New West Symphony"

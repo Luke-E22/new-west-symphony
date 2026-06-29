@@ -48,6 +48,7 @@ export function concertJsonLd(concert: Concert) {
       "@type": "MusicEvent",
       name: concert.title,
       description: concert.blurb,
+      // TODO(audit P2): add endDate (recommended by Google Event structured data) — startDate + a default ~2h duration; strengthens every concert's rich result. — see AUDIT.md
       startDate: perf.startDate,
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",

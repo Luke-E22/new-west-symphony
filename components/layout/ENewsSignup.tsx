@@ -13,6 +13,7 @@ import { EXTERNAL } from "@/lib/config";
 export default function ENewsSignup() {
   const [submitted, setSubmitted] = useState(false);
 
+  // TODO(audit P2): "Thanks!" shows optimistically regardless of Mailchimp success; input stays editable + button stuck. Disable input/button after submit (cross-origin embed has no success callback) or time-box the label. — see AUDIT.md
   return (
     <form
       className="enews-form"

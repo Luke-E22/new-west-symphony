@@ -66,7 +66,8 @@ export default async function ConcertDetailPage({
             src="/assets/photos/orchestra-performance.jpg"
             alt="The New West Symphony in performance"
             fill
-            priority
+            preload
+            quality={55}
             sizes="100vw"
             style={{ objectFit: "cover", objectPosition: "center 35%" }}
           />

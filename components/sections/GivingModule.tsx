@@ -31,6 +31,7 @@ export default function GivingModule() {
     setCustom("");
   }
 
+  // TODO(audit P2): build with URL/URLSearchParams — if EXTERNAL.donate ever gains its own query string this template produces a double "?" and drops amount/frequency. — see AUDIT.md
   const donateHref = `${EXTERNAL.donate}?amount=${effectiveAmount}&frequency=${freq}`;
 
   return (
@@ -96,8 +97,15 @@ export default function GivingModule() {
               inputMode="numeric"
               placeholder="Custom"
               value={custom}
-              onChange={(e) => setCustom(e.target.value.replace(/[^\d]/g, ""))}
+              onChange={(e) => {
+                const v = e.target.value.replace(/[^\d]/g, "");
+                setCustom(v);
+                // Deselect the preset cards while a custom amount is entered so
+                // customActive activates; restore the default when cleared.
+                setAmount(v === "" ? (freq === "once" ? 150 : 25) : -1);
+              }}
               aria-label="Custom donation amount in dollars"
+              // TODO(audit P2): minHeight:40 overrides the 44px .field__control min and bypasses the token scale — remove/raise to 44 (sub-44 tap target). — see AUDIT.md
               style={{ minHeight: 40 }}
             />
           </div>
@@ -123,6 +131,7 @@ export default function GivingModule() {
         variant="gold"
         size="lg"
         fullWidth
+        disabled={effectiveAmount <= 0}
         track="donate_click"
         trackParams={{ location: "giving-module", amount: effectiveAmount, freq, custom: customActive }}
         aria-label={`Continue to give $${effectiveAmount}${suffix}`}

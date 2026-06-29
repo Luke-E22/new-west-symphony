@@ -349,6 +349,7 @@
   flex-direction: column;
   gap: var(--space-5);
 }
+/* TODO(audit P2): dead CSS — .concert-row* (~65 lines, fixed 240px col, no 641-960px fallback) is unreferenced; the list uses .poster-*. Remove. — see AUDIT.md */
 .concert-row {
   display: grid;
   grid-template-columns: 240px 1fr;
@@ -433,6 +434,7 @@
   gap: var(--space-4);
   flex-wrap: wrap;
 }
+/* TODO(audit P2): cursor:pointer + transition but no :hover on unselected chips — concerts filter feels non-interactive on hover; add :hover:not([aria-pressed=true]). — see AUDIT.md */
 .filter-chip {
   border: var(--border-hairline) solid var(--border-default);
   border-radius: var(--radius-pill);
@@ -818,6 +820,7 @@
 .faq-item {
   border-bottom: var(--border-hairline) solid var(--border-default);
 }
+/* TODO(audit P2): cursor:pointer but no :hover rule — row reads as static text on hover; add .faq-item__q:hover affordance. — see AUDIT.md */
 .faq-item__q {
   width: 100%;
   display: flex;
@@ -845,11 +848,19 @@
   overflow: hidden;
   max-height: 0;
   opacity: 0;
-  transition: max-height var(--duration-base) ease, opacity var(--duration-base) ease;
+  /* visibility:hidden removes the collapsed answer from the accessibility tree
+     (so screen readers don't announce every answer) while keeping it in layout
+     for the max-height animation; the delay keeps it visible during collapse. */
+  visibility: hidden;
+  transition: max-height var(--duration-base) ease, opacity var(--duration-base) ease,
+    visibility 0s linear var(--duration-base);
 }
+/* TODO(audit P2): fixed max-height:320px can silently clip a long answer on narrow screens (overflow:hidden, no scroll) — use a generous value or grid-template-rows 0fr->1fr. — see AUDIT.md */
 .faq-item__a[data-open="true"] {
   max-height: 320px;
   opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
 }
 .faq-item__a-inner {
   padding: 0 0 var(--space-5);
@@ -873,6 +884,7 @@
   padding: 4px;
   margin: var(--space-5) 0;
 }
+/* TODO(audit P2): cursor:pointer + transition but no :hover on the inactive segment — no feedback on the donation frequency toggle; add :hover:not([aria-pressed=true]). — see AUDIT.md */
 .seg-toggle__btn {
   flex: 1;
   text-align: center;
@@ -904,6 +916,7 @@
   width: 100%;
   min-width: 0;
 }
+/* TODO(audit P2): cursor:pointer + transition but no :hover — donation amount cards feel flat on hover, unlike poster/edu cards; add a hover lift on unselected cards. — see AUDIT.md */
 .amount-card {
   background: var(--surface-card);
   border: var(--border-hairline) solid var(--border-subtle);
@@ -1071,6 +1084,10 @@
 }
 .roster-person__link {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
   color: var(--text-muted);
   transition: color var(--duration-fast) var(--ease-standard);
 }
@@ -1307,7 +1324,8 @@
   .card-grid,
   .benefits-grid,
   .stat-cards,
-  .duties-grid {
+  .duties-grid,
+  .steps-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .split,
@@ -1358,6 +1376,7 @@
     align-items: flex-start;
     text-align: left;
   }
+  /* TODO(audit P2): grid-template-columns on .stat-row and .roster (both display:flex, here + the 960px block) are no-ops — dead rules; remove or convert the containers to grid. — see AUDIT.md */
   .stat-row {
     grid-template-columns: 1fr;
     gap: var(--space-5);

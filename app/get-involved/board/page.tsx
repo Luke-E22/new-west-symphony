@@ -31,7 +31,8 @@ export default function BoardPage() {
             src="/assets/photos/photo-hero-hall.jpg"
             alt="The New West Symphony performing to a full house"
             fill
-            priority
+            preload
+            quality={55}
             sizes="100vw"
             style={{ objectFit: "cover" }}
           />
@@ -167,6 +168,7 @@ export default function BoardPage() {
             title="Current board"
             subtitle="The directors who guide the New West Symphony today."
           />
+          {/* TODO(audit P2): roster has no structured data — optionally emit an ItemList of Person (name+role) via <JsonLd> for entity/knowledge-panel signals. — see AUDIT.md */}
           <div className="mt-6">
             <BoardRoster />
           </div>

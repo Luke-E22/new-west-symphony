@@ -18,6 +18,12 @@ export default function Header() {
   const panelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const close = () => setOpen(false);
+  // Dismiss (✕ / backdrop / Escape) returns focus to the toggle (WCAG 2.4.3);
+  // nav links use `close` since navigation moves focus to the new page.
+  const dismiss = () => {
+    setOpen(false);
+    toggleRef.current?.focus();
+  };
 
   // Focus trap + Escape while the mobile menu is open.
   useEffect(() => {
@@ -60,7 +66,7 @@ export default function Header() {
         <Link href="/" className="brand-lockup" aria-label="New West Symphony — home">
           {/* Decorative: the link's aria-label + visible wordmark name the lockup,
               so an alt here would be redundant (axe image-redundant-alt). */}
-          <Logo variant="mark" height={42} priority alt="" />
+          <Logo variant="mark" height={42} preload alt="" />
           <span className="brand-lockup__divider" aria-hidden="true" />
           <span className="brand-lockup__wordmark">
             New West
@@ -94,6 +100,7 @@ export default function Header() {
           </Button>
         </div>
 
+        {/* TODO(audit P2): toggle aria-label is static "Open menu" even when open — use aria-label={open ? "Close menu" : "Open menu"}. — see AUDIT.md */}
         <button
           ref={toggleRef}
           type="button"
@@ -118,7 +125,7 @@ export default function Header() {
         className="mobile-menu"
         data-open={open}
         onClick={(e) => {
-          if (e.target === e.currentTarget) setOpen(false);
+          if (e.target === e.currentTarget) dismiss();
         }}
       >
         <div className="mobile-menu__panel" ref={panelRef} role="dialog" aria-modal="true" aria-label="Site menu">
@@ -128,7 +135,7 @@ export default function Header() {
               type="button"
               className="mobile-menu__close"
               aria-label="Close menu"
-              onClick={() => setOpen(false)}
+              onClick={dismiss}
             >
               ✕
             </button>

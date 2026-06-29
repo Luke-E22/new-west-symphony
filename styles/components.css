@@ -200,7 +200,7 @@
     box-shadow var(--duration-fast) var(--ease-standard);
 }
 .field__control::placeholder {
-  color: var(--nws-stone);
+  color: var(--text-muted); /* 5.69:1 on white — was --nws-stone (1.83:1, fails WCAG 1.4.3) */
 }
 .field__control:focus {
   outline: none;

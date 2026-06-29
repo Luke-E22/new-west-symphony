@@ -22,11 +22,12 @@ export default function HomePage() {
       {/* 1 — Hero */}
       <section className="hero">
         <div className="hero__media">
+          {/* TODO(audit P1): page LCP is 3.1-3.6s (render-delay-dominated) — needs architectural work (defer/lazy-hydrate below-fold client islands + reduce render-blocking CSS), not image tuning. — see AUDIT.md */}
           <Image
             src="/assets/photos/orchestra-performance.jpg"
             alt="Michael Christie conducting the New West Symphony before a full house"
             fill
-            priority
+            preload
             quality={55}
             sizes="100vw"
             style={{ objectFit: "cover" }}

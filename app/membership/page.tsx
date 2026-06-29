@@ -33,7 +33,7 @@ export default function MembershipPage() {
             src="/assets/photos/photo-hero-hall.jpg"
             alt="A full concert hall before a New West Symphony performance"
             fill
-            priority
+            preload
             quality={55}
             sizes="100vw"
             style={{ objectFit: "cover" }}
@@ -184,6 +184,7 @@ export default function MembershipPage() {
       <section className="section band-cream">
         <div className="container">
           <SectionHeading align="center" eyebrow="Good to know" title="Questions, answered" />
+          {/* TODO(audit P2): 6 visible Q&As but no FAQPage JSON-LD — add a faqJsonLd(MEMBER_FAQS) helper + <JsonLd> for FAQ rich-result eligibility on this conversion page. — see AUDIT.md */}
           <div className="mt-6">
             <FaqAccordion items={MEMBER_FAQS} />
           </div>

@@ -7,7 +7,7 @@ interface LogoProps {
   /** Rendered height in px; width is derived from the asset's aspect ratio. */
   height?: number;
   className?: string;
-  priority?: boolean;
+  preload?: boolean;
   alt?: string;
 }
 
@@ -27,7 +27,7 @@ export default function Logo({
   variant = "mark",
   height = 42,
   className,
-  priority = false,
+  preload = false,
   alt,
 }: LogoProps) {
   const a = ASSETS[variant];
@@ -38,7 +38,7 @@ export default function Logo({
       width={width}
       height={height}
       alt={alt ?? a.alt}
-      priority={priority}
+      preload={preload}
       className={["logo", className].filter(Boolean).join(" ")}
       style={{ height, width: "auto" }}
     />
