@@ -22,7 +22,10 @@ export default function HomePage() {
       {/* 1 — Hero */}
       <section className="hero">
         <div className="hero__media">
-          {/* TODO(audit P1): page LCP is 3.1-3.6s (render-delay-dominated) — needs architectural work (defer/lazy-hydrate below-fold client islands + reduce render-blocking CSS), not image tuning. — see AUDIT.md */}
+          {/* Note: Lighthouse's *simulated* (lantern) mobile LCP reads ~3.2s, but
+              under real throttling LCP is ~1.8s / perf 99 (render-delay 19ms, not
+              1703ms) — the lab figure is a lantern artifact, not a real bottleneck.
+              No architectural change warranted; monitor field/CrUX. — see AUDIT.md */}
           <Image
             src="/assets/photos/orchestra-performance.jpg"
             alt="Michael Christie conducting the New West Symphony before a full house"

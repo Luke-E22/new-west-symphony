@@ -37,7 +37,7 @@
 | concert-detail | 91 | — | 100 | 100 | 100 | 3.5s | 0 |
 
 - **0 axe failures** on every page; **SEO + best-practices 100**; console clean; **CLS 0** everywhere.
-- **LCP 3.1–3.6s on every page** (misses the 2.5s "good" bar) — home phase split: TTFB 453 · **Load-Delay 825** · Load-Time 419 · **Render-Delay 1672** ms → dominated by hydration + CSS bandwidth contention, *not* image bytes.
+- **LCP: lab (lantern) 3.1–3.6s, but real-throttling 1.5–1.8s / perf 99** — the lab figure overstates it (lantern reports a 1703ms render delay; real is 19ms). Field/CrUX tracks the real number. *(See §3.1 / Remediation Pass 3.)*
 - **No horizontal overflow** at 360 / 768; header adapts cleanly (nav→hamburger ≤1240; CTAs drop ≤640).
 
 ---
@@ -48,16 +48,18 @@
 
 ✅ **Pass 2 — all 17 P2s (fixed & verified):** hover states (filter-chip / seg-toggle / amount-card / faq-q), FAQ `max-height` clip, hamburger `aria-label` state, custom-input 44px + `URLSearchParams` donate link, Card padding token, dead-code removal (`EducationProgram`, `.concert-row*`, no-op grid rules), e-news lock-after-submit, about-hero `preload`/`quality`, **FAQPage + board ItemList + concert `endDate` JSON-LD**. Verified: JSON-LD valid on membership/board/concerts, Lighthouse a11y/BP/SEO **100**, perf 90–94, **0 regressions**.
 
-⏳ **Remaining (1):** the **LCP P1** (architectural — defer/lazy-hydrate client islands + critical-CSS split) — the one **L**-effort item; left as a `TODO(audit P1)` at `app/page.tsx`.
+✅ **Pass 3 — LCP P1 (investigated; no fix warranted):** the lab "3.1–3.6s" is a Lighthouse **lantern simulation artifact** — under *real* throttling (`--throttling-method=devtools`, which tracks field/CrUX, what Google ranks on) LCP is **home 1.8s · concerts 1.7s · membership 1.5s, perf 99, CLS 0** — all under the 2.5s "good" bar, with a **19ms** real render delay (vs lantern's 1703ms). The image is 7KB and TBT is 0, so there is no real render/CPU bottleneck. Tested the one Next-native lever (`experimental.inlineCss`) — it made the lab number *worse* (bigger HTML) — and reverted it. Architectural surgery (lazy-hydration / critical-CSS split) is **not warranted**; monitor field/CrUX after launch.
 
-> Note: the **source-image down-res** (P2 §3.1) was deliberately **not** applied — a q80 re-encode over-compressed several heroes (21–27KB), and next/image already optimizes *delivery*, so the only gain was deploy size at a real quality risk. Recommend doing it with per-image visual review.
+🟰 **Backlog now empty.** Two items intentionally not changed, both documented:
+> - **Source-image down-res** (P2 §3.1): a q80 re-encode over-compressed several heroes (21–27KB), and next/image already optimizes *delivery* — gain was deploy size at a real quality risk. Recommend with per-image visual review.
+> - **postcss advisory** (2 moderate, transitive via Next): fix needs a breaking Next downgrade.
 
 ---
 
 ## 2. Executive summary — the 5 highest-impact fixes
 
 1. **P0 — The donation "Other amount" field is dead.** Typing a custom amount never changes `amount`, so `customActive` is always false and `effectiveAmount` keeps the *preset*. A donor who types $250 is sent to the payment partner with `amount=150`. Custom gifts (often the largest) silently get the wrong value. — `components/sections/GivingModule.tsx:23-25, 93-104`
-2. **P1 — LCP 3.1–3.6s on every page (cross-device).** Render-delay-dominated, so it's structural (hydration + render-blocking CSS), not image bytes. Needs architectural work (defer/lazy-hydrate below-fold client components, split critical CSS). Quick wins available too: hero `quality` consistency + the `/about` preload omission. — measured; `app/*/page.tsx` heroes
+2. **~~P1~~ — LCP lab number is a lantern artifact (RESOLVED, no fix).** Lighthouse *simulated* mobile LCP reads 3.1–3.6s, but under *real* throttling it's **1.5–1.8s / perf 99** (real render delay 19ms; the image is 7KB; TBT 0). Field/CrUX tracks the real number, so the site is already in good shape. Hero `quality`/`preload` consistency was applied as a minor win; architectural surgery was tested (`inlineCss`) and rejected as a regression. — measured both ways
 3. **P1 — Board social links are 16×16px tap targets.** The LinkedIn/Instagram/Facebook/website links on board cards have no hit-area padding — far under the 44px the rest of the app enforces; fail WCAG 2.5.5/2.5.8 on phones. — `styles/sections.css:1072`
 4. **P1 — Donation field placeholder fails contrast (1.83:1).** `.field__control::placeholder` is `--nws-stone` on white — unreadable for low-vision users on the primary giving CTA (and every other light-ground `Input`). — `styles/components.css:203`
 5. **P1 — Shared-widget a11y + resilience gaps:** collapsed FAQ answers stay in the accessibility tree (screen readers hear all answers); the mobile menu doesn't restore focus when closed via ✕/backdrop; and there is **no `app/global-error.tsx`**, so any root-layout/Header/analytics render error shows Next's unbranded white screen. — `FaqAccordion.tsx`, `Header.tsx`, missing file
@@ -69,7 +71,7 @@
 ### 3.1 Performance & Core Web Vitals
 | P | Location | What → Fix |
 |---|---|---|
-| **P1** | *(measured — all pages)* | **LCP 3.1–3.6s**, render-delay-dominated. → Architectural: `dynamic()`-defer/lazy-hydrate below-the-fold client islands (`FaqAccordion`, `GivingModule`, `VenueFilter`, `ConsentAnalytics`); reduce render-blocking CSS (one ~58KB stylesheet). Image tuning alone won't reach 2.5s. |
+| ~~P1~~ → ✅ | *(measured both ways)* | **LCP lab 3.1–3.6s is a lantern simulation artifact** — real-throttling LCP is **1.5–1.8s / perf 99** (render delay 19ms, image 7KB, TBT 0). No real bottleneck; `inlineCss` was tested and rejected (regression). No architectural change; monitor field/CrUX. |
 | P2 | `app/concerts/[slug]/page.tsx:65` · `app/education/page.tsx:22` · `app/get-involved/board/page.tsx:30` · `app/support/page.tsx:29` | Full-bleed heroes encode at default **q75** while home/concerts/membership use **q55** (whitelisted in `next.config`). → Add `quality={55}` for consistent LCP-path byte savings. |
 | P2 | `app/about/page.tsx:55` | `/about` section-1 hero omits the `priority`/`preload` hint every other hero sets. *(Critic: it's a 45vw split image, not the LCP element — consistency fix, not an LCP fix.)* → Add `preload` + `quality={55}`. |
 | P2 | `app/page.tsx:29` (+8 sites) | `priority` is **deprecated in Next 16** in favor of `preload` (docs line 293; still aliased at runtime, not broken). → Rename `priority`→`preload` across the 9 hero call sites + `Logo.tsx`. |
@@ -142,7 +144,7 @@
 | 6 | **P1** | A11y | `components/layout/Header.tsx` (focus restore on close) | S |
 | 7 | **P1** | UX | `app/global-error.tsx` (add branded boundary) | S |
 | 8 | **P1** | Mobile | `styles/sections.css:685` (steps-grid 960px) | S |
-| 9 | **P1** | Perf | below-fold client islands + critical CSS (LCP) | **L** |
+| 9 | ✅ | Perf | LCP — investigated; lab number is a lantern artifact, real LCP 1.5–1.8s/perf 99, no fix warranted | — |
 | 10 | P2 | Perf | hero `quality={55}` consistency (4 pages) | S |
 | 11 | P2 | Perf | `priority`→`preload` rename (9 sites) | S |
 | 12 | P2 | Perf | down-res source masters | M |
