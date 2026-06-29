@@ -100,17 +100,16 @@ export default function Header() {
           </Button>
         </div>
 
-        {/* TODO(audit P2): toggle aria-label is static "Open menu" even when open — use aria-label={open ? "Close menu" : "Open menu"}. — see AUDIT.md */}
         <button
           ref={toggleRef}
           type="button"
           className="site-header__menu-toggle"
           aria-expanded={open}
           aria-controls="mobile-menu"
-          aria-label="Open menu"
+          aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen(true)}
         >
-          <span aria-hidden="true" style={{ fontSize: 22, lineHeight: 1 }}>
+          <span aria-hidden="true" className="site-header__menu-glyph">
             ☰
           </span>
         </button>

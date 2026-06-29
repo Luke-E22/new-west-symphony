@@ -42,11 +42,15 @@
 
 ---
 
-## Remediation status (pass 1)
+## Remediation status
 
-✅ **Fixed & verified:** the **P0** (dead donation field) + all **7 P1s** ($0 guard, 44px board links, placeholder contrast, FAQ collapsed-panel a11y, menu focus-restore, `global-error.tsx`, steps-grid tablet collapse) + quick perf wins (hero `quality={55}` ×4, `priority`→`preload` ×9). Verified: P0/$0 behavior in-browser, board links 44×44, steps-grid 2-col @768, FAQ panels `visibility:hidden`, focus returns to toggle, and Lighthouse a11y/BP/SEO **100** with **0 regressions** on home/support/membership/board.
+✅ **Pass 1 — P0 + all P1s + perf wins (fixed & verified):** dead donation field, $0 guard, 44px board links, placeholder contrast, FAQ collapsed-panel a11y, menu focus-restore, `global-error.tsx`, steps-grid tablet collapse, hero `quality={55}` ×4, `priority`→`preload` ×9.
 
-⏳ **Remaining (18 `TODO(audit)` left):** the **LCP P1** (architectural — defer/lazy-hydrate client islands + critical CSS) and 17 **P2** polish items (hover states, dead CSS, FAQPage/`endDate` JSON-LD, e-news state, source-image down-res, etc.) — see the backlog below.
+✅ **Pass 2 — all 17 P2s (fixed & verified):** hover states (filter-chip / seg-toggle / amount-card / faq-q), FAQ `max-height` clip, hamburger `aria-label` state, custom-input 44px + `URLSearchParams` donate link, Card padding token, dead-code removal (`EducationProgram`, `.concert-row*`, no-op grid rules), e-news lock-after-submit, about-hero `preload`/`quality`, **FAQPage + board ItemList + concert `endDate` JSON-LD**. Verified: JSON-LD valid on membership/board/concerts, Lighthouse a11y/BP/SEO **100**, perf 90–94, **0 regressions**.
+
+⏳ **Remaining (1):** the **LCP P1** (architectural — defer/lazy-hydrate client islands + critical-CSS split) — the one **L**-effort item; left as a `TODO(audit P1)` at `app/page.tsx`.
+
+> Note: the **source-image down-res** (P2 §3.1) was deliberately **not** applied — a q80 re-encode over-compressed several heroes (21–27KB), and next/image already optimizes *delivery*, so the only gain was deploy size at a real quality risk. Recommend doing it with per-image visual review.
 
 ---
 

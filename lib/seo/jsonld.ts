@@ -43,13 +43,18 @@ export function concertJsonLd(concert: Concert) {
 
   return concert.performances.map((perf) => {
     const v = VENUES[perf.venueKey];
+    // endDate (recommended by Google) — concerts run ~2 hours; computed from the
+    // start instant so we don't fabricate a separate field.
+    const endDate = new Date(
+      new Date(perf.startDate).getTime() + 2 * 60 * 60 * 1000,
+    ).toISOString();
     return {
       "@context": "https://schema.org",
       "@type": "MusicEvent",
       name: concert.title,
       description: concert.blurb,
-      // TODO(audit P2): add endDate (recommended by Google Event structured data) — startDate + a default ~2h duration; strengthens every concert's rich result. — see AUDIT.md
       startDate: perf.startDate,
+      endDate,
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
       image: [abs(concert.image)],
@@ -85,4 +90,36 @@ export function concertJsonLd(concert: Concert) {
       },
     };
   });
+}
+
+/** FAQPage markup for a list of visible Q&As (audit SEO P2). */
+export function faqJsonLd(faqs: ReadonlyArray<{ q: string; a: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
+/** ItemList of board members (audit SEO P2) — entity/leadership signals. */
+export function boardJsonLd(members: ReadonlyArray<{ name: string; role: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${SITE.name} Board of Directors`,
+    itemListElement: members.map((m, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Person",
+        name: m.name,
+        jobTitle: m.role,
+        affiliation: { "@type": "Organization", name: SITE.legalName },
+      },
+    })),
+  };
 }

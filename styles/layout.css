@@ -77,6 +77,10 @@
   color: var(--nws-navy);
   cursor: pointer;
 }
+.site-header__menu-glyph {
+  font-size: 22px;
+  line-height: 1;
+}
 
 /* Mobile menu panel */
 .mobile-menu {

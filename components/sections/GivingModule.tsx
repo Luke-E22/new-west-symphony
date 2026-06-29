@@ -31,8 +31,12 @@ export default function GivingModule() {
     setCustom("");
   }
 
-  // TODO(audit P2): build with URL/URLSearchParams — if EXTERNAL.donate ever gains its own query string this template produces a double "?" and drops amount/frequency. — see AUDIT.md
-  const donateHref = `${EXTERNAL.donate}?amount=${effectiveAmount}&frequency=${freq}`;
+  // Built with URL so amount/frequency append safely even if EXTERNAL.donate
+  // already carries a query string (no double "?").
+  const donateUrl = new URL(EXTERNAL.donate);
+  donateUrl.searchParams.set("amount", String(effectiveAmount));
+  donateUrl.searchParams.set("frequency", freq);
+  const donateHref = donateUrl.toString();
 
   return (
     <div className="giving-module">
@@ -105,8 +109,6 @@ export default function GivingModule() {
                 setAmount(v === "" ? (freq === "once" ? 150 : 25) : -1);
               }}
               aria-label="Custom donation amount in dollars"
-              // TODO(audit P2): minHeight:40 overrides the 44px .field__control min and bypasses the token scale — remove/raise to 44 (sub-44 tap target). — see AUDIT.md
-              style={{ minHeight: 40 }}
             />
           </div>
         </div>

@@ -6,12 +6,15 @@ import Card from "@/components/core/Card";
 import BoardInterestForm from "@/components/sections/BoardInterestForm";
 import BoardRoster from "@/components/sections/BoardRoster";
 import { SkillIcon } from "@/components/Icons";
+import JsonLd from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { boardJsonLd } from "@/lib/seo/jsonld";
 import {
   TRUSTEE_DUTIES,
   BOARD_SKILLS,
   GOVERNANCE_CONTACT,
   INVOLVEMENT_LADDER,
+  BOARD_MEMBERS,
 } from "@/lib/data";
 
 export const metadata: Metadata = buildMetadata({
@@ -168,10 +171,10 @@ export default function BoardPage() {
             title="Current board"
             subtitle="The directors who guide the New West Symphony today."
           />
-          {/* TODO(audit P2): roster has no structured data — optionally emit an ItemList of Person (name+role) via <JsonLd> for entity/knowledge-panel signals. — see AUDIT.md */}
           <div className="mt-6">
             <BoardRoster />
           </div>
+          <JsonLd data={boardJsonLd(BOARD_MEMBERS)} />
           <div className="hero__actions mt-6" style={{ justifyContent: "center" }}>
             <Button href="/about" variant="link">
               Meet the orchestra &amp; staff →

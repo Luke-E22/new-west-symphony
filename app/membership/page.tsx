@@ -5,8 +5,10 @@ import Badge from "@/components/core/Badge";
 import Button from "@/components/core/Button";
 import Card from "@/components/core/Card";
 import FaqAccordion from "@/components/sections/FaqAccordion";
+import JsonLd from "@/components/JsonLd";
 import { BenefitIcon } from "@/components/Icons";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { faqJsonLd } from "@/lib/seo/jsonld";
 import { MEMBERSHIP_PURCHASE_URL } from "@/lib/config";
 import {
   MEMBERSHIP_TIERS,
@@ -184,10 +186,10 @@ export default function MembershipPage() {
       <section className="section band-cream">
         <div className="container">
           <SectionHeading align="center" eyebrow="Good to know" title="Questions, answered" />
-          {/* TODO(audit P2): 6 visible Q&As but no FAQPage JSON-LD — add a faqJsonLd(MEMBER_FAQS) helper + <JsonLd> for FAQ rich-result eligibility on this conversion page. — see AUDIT.md */}
           <div className="mt-6">
             <FaqAccordion items={MEMBER_FAQS} />
           </div>
+          <JsonLd data={faqJsonLd(MEMBER_FAQS)} />
         </div>
       </section>
 

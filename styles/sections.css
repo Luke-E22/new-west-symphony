@@ -343,80 +343,6 @@
   color: var(--nws-gold-bright);
 }
 
-/* ====================================================== Concert rows ====== */
-.concert-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-}
-/* TODO(audit P2): dead CSS — .concert-row* (~65 lines, fixed 240px col, no 641-960px fallback) is unreferenced; the list uses .poster-*. Remove. — see AUDIT.md */
-.concert-row {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  background: var(--surface-card);
-  border: var(--border-hairline) solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-  transition: box-shadow var(--duration-base) var(--ease-standard),
-    transform var(--duration-base) var(--ease-standard);
-}
-.concert-row:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-3px);
-}
-.concert-row__media {
-  position: relative;
-}
-.concert-row__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.concert-row__badge {
-  position: absolute;
-  top: var(--space-3);
-  left: var(--space-3);
-}
-.concert-row__body {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--space-5);
-  padding: var(--space-5) var(--space-6);
-  align-items: center;
-}
-.concert-row__date {
-  font: var(--type-eyebrow);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--nws-burgundy);
-}
-.concert-row__title {
-  font: 600 24px/1.15 var(--font-display);
-  color: var(--nws-navy);
-  margin: var(--space-2) 0;
-}
-.concert-row__desc {
-  font: var(--type-body-s);
-  color: var(--text-body);
-  max-width: 58ch;
-}
-.concert-row__meta {
-  font: 500 13px/1.5 var(--font-sans);
-  color: var(--text-muted);
-  margin-top: var(--space-3);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-}
-.concert-row__cta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--space-3);
-  text-align: right;
-}
-
 /* Filter toolbar */
 .filter-bar {
   position: sticky;
@@ -434,7 +360,6 @@
   gap: var(--space-4);
   flex-wrap: wrap;
 }
-/* TODO(audit P2): cursor:pointer + transition but no :hover on unselected chips — concerts filter feels non-interactive on hover; add :hover:not([aria-pressed=true]). — see AUDIT.md */
 .filter-chip {
   border: var(--border-hairline) solid var(--border-default);
   border-radius: var(--radius-pill);
@@ -446,6 +371,10 @@
   color: var(--nws-navy);
   transition: all var(--duration-base) var(--ease-standard);
   min-height: 44px;
+}
+.filter-chip:hover:not([aria-pressed="true"]) {
+  border-color: var(--nws-navy);
+  background: var(--surface-band);
 }
 .filter-chip[aria-pressed="true"] {
   background: var(--nws-navy);
@@ -820,7 +749,6 @@
 .faq-item {
   border-bottom: var(--border-hairline) solid var(--border-default);
 }
-/* TODO(audit P2): cursor:pointer but no :hover rule — row reads as static text on hover; add .faq-item__q:hover affordance. — see AUDIT.md */
 .faq-item__q {
   width: 100%;
   display: flex;
@@ -834,6 +762,9 @@
   text-align: left;
   font: var(--type-h4);
   color: var(--text-strong);
+}
+.faq-item__q:hover {
+  color: var(--text-accent);
 }
 .faq-item__icon {
   font: 300 26px/1 var(--font-sans);
@@ -855,9 +786,8 @@
   transition: max-height var(--duration-base) ease, opacity var(--duration-base) ease,
     visibility 0s linear var(--duration-base);
 }
-/* TODO(audit P2): fixed max-height:320px can silently clip a long answer on narrow screens (overflow:hidden, no scroll) — use a generous value or grid-template-rows 0fr->1fr. — see AUDIT.md */
 .faq-item__a[data-open="true"] {
-  max-height: 320px;
+  max-height: 60rem; /* generous cap so a long answer never clips on narrow screens */
   opacity: 1;
   visibility: visible;
   transition-delay: 0s;
@@ -884,7 +814,6 @@
   padding: 4px;
   margin: var(--space-5) 0;
 }
-/* TODO(audit P2): cursor:pointer + transition but no :hover on the inactive segment — no feedback on the donation frequency toggle; add :hover:not([aria-pressed=true]). — see AUDIT.md */
 .seg-toggle__btn {
   flex: 1;
   text-align: center;
@@ -898,6 +827,9 @@
   color: var(--text-muted);
   transition: all var(--duration-base) var(--ease-standard);
   min-height: 44px;
+}
+.seg-toggle__btn:hover:not([aria-pressed="true"]) {
+  color: var(--text-strong);
 }
 .seg-toggle__btn[aria-pressed="true"] {
   background: var(--nws-navy);
@@ -916,7 +848,6 @@
   width: 100%;
   min-width: 0;
 }
-/* TODO(audit P2): cursor:pointer + transition but no :hover — donation amount cards feel flat on hover, unlike poster/edu cards; add a hover lift on unselected cards. — see AUDIT.md */
 .amount-card {
   background: var(--surface-card);
   border: var(--border-hairline) solid var(--border-subtle);
@@ -929,6 +860,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+}
+.amount-card:hover:not([aria-pressed="true"]):not([data-active="true"]) {
+  border-color: var(--border-default);
+  box-shadow: var(--shadow-sm);
 }
 .amount-card[aria-pressed="true"],
 .amount-card[data-active="true"] {
@@ -1343,8 +1278,7 @@
   .tier-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .ladder,
-  .roster {
+  .ladder {
     grid-template-columns: repeat(2, 1fr);
   }
   .hero {
@@ -1365,20 +1299,10 @@
   .tier-grid,
   .steps-grid,
   .amount-grid,
-  .ladder,
-  .concert-row,
-  .concert-row__body,
-  .concert-row__cta,
-  .roster {
+  .ladder {
     grid-template-columns: 1fr;
   }
-  .concert-row__cta {
-    align-items: flex-start;
-    text-align: left;
-  }
-  /* TODO(audit P2): grid-template-columns on .stat-row and .roster (both display:flex, here + the 960px block) are no-ops — dead rules; remove or convert the containers to grid. — see AUDIT.md */
   .stat-row {
-    grid-template-columns: 1fr;
     gap: var(--space-5);
   }
   .hero__title {

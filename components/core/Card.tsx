@@ -17,8 +17,7 @@ export default function Card({
   children,
   accent = false,
   interactive = false,
-  // TODO(audit P2): hardcoded "24px" default bypasses the token scale — default to var(--space-6). — see AUDIT.md
-  padding = "24px",
+  padding = "var(--space-5)", // 24px, from the token scale
   className,
   style,
   id,

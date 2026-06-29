@@ -97,12 +97,6 @@ export interface DonationAmount {
   defaultSelected?: boolean;
 }
 
-// TODO(audit P2): dead export — EducationProgram is referenced nowhere (education uses EducationDetail). Remove. — see AUDIT.md
-export interface EducationProgram {
-  tag: string;
-  name: string;
-  desc: string;
-}
 
 export interface EducationDetail {
   /** Anchor id + icon key, e.g. "music-van". */

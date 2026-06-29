@@ -13,7 +13,10 @@ import { EXTERNAL } from "@/lib/config";
 export default function ENewsSignup() {
   const [submitted, setSubmitted] = useState(false);
 
-  // TODO(audit P2): "Thanks!" shows optimistically regardless of Mailchimp success; input stays editable + button stuck. Disable input/button after submit (cross-origin embed has no success callback) or time-box the label. — see AUDIT.md
+  // The Mailchimp embed posts cross-origin to a new tab with no success callback,
+  // so "Thanks!" is a soft acknowledgement; lock the field + button after submit
+  // (the email is captured by the native POST before React disables them) so a
+  // failed/optimistic submit can't be silently re-clicked.
   return (
     <form
       className="enews-form"
@@ -31,6 +34,7 @@ export default function ENewsSignup() {
         required
         autoComplete="email"
         onDark
+        disabled={submitted}
       />
       {/* Mailchimp honeypot — keep visually hidden, do not remove. */}
       <div aria-hidden="true" className="sr-only">
@@ -42,7 +46,7 @@ export default function ENewsSignup() {
           autoComplete="off"
         />
       </div>
-      <Button type="submit" variant="gold" size="md">
+      <Button type="submit" variant="gold" size="md" disabled={submitted}>
         {submitted ? "Thanks!" : "Join"}
       </Button>
     </form>
