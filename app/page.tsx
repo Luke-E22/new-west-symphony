@@ -214,9 +214,10 @@ export default function HomePage() {
               </div>
               <div className="media-frame">
                 <Image
-                  src="/assets/photos/photo-donate.jpg"
-                  alt="Volunteers and supporters at a New West Symphony event"
+                  src="/assets/photos/edu-symphonic.jpg"
+                  alt="Schoolchildren at a New West Symphony education concert"
                   fill
+                  quality={60}
                   sizes="(max-width: 960px) 100vw, 45vw"
                   style={{ objectFit: "cover" }}
                 />

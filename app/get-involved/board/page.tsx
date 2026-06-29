@@ -89,15 +89,17 @@ export default function BoardPage() {
           <div>
             <div className="media-frame">
               <Image
-                src="/assets/photos/photo-donate.jpg"
-                alt="Supporters and directors gathered at a New West Symphony event"
+                src="/assets/photos/nws-chorus.jpg"
+                alt="The New West Symphony and chorus performing on stage"
                 fill
+                quality={60}
                 sizes="(max-width: 960px) 100vw, 45vw"
                 style={{ objectFit: "cover" }}
               />
             </div>
             <p className="caption">
-              Board members and supporters at a season event — placeholder photography.
+              The New West Symphony and chorus on stage — the music your service
+              helps sustain.
             </p>
           </div>
         </div>

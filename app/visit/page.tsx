@@ -15,7 +15,7 @@ export const metadata: Metadata = buildMetadata({
 });
 
 const VENUE_PHOTOS = {
-  to: "/assets/venues/bofa-pac-thousand-oaks.jpg",
+  to: "/assets/venues/bofa-pac-thousand-oaks-hires.jpg",
   cam: "/assets/venues/rancho-campana-camarillo-hires.jpg",
 } as const;
 

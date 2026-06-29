@@ -27,17 +27,18 @@ export default function SupportPage() {
           <div>
             <div className="media-frame">
               <Image
-                src="/assets/photos/photo-donate.jpg"
-                alt="A young student holding a violin at a New West Symphony education program"
+                src="/assets/photos/edu-harmony.jpg"
+                alt="A student playing cello in a New West Symphony education program"
                 fill
                 preload
-                quality={55}
+                quality={60}
                 sizes="(max-width: 960px) 100vw, 45vw"
                 style={{ objectFit: "cover" }}
               />
             </div>
             <p className="caption">
-              A first instrument, made possible by donors — placeholder photography.
+              A young cellist in a New West Symphony education program — instruments
+              in young hands, made possible by donors.
             </p>
           </div>
           <div className="legacy-card">
