@@ -14,7 +14,6 @@ export const BOARD_MEMBERS: Person[] = [
     photo: "/assets/board/luke-erickson-v3.jpg",
     links: [
       { kind: "linkedin", href: "https://www.linkedin.com/in/luke-erickson/" },
-      { kind: "instagram", href: "https://www.instagram.com/luke_erickson/" },
       { kind: "facebook", href: "https://www.facebook.com/luke.e.erickson" },
       { kind: "website", href: "https://lukeerickson.com" },
     ],

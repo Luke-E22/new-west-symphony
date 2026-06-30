@@ -1014,15 +1014,17 @@
 .roster-person__links {
   display: flex;
   justify-content: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
   margin-top: var(--space-2);
 }
 .roster-person__link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
+  /* 44px tall keeps a comfortable tap target; a small inline padding (not a
+     44px min-width) keeps the icons clustered within the 140px card. */
   min-height: 44px;
+  padding-inline: var(--space-2);
   color: var(--text-muted);
   transition: color var(--duration-fast) var(--ease-standard);
 }
