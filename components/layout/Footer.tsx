@@ -102,7 +102,11 @@ export default function Footer() {
           {SITE.ein} · <Link href="/privacy">Privacy</Link>
         </span>
         <span>
-          {SITE.musicDirector}, {SITE.musicDirectorTitle}
+          {SITE.musicDirector}, {SITE.musicDirectorTitle} · Site designed and
+          built by{" "}
+          <a href="https://lukeerickson.com" target="_blank" rel="noopener noreferrer">
+            Luke Erickson
+          </a>
         </span>
       </div>
     </footer>
