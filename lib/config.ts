@@ -72,6 +72,10 @@ export const EXTERNAL = {
   // Donations — the Salesforce donation form (the separate, tax-deductible flow).
   // TODO(NWS): confirm this is the live donation URL.
   donate: "https://nws.my.salesforce-sites.com/donate",
+  // Adopt-A-Musician campaign form — the real Salesforce form with the
+  // campaign's dfId, taken from the live page (/support/adopt-a-musician/).
+  adoptAMusician:
+    "https://newwestsymphony.my.salesforce-sites.com/donate/?dfId=a0n5c00001DHwaBAAT",
   // Existing Salesforce patron portal (kept live through cutover, §11).
   patronLogin: "https://nws.my.salesforce-sites.com/patron",
   // Watch & Listen.

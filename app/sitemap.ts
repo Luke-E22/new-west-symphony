@@ -14,6 +14,7 @@ const STATIC_ROUTES = [
   "/get-involved/board",
   "/press-room",
   "/privacy",
+  "/support/adopt-a-musician",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

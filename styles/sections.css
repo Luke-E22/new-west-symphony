@@ -1512,3 +1512,80 @@
   text-align: center;
   margin: var(--space-2) 0 0;
 }
+
+/* ============================================= Adopt-A-Musician campaign === */
+/* Home banner below the hero: one full-width navy ribbon, whole thing a link. */
+.campaign-band {
+  display: block;
+  background: var(--nws-navy);
+  color: var(--text-on-dark);
+  text-decoration: none;
+  border-top: 3px solid var(--nws-gold);
+  border-bottom: 3px solid var(--nws-gold);
+}
+.campaign-band__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+}
+.campaign-band__note {
+  color: var(--nws-gold-bright);
+  font: 600 22px/1 var(--font-display);
+}
+.campaign-band__text {
+  margin: 0;
+  font: var(--type-body-m);
+  color: var(--text-on-dark);
+}
+.campaign-band__text strong {
+  color: var(--nws-gold-bright);
+}
+.campaign-band__cta {
+  margin-left: auto;
+  font: 600 0.875rem/1 var(--font-sans);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--nws-gold-bright);
+  white-space: nowrap;
+}
+.campaign-band:hover .campaign-band__cta {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (max-width: 640px) {
+  .campaign-band__inner {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .campaign-band__note {
+    display: none;
+  }
+  .campaign-band__cta {
+    margin-left: 0;
+  }
+}
+
+/* Adoption level cards. */
+.adopt-levels .card {
+  text-align: center;
+}
+.adopt-level__amount {
+  font: 600 clamp(1.6rem, 2.6vw, 2.1rem) / 1.1 var(--font-display);
+  color: var(--nws-navy);
+}
+.adopt-level__name {
+  margin-top: var(--space-2);
+  font: var(--type-body-s);
+  color: var(--text-muted);
+}
+
+/* Links set directly on navy bands (contact lines). */
+.on-dark-link {
+  color: var(--nws-gold-bright);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.on-dark-link:hover {
+  color: var(--text-on-dark);
+}

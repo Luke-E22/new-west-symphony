@@ -660,10 +660,6 @@ export const LEGACY_EXACT: { source: string; destination: string }[] = [
     "destination": "/concerts"
   },
   {
-    "source": "/support/adopt-a-musician",
-    "destination": "/support"
-  },
-  {
     "source": "/support/concert-sponsorship",
     "destination": "/support"
   },
@@ -816,5 +812,6 @@ export const VALID_ROUTES: string[] = [
   "/get-involved",
   "/get-involved/board",
   "/privacy",
-  "/press-room"
+  "/press-room",
+  "/support/adopt-a-musician"
 ];

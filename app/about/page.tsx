@@ -112,7 +112,7 @@ export default function AboutPage() {
       </section>
 
       {/* 4 — The orchestra (cream) */}
-      <section className="section band-cream">
+      <section className="section band-cream anchor-target" id="orchestra">
         <div className="container">
           <SectionHeading
             eyebrow="On stage"

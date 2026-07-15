@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import SectionHeading from "@/components/brand/SectionHeading";
 import EventCard from "@/components/brand/EventCard";
 import Button from "@/components/core/Button";
@@ -57,6 +58,25 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* 1b — Adopt-A-Musician campaign banner (fundraising push) */}
+      <Link
+        href="/support/adopt-a-musician"
+        className="campaign-band"
+        aria-label="Adopt a Musician — explore the campaign"
+      >
+        <div className="container campaign-band__inner">
+          <span className="campaign-band__note" aria-hidden="true">
+            ♪
+          </span>
+          <p className="campaign-band__text">
+            <strong>Adopt a Musician.</strong> Connect with your favorite chair in the
+            orchestra — meet your musician, join private receptions, and keep the music
+            playing.
+          </p>
+          <span className="campaign-band__cta">Explore the campaign →</span>
+        </div>
+      </Link>
 
       {/* 2 — Season highlight */}
       <section className="section">

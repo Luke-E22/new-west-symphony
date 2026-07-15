@@ -75,7 +75,12 @@ export default function SupportPage() {
                 <div className="program-card" key={program.name}>
                   <div className="program-card__t">{program.name}</div>
                   <div className="program-card__b">{program.blurb}</div>
-                  <Button href={EXTERNAL.donate} variant="link" track="donate_click" trackParams={{ location: "support-program-card", program: program.name }}>
+                  <Button
+                    href={program.href ?? EXTERNAL.donate}
+                    variant="link"
+                    track="donate_click"
+                    trackParams={{ location: "support-program-card", program: program.name }}
+                  >
                     Learn more →
                   </Button>
                 </div>

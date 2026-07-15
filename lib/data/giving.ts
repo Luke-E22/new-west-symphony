@@ -39,11 +39,23 @@ export const MONTHLY_AMOUNTS: DonationAmount[] = [
   { value: 100, label: "$100", impact: "Sustains a full education residency" },
 ];
 
+/**
+ * Adopt-A-Musician adoption levels, verbatim from the live campaign page
+ * (/support/adopt-a-musician/). Amounts are the campaign's own — don't invent.
+ */
+export const ADOPTION_LEVELS = [
+  { level: "Concertmaster", amount: "$10,000" },
+  { level: "Assistant Concertmaster", amount: "$5,000" },
+  { level: "Principal Musician", amount: "$2,500" },
+  { level: "Section Musician", amount: "$1,500" },
+] as const;
+
 export const GIVING_PROGRAMS: GivingProgram[] = [
   {
     name: "Adopt a Musician",
     blurb:
       "Sponsor a chair for the season and go behind the scenes with the player you support.",
+    href: "/support/adopt-a-musician",
   },
   {
     name: "The 30 Club",

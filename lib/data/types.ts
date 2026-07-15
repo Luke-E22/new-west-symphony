@@ -91,6 +91,8 @@ export interface MembershipTier {
 export interface GivingProgram {
   name: string;
   blurb: string;
+  /** Internal campaign page, when the program has one (else the donate form). */
+  href?: string;
   isLegacy?: boolean;
 }
 
