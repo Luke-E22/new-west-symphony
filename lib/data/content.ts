@@ -80,7 +80,8 @@ export const INVOLVED_ROUTES = [
   {
     k: "Give time",
     name: "Volunteer",
-    desc: "Usher a concert, staff an education event, or lend a hand backstage. Flexible, friendly, and fun.",
+    // Ushers are provided by the concert halls — don't offer ushering here.
+    desc: "Help in the NWS office, at street fairs and fundraising events, or with community outreach. Flexible, friendly, and fun.",
     cta: "Volunteer with us",
   },
   {
