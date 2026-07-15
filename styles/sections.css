@@ -1600,3 +1600,146 @@
   text-transform: uppercase;
   color: var(--text-accent);
 }
+
+/* ====================================================== Hero carousel ====== */
+/* Slides stack in one grid cell and crossfade; the container takes the tallest
+   slide's height, so no JS height management. visibility (with a delay that
+   matches the fade) keeps hidden slides out of hit-testing; `inert` in the
+   component handles tab order and the a11y tree. */
+.hero-carousel {
+  position: relative;
+}
+.hero-carousel__track {
+  display: grid;
+  /* All three slides are dark navy-scrimmed photos. Mid-crossfade the two
+     opacities dip to ~25% combined coverage, so whatever is behind shows
+     through — make that navy, not the ivory page, or every rotation flashes
+     bright. */
+  background: var(--nws-navy-ink);
+}
+.hero-carousel__slide {
+  grid-area: 1 / 1;
+  /* Stretch the inner .hero to the container's height (set by the tallest
+     slide) so shorter slides don't leave a bare strip under their image. */
+  display: grid;
+  opacity: 0;
+  visibility: hidden;
+  /* visibility is discrete: on fade-out it holds "visible" until the 0.7s
+     transition ends, on fade-in it flips at the start — the classic crossfade
+     pairing. (A 0s+delay form never completed in Chrome.) */
+  transition:
+    opacity 0.7s ease,
+    visibility 0.7s;
+}
+.hero-carousel__slide--active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.7s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-carousel__slide,
+  .hero-carousel__slide--active {
+    transition: none;
+  }
+}
+/* The slides ARE .hero sections; they keep their own layout untouched. */
+
+.hero-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-hairline) solid rgba(243, 239, 230, 0.4);
+  border-radius: var(--radius-pill);
+  background: rgba(14, 20, 51, 0.35);
+  color: var(--text-on-dark);
+  font: 400 26px/1 var(--font-display);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.hero-carousel__arrow:hover {
+  background: rgba(14, 20, 51, 0.6);
+  border-color: var(--nws-gold-bright);
+}
+.hero-carousel__arrow--prev {
+  left: var(--space-4);
+}
+.hero-carousel__arrow--next {
+  right: var(--space-4);
+}
+
+.hero-carousel__controls {
+  position: absolute;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.hero-carousel__pause {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: rgba(14, 20, 51, 0.35);
+  color: var(--text-on-dark);
+  font: 400 10px/1 var(--font-sans);
+  cursor: pointer;
+}
+.hero-carousel__pause:hover {
+  background: rgba(14, 20, 51, 0.6);
+}
+.hero-carousel__dots {
+  display: flex;
+  gap: var(--space-2);
+}
+/* The visual dot is 12px, but the button's hit area is 28px (WCAG 2.5.8 wants
+   ≥24px; on mobile these are the only per-slide targets). */
+.hero-carousel__dot {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.hero-carousel__dot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border: var(--border-hairline) solid rgba(243, 239, 230, 0.65);
+  border-radius: var(--radius-pill);
+  transition: background 0.2s ease, width 0.2s ease;
+}
+.hero-carousel__dot--active {
+  width: 40px;
+}
+.hero-carousel__dot--active::before {
+  width: 28px;
+  background: var(--nws-gold-bright);
+  border-color: var(--nws-gold-bright);
+}
+
+/* The hero copy starts ~24-32px from the viewport edge, and the 44px arrows
+   sit at x 16-60px — they only clear the text column above ~1256px viewports.
+   Below that, dots (and swipe on touch) carry navigation. */
+@media (max-width: 1279px) {
+  .hero-carousel__arrow {
+    display: none;
+  }
+}

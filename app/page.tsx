@@ -4,6 +4,7 @@ import Link from "next/link";
 import SectionHeading from "@/components/brand/SectionHeading";
 import EventCard from "@/components/brand/EventCard";
 import Button from "@/components/core/Button";
+import HeroCarousel from "@/components/sections/HeroCarousel";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { EXTERNAL, MEMBERSHIP_PURCHASE_URL, SITE } from "@/lib/config";
 import { upcomingConcerts, EDUCATION_CHIPS, IMPACT_STATS } from "@/lib/data";
@@ -20,44 +21,144 @@ export default function HomePage() {
 
   return (
     <>
-      {/* 1 — Hero */}
-      <section className="hero">
-        <div className="hero__media">
-          {/* Note: Lighthouse's *simulated* (lantern) mobile LCP reads ~3.2s, but
-              under real throttling LCP is ~1.8s / perf 99 (render-delay 19ms, not
-              1703ms) — the lab figure is a lantern artifact, not a real bottleneck.
-              No architectural change warranted; monitor field/CrUX. — see AUDIT.md */}
-          <Image
-            src="/assets/photos/orchestra-performance.jpg"
-            alt="Michael Christie conducting the New West Symphony before a full house"
-            fill
-            preload
-            quality={55}
-            sizes="100vw"
-            style={{ objectFit: "cover" }}
-          />
-        </div>
-        <div className="hero__scrim" />
-        <div className="container hero__inner">
-          <div className="hero__content">
-            <div className="hero__eyebrow">Your Symphony · Your Choice</div>
-            <hr className="hero__rule" />
-            <h1 className="hero__title">The sound of California, close to home.</h1>
-            <p className="hero__lead">
-              Six Masterpiece concerts a year in Thousand Oaks and Camarillo — live
-              orchestral music, and the people of {SITE.serviceArea} gathered to hear it.
-            </p>
-            <div className="hero__actions">
-              <Button href="/concerts" variant="gold" size="lg">
-                Explore the 2026 Season
-              </Button>
-              <Button href="/visit" variant="ghost" size="lg" onDark>
-                Plan Your Visit
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 1 — Hero carousel: season (LCP slide) · Adopt-A-Musician · membership.
+          The page h1 lives OUTSIDE the carousel: inactive slides are
+          aria-hidden, so an h1 inside slide 1 would vanish from the
+          accessibility tree whenever another slide is showing. */}
+      <h1 className="sr-only">
+        {SITE.name} — the sound of California, close to home
+      </h1>
+      <HeroCarousel
+        slides={[
+          {
+            label: "The 2026 season",
+            content: (
+              <section className="hero">
+                <div className="hero__media">
+                  {/* Note: Lighthouse's *simulated* (lantern) mobile LCP reads ~3.2s, but
+                      under real throttling LCP is ~1.8s / perf 99 (render-delay 19ms, not
+                      1703ms) — the lab figure is a lantern artifact, not a real bottleneck.
+                      No architectural change warranted; monitor field/CrUX. — see AUDIT.md */}
+                  <Image
+                    src="/assets/photos/orchestra-performance.jpg"
+                    alt="Michael Christie conducting the New West Symphony before a full house"
+                    fill
+                    preload
+                    quality={55}
+                    sizes="100vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+                <div className="hero__scrim" />
+                <div className="container hero__inner">
+                  <div className="hero__content">
+                    <div className="hero__eyebrow">Your Symphony · Your Choice</div>
+                    <hr className="hero__rule" />
+                    <p className="hero__title">The sound of California, close to home.</p>
+                    <p className="hero__lead">
+                      Six Masterpiece concerts a year in Thousand Oaks and Camarillo — live
+                      orchestral music, and the people of {SITE.serviceArea} gathered to hear it.
+                    </p>
+                    <div className="hero__actions">
+                      <Button href="/concerts" variant="gold" size="lg">
+                        Explore the 2026 Season
+                      </Button>
+                      <Button href="/visit" variant="ghost" size="lg" onDark>
+                        Plan Your Visit
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            ),
+          },
+          {
+            label: "Adopt a Musician",
+            content: (
+              <section className="hero">
+                <div className="hero__media">
+                  <Image
+                    src="/assets/photos/nws-chorus.jpg"
+                    alt="The New West Symphony and chorus performing on stage"
+                    fill
+                    loading="eager"
+                    quality={55}
+                    sizes="100vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+                <div className="hero__scrim" />
+                <div className="container hero__inner">
+                  <div className="hero__content">
+                    <div className="hero__eyebrow">Support · Fundraising campaign</div>
+                    <hr className="hero__rule" />
+                    <p className="hero__title hero__title--md">Adopt a Musician</p>
+                    <p className="hero__lead">
+                      Connect with your favorite instrument or musician in the orchestra —
+                      meet your musician, join private receptions, and keep the music
+                      playing.
+                    </p>
+                    <div className="hero__actions">
+                      <Button
+                        href="/support/adopt-a-musician"
+                        variant="gold"
+                        size="lg"
+                        track="donate_click"
+                        trackParams={{ location: "home-carousel", campaign: "adopt-a-musician" }}
+                      >
+                        Explore the Campaign
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            ),
+          },
+          {
+            label: "Become a Member",
+            content: (
+              <section className="hero">
+                <div className="hero__media">
+                  <Image
+                    src="/assets/photos/christie-conducting.jpg"
+                    alt="Michael Christie conducting the New West Symphony"
+                    fill
+                    loading="eager"
+                    quality={55}
+                    sizes="100vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+                <div className="hero__scrim" />
+                <div className="container hero__inner">
+                  <div className="hero__content">
+                    <div className="hero__eyebrow">Membership · New for 2026</div>
+                    <hr className="hero__rule" />
+                    <p className="hero__title hero__title--md">
+                      The most flexible way to hear it all
+                    </p>
+                    <p className="hero__lead">
+                      Not a fixed subscription — reserve seats at a flat $20 each, whenever
+                      you want them, at either venue, with member perks all year.
+                    </p>
+                    <div className="hero__actions">
+                      <Button
+                        href="/membership"
+                        variant="gold"
+                        size="lg"
+                        track="become_member_click"
+                        trackParams={{ location: "home-carousel" }}
+                      >
+                        Explore Membership
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            ),
+          },
+        ]}
+      />
 
       {/* 1b — Adopt-A-Musician campaign banner (fundraising push) */}
       <Link
