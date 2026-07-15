@@ -59,9 +59,11 @@ export interface Concert {
   programList: string[];
   blurb: string;
   priceTiers: PriceTier[];
-  /** Real per-concert ticketing URL (audit M1). TODO(NWS): set this on each
-   *  concert; until then the page falls back to the venue provider homepage. */
-  ticketUrl?: string;
+  /** Real per-concert ticketing URLs, keyed by venue — Thousand Oaks and
+   *  Camarillo sell through separate pages, so a concert can have two (audit
+   *  M1). TODO(NWS): set these on each concert; until then each venue falls
+   *  back to its provider URL. Use ticketLinks(concert) to resolve. */
+  ticketUrls?: Partial<Record<VenueKey, string>>;
   /** True when conductor/guests/program are not yet confirmed from the
    *  program book (real season concerts 1–3, §8a). */
   tbc?: boolean;

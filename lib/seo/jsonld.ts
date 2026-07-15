@@ -80,12 +80,13 @@ export function concertJsonLd(concert: Concert) {
       organizer: { "@type": "Organization", name: SITE.legalName, url: SITE.url },
       // No price/priceCurrency until 2026 single-ticket prices are confirmed
       // (audit H7) — never publish a fabricated price to Google. url +
-      // availability keep the offer valid. offers.url points at the real
-      // ticketing page once provided, else the concert detail page (audit M1).
+      // availability keep the offer valid. Each event is one venue's
+      // performance, so the offer points at that venue's own ticketing page
+      // once provided, else the concert detail page (audit M1).
       // TODO(NWS): add price once confirmed.
       offers: {
         "@type": "Offer",
-        url: concert.ticketUrl ?? url,
+        url: concert.ticketUrls?.[perf.venueKey] ?? url,
         availability: "https://schema.org/InStock",
       },
     };

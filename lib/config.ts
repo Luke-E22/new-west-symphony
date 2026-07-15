@@ -62,10 +62,11 @@ export const MEMBERSHIP_PURCHASE_URL = "/membership#purchase-tbc";
 
 /** External ticketing & giving providers (the site links out; it sells nothing). */
 export const EXTERNAL = {
-  // Tickets — venue-level fallbacks only. TODO(NWS): replace with the REAL
-  // per-concert ticketing URLs (set Concert.ticketUrl on each concert). The
-  // Thousand Oaks value is a provider HOMEPAGE placeholder, not an event page,
-  // so "Buy Tickets" is a dead-end until real links are supplied (audit M1).
+  // Tickets — venue-level fallbacks only. The two halls sell separately, so
+  // each concert can carry a link per venue: TODO(NWS): set Concert.ticketUrls
+  // = { to, cam } on each concert, and these stop being used. The Thousand Oaks
+  // value is a provider HOMEPAGE placeholder, not an event page, so "Buy
+  // Tickets" is a dead-end until real links are supplied (audit M1).
   ticketsThousandOaks: "https://www.ticketmaster.com/",
   ticketsCamarillo: "https://nws.my.salesforce-sites.com/tickets",
   // Donations — the Salesforce donation form (the separate, tax-deductible flow).

@@ -4,8 +4,7 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import Badge from "@/components/core/Badge";
 import Button from "@/components/core/Button";
-import { EXTERNAL } from "@/lib/config";
-import type { Concert, VenueKey } from "@/lib/data";
+import { ticketLinks, type Concert, type VenueKey } from "@/lib/data";
 
 type Filter = "all" | VenueKey;
 
@@ -15,13 +14,21 @@ const FILTERS: { key: Filter; label: string }[] = [
   { key: "cam", label: "Camarillo" },
 ];
 
-function ticketUrlFor(c: Concert) {
-  return c.venueKeys.includes("to")
-    ? EXTERNAL.ticketsThousandOaks
-    : EXTERNAL.ticketsCamarillo;
+/**
+ * The card has room for one buy. With a venue filter active we know which hall
+ * they mean, so link straight into its ticketing; otherwise the two halls sell
+ * separately and there's no single right answer — send them to the concert page
+ * to choose rather than silently picking one.
+ */
+function cardBuy(c: Concert, venue: Filter) {
+  const links = ticketLinks(c);
+  if (links.length === 1) return links[0].href;
+  if (venue !== "all") return links.find((l) => l.venueKey === venue)?.href;
+  return undefined;
 }
 
-function PosterCard({ c, past }: { c: Concert; past: boolean }) {
+function PosterCard({ c, past, venue }: { c: Concert; past: boolean; venue: Filter }) {
+  const buyHref = cardBuy(c, venue) ?? `/concerts/${c.slug}`;
   return (
     <article className={past ? "poster-card poster-card--past" : "poster-card"}>
       <a href={`/concerts/${c.slug}`} className="poster-card__media">
@@ -52,7 +59,13 @@ function PosterCard({ c, past }: { c: Concert; past: boolean }) {
             </Button>
           ) : (
             <>
-              <Button href={ticketUrlFor(c)} variant="gold" size="sm" track="buy_tickets_click" trackParams={{ location: "concerts-list", concert: c.slug }}>
+              <Button
+                href={buyHref}
+                variant="gold"
+                size="sm"
+                track="buy_tickets_click"
+                trackParams={{ location: "concerts-list", concert: c.slug, venue }}
+              >
                 Buy Tickets
               </Button>
               <Button href={`/concerts/${c.slug}`} variant="link" size="sm">
@@ -123,7 +136,7 @@ export default function VenueFilter({
             </div>
             <div className="poster-grid">
               {visUpcoming.map((c) => (
-                <PosterCard key={c.slug} c={c} past={false} />
+                <PosterCard key={c.slug} c={c} past={false} venue={filter} />
               ))}
             </div>
           </section>
@@ -140,7 +153,7 @@ export default function VenueFilter({
             </div>
             <div className="poster-grid">
               {visPast.map((c) => (
-                <PosterCard key={c.slug} c={c} past />
+                <PosterCard key={c.slug} c={c} past venue={filter} />
               ))}
             </div>
           </section>

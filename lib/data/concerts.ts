@@ -1,4 +1,6 @@
-import type { Concert, PriceTier } from "./types";
+import { EXTERNAL } from "@/lib/config";
+import { VENUES } from "./venues";
+import type { Concert, PriceTier, VenueKey } from "./types";
 
 /**
  * Standard single-ticket price tiers (§8c — representative; confirm before
@@ -200,6 +202,53 @@ export const getConcert = (slug: string): Concert | undefined =>
   CONCERTS.find((c) => c.slug === slug);
 
 export const concertSlugs = (): string[] => CONCERTS.map((c) => c.slug);
+
+/** Where a venue's tickets are sold when a concert has no explicit link yet. */
+const VENUE_TICKET_FALLBACK: Record<VenueKey, string> = {
+  to: EXTERNAL.ticketsThousandOaks,
+  cam: EXTERNAL.ticketsCamarillo,
+};
+
+const MONTHS_SHORT = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+/**
+ * "2026-01-24T19:00:00-08:00" → "Jan 24". The UTC offset is already baked into
+ * the string, so the date part is the local one — slice it rather than building
+ * a Date, which would re-interpret the instant in the runtime's timezone.
+ */
+function localDateLabel(iso: string): string {
+  const [, month, day] = iso.slice(0, 10).split("-");
+  return `${MONTHS_SHORT[Number(month) - 1]} ${Number(day)}`;
+}
+
+export interface TicketLink {
+  venueKey: VenueKey;
+  /** "Thousand Oaks" | "Camarillo" */
+  city: string;
+  /** When that venue's performance is, e.g. "Jan 24 · Sat 7 PM". */
+  when?: string;
+  href: string;
+}
+
+/**
+ * The buy links for a concert — one per venue, in the concert's venue order.
+ * The two halls sell through separate ticketing pages, so a concert playing
+ * both offers two buys; a single-venue concert yields one.
+ */
+export function ticketLinks(concert: Concert): TicketLink[] {
+  return concert.venueKeys.map((key) => {
+    const perf = concert.performances.find((p) => p.venueKey === key);
+    return {
+      venueKey: key,
+      city: VENUES[key].city,
+      when: perf ? `${localDateLabel(perf.startDate)} · ${perf.timeLabel}` : undefined,
+      href: concert.ticketUrls?.[key] ?? VENUE_TICKET_FALLBACK[key],
+    };
+  });
+}
 
 /** Final performance datetime of a concert (its last show). */
 function concertEnd(c: Concert): number {

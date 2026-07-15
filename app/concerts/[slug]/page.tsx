@@ -9,8 +9,8 @@ import Card from "@/components/core/Card";
 import JsonLd from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { concertJsonLd } from "@/lib/seo/jsonld";
-import { CONCERTS, VENUES, getConcert, isConcertPast } from "@/lib/data";
-import { EXTERNAL, MEMBERSHIP_PURCHASE_URL } from "@/lib/config";
+import { CONCERTS, VENUES, getConcert, isConcertPast, ticketLinks } from "@/lib/data";
+import { MEMBERSHIP_PURCHASE_URL } from "@/lib/config";
 
 export function generateStaticParams() {
   return CONCERTS.map((c) => ({ slug: c.slug }));
@@ -46,13 +46,8 @@ export default async function ConcertDetailPage({
 
   const more = CONCERTS.filter((c) => c.slug !== concert.slug).slice(0, 3);
   const lowest = Math.min(...concert.priceTiers.map((t) => t.amount));
-  // Prefer the real per-concert ticketing URL once NWS supplies it (audit M1);
-  // until then fall back to the venue's provider URL (a placeholder).
-  const ticketUrl =
-    concert.ticketUrl ??
-    (concert.venueKeys.includes("to")
-      ? EXTERNAL.ticketsThousandOaks
-      : EXTERNAL.ticketsCamarillo);
+  // One buy per venue: Thousand Oaks and Camarillo ticket separately.
+  const buys = ticketLinks(concert);
   const isPast = isConcertPast(concert);
 
   return (
@@ -207,9 +202,32 @@ export default async function ConcertDetailPage({
                     Seating tiers are representative; 2026 single-ticket prices are
                     subject to change.
                   </p>
-                  <Button href={ticketUrl} variant="gold" size="lg" fullWidth track="buy_tickets_click" trackParams={{ location: "concert-detail", concert: concert.slug }}>
-                    Buy Tickets
-                  </Button>
+                  {buys.length > 1 && (
+                    <p className="buy-options__note">
+                      Each venue sells its own tickets — pick your date:
+                    </p>
+                  )}
+                  <div className="buy-options">
+                    {buys.map((buy) => (
+                      <div className="buy-option" key={buy.venueKey}>
+                        <Button
+                          href={buy.href}
+                          variant="gold"
+                          size="lg"
+                          fullWidth
+                          track="buy_tickets_click"
+                          trackParams={{
+                            location: "concert-detail",
+                            concert: concert.slug,
+                            venue: buy.venueKey,
+                          }}
+                        >
+                          {buys.length > 1 ? `Buy for ${buy.city}` : "Buy Tickets"}
+                        </Button>
+                        {buy.when && <p className="buy-option__when">{buy.when}</p>}
+                      </div>
+                    ))}
+                  </div>
                   <p className="footnote mt-4" style={{ textAlign: "center" }}>
                     <a href={MEMBERSHIP_PURCHASE_URL} className="quiet-link">
                       Members save up to 15% — join today
@@ -243,13 +261,34 @@ export default async function ConcertDetailPage({
         </div>
       </section>
 
-      {/* Mobile sticky Buy bar (upcoming only) */}
+      {/* Mobile sticky Buy bar (upcoming only). The desktop ticket panel is
+          hidden below 640px, so this bar is the only buy path on mobile — it
+          has to carry every venue, not just the first. */}
       {!isPast && (
         <div className="buy-bar">
-          <span className="buy-bar__price">Tickets from ${lowest}</span>
-          <Button href={ticketUrl} variant="gold" size="md" track="buy_tickets_click" trackParams={{ location: "concert-sticky-bar", concert: concert.slug }}>
-            Buy Tickets
-          </Button>
+          <span className="buy-bar__price">
+            Tickets from ${lowest}
+            {buys.length > 1 && <span className="buy-bar__hint"> · choose a venue</span>}
+          </span>
+          <div className="buy-bar__actions">
+            {buys.map((buy) => (
+              <Button
+                key={buy.venueKey}
+                href={buy.href}
+                variant="gold"
+                size="md"
+                aria-label={`Buy tickets for ${buy.city}${buy.when ? `, ${buy.when}` : ""}`}
+                track="buy_tickets_click"
+                trackParams={{
+                  location: "concert-sticky-bar",
+                  concert: concert.slug,
+                  venue: buy.venueKey,
+                }}
+              >
+                {buys.length > 1 ? buy.city : "Buy Tickets"}
+              </Button>
+            ))}
+          </div>
         </div>
       )}
     </>
