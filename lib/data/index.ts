@@ -9,3 +9,4 @@ export * from "./education";
 export * from "./people";
 export * from "./ensemble";
 export * from "./content";
+export * from "./privacy";

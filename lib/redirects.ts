@@ -572,6 +572,10 @@ export const LEGACY_EXACT: { source: string; destination: string }[] = [
     "destination": "/concerts"
   },
   {
+    "source": "/privacy-policy",
+    "destination": "/privacy"
+  },
+  {
     "source": "/professional-track-at-state-street-ballet",
     "destination": "/concerts"
   },
