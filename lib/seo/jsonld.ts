@@ -87,7 +87,11 @@ export function concertJsonLd(concert: Concert) {
       offers: {
         "@type": "Offer",
         url: concert.ticketUrls?.[perf.venueKey] ?? url,
-        availability: "https://schema.org/InStock",
+        // PreOrder = announced but not yet on sale (Google's event docs accept
+        // InStock / PreOrder / SoldOut) — never claim InStock for those.
+        availability: concert.ticketsComingSoon
+          ? "https://schema.org/PreOrder"
+          : "https://schema.org/InStock",
       },
     };
   });

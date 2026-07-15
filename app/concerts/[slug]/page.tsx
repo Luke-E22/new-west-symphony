@@ -186,6 +186,21 @@ export default async function ConcertDetailPage({
                     See upcoming concerts
                   </Button>
                 </>
+              ) : concert.ticketsComingSoon ? (
+                <>
+                  <div className="info-cell__label">Save the date</div>
+                  <h2 style={{ font: "var(--type-h2)", color: "var(--text-strong)", margin: "var(--space-2) 0 0" }}>
+                    Tickets coming soon
+                  </h2>
+                  <p className="footnote mt-4">
+                    Single tickets for this concert aren&rsquo;t on sale yet. Join the
+                    e-news below for on-sale dates, or explore membership for the
+                    season.
+                  </p>
+                  <Button href="/membership" variant="ghost" size="lg" fullWidth>
+                    Explore Membership
+                  </Button>
+                </>
               ) : (
                 <>
                   <div className="info-cell__label">Tickets from ${lowest}</div>
@@ -259,6 +274,7 @@ export default async function ConcertDetailPage({
                 time={c.dateLabel}
                 venue={c.venuesLabel}
                 href={`/concerts/${c.slug}`}
+                ctaLabel={c.ticketsComingSoon ? "Tickets coming soon" : undefined}
               />
             ))}
           </div>
@@ -268,33 +284,41 @@ export default async function ConcertDetailPage({
       {/* Mobile sticky Buy bar (upcoming only). The desktop ticket panel is
           hidden below 640px, so this bar is the only buy path on mobile — it
           has to carry every venue, not just the first. */}
-      {!isPast && (
-        <div className="buy-bar">
-          <span className="buy-bar__price">
-            Tickets from ${lowest}
-            {buys.length > 1 && <span className="buy-bar__hint"> · choose a venue</span>}
-          </span>
-          <div className="buy-bar__actions">
-            {buys.map((buy) => (
-              <Button
-                key={buy.venueKey}
-                href={buy.href}
-                variant="gold"
-                size="md"
-                aria-label={`Buy tickets for ${buy.city}${buy.when ? `, ${buy.when}` : ""}`}
-                track="buy_tickets_click"
-                trackParams={{
-                  location: "concert-sticky-bar",
-                  concert: concert.slug,
-                  venue: buy.venueKey,
-                }}
-              >
-                {buys.length > 1 ? buy.city : "Buy Tickets"}
-              </Button>
-            ))}
+      {!isPast &&
+        (concert.ticketsComingSoon ? (
+          <div className="buy-bar">
+            <span className="buy-bar__price">
+              Tickets coming soon
+              <span className="buy-bar__hint"> · {concert.dateLabel}</span>
+            </span>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="buy-bar">
+            <span className="buy-bar__price">
+              Tickets from ${lowest}
+              {buys.length > 1 && <span className="buy-bar__hint"> · choose a venue</span>}
+            </span>
+            <div className="buy-bar__actions">
+              {buys.map((buy) => (
+                <Button
+                  key={buy.venueKey}
+                  href={buy.href}
+                  variant="gold"
+                  size="md"
+                  aria-label={`Buy tickets for ${buy.city}${buy.when ? `, ${buy.when}` : ""}`}
+                  track="buy_tickets_click"
+                  trackParams={{
+                    location: "concert-sticky-bar",
+                    concert: concert.slug,
+                    venue: buy.venueKey,
+                  }}
+                >
+                  {buys.length > 1 ? buy.city : "Buy Tickets"}
+                </Button>
+              ))}
+            </div>
+          </div>
+        ))}
     </>
   );
 }

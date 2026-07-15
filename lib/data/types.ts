@@ -66,6 +66,10 @@ export interface Concert {
    *  M1). TODO(NWS): set these on each concert; until then each venue falls
    *  back to its provider URL. Use ticketLinks(concert) to resolve. */
   ticketUrls?: Partial<Record<VenueKey, string>>;
+  /** True while single tickets are not yet on sale (the 2027 placeholders):
+   *  every buy surface shows "Tickets coming soon" instead of buy buttons.
+   *  Remove when the concert's tickets go on sale (usually with ticketUrls). */
+  ticketsComingSoon?: boolean;
   /** True when conductor/guests/program are not yet confirmed from the
    *  program book (real season concerts 1–3, §8a). */
   tbc?: boolean;

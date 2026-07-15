@@ -57,6 +57,13 @@ function PosterCard({ c, past, venue }: { c: Concert; past: boolean; venue: Filt
             <Button href={`/concerts/${c.slug}`} variant="ghost" size="sm">
               Program notes
             </Button>
+          ) : c.ticketsComingSoon ? (
+            <>
+              <span className="poster-card__soon">Tickets coming soon</span>
+              <Button href={`/concerts/${c.slug}`} variant="link" size="sm">
+                Concert details →
+              </Button>
+            </>
           ) : (
             <>
               <Button

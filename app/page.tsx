@@ -98,6 +98,7 @@ export default function HomePage() {
                 time={c.dateLabel}
                 venue={c.venuesLabel}
                 href={`/concerts/${c.slug}`}
+                ctaLabel={c.ticketsComingSoon ? "Tickets coming soon" : undefined}
               />
             ))}
           </div>
