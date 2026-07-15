@@ -14,7 +14,7 @@ interface HeroCarouselProps {
   slides: { label: string; content: ReactNode }[];
 }
 
-const ROTATE_MS = 8000;
+const ROTATE_MS = 5000;
 
 /* prefers-reduced-motion, hydration-safe (same pattern as the GA consent
    store): the server snapshot says "no preference", the client corrects on
