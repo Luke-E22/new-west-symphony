@@ -89,7 +89,9 @@ export default function Header() {
         </nav>
 
         <div className="site-header__actions">
-          <Button href={EXTERNAL.ticketsThousandOaks} variant="ghost" size="sm" className="action--buy" track="buy_tickets_click" trackParams={{ location: "header" }}>
+          {/* Routes to the season listing: each concert sells per venue, so
+              there's no single ticketing URL to deep-link from the chrome. */}
+          <Button href="/concerts" variant="ghost" size="sm" className="action--buy" track="buy_tickets_click" trackParams={{ location: "header" }}>
             Buy Tickets
           </Button>
           <Button href={MEMBERSHIP_PURCHASE_URL} variant="gold" size="sm" track="become_member_click" trackParams={{ location: "header" }}>
@@ -151,7 +153,7 @@ export default function Header() {
             </Link>
           ))}
           <div className="mobile-menu__actions">
-            <Button href={EXTERNAL.ticketsThousandOaks} variant="ghost" fullWidth onClick={close} track="buy_tickets_click" trackParams={{ location: "mobile-menu" }}>
+            <Button href="/concerts" variant="ghost" fullWidth onClick={close} track="buy_tickets_click" trackParams={{ location: "mobile-menu" }}>
               Buy Tickets
             </Button>
             <Button href={MEMBERSHIP_PURCHASE_URL} variant="gold" fullWidth onClick={close} track="become_member_click" trackParams={{ location: "mobile-menu" }}>

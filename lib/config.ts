@@ -65,8 +65,9 @@ export const EXTERNAL = {
   // Tickets — venue-level fallbacks only. The two halls sell separately, so
   // each concert can carry a link per venue: TODO(NWS): set Concert.ticketUrls
   // = { to, cam } on each concert, and these stop being used. The Thousand Oaks
-  // value is a provider HOMEPAGE placeholder, not an event page, so "Buy
-  // Tickets" is a dead-end until real links are supplied (audit M1).
+  // value is a provider HOMEPAGE placeholder, not an event page (audit M1); the
+  // header's "Buy Tickets" routes to /concerts instead, so only the per-venue
+  // concert buttons fall back to these.
   ticketsThousandOaks: "https://www.ticketmaster.com/",
   ticketsCamarillo: "https://nws.my.salesforce-sites.com/tickets",
   // Donations — the Salesforce donation form (the separate, tax-deductible flow).
