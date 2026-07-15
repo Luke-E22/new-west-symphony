@@ -753,6 +753,20 @@ export const LEGACY_EXACT: { source: string; destination: string }[] = [
   }
 ];
 
+/**
+ * Legacy directories whose root is now a real page: only the children collapse.
+ * The old press room had ~65 per-release sub-pages (/press-room/pr-jan-18-2023,
+ * …) that were not migrated; they land on the press room itself rather than the
+ * home page. Kept separate from LEGACY_PREFIX because that helper also redirects
+ * the root, which would shadow the page.
+ */
+export const LEGACY_CHILD_PREFIX: { source: string; destination: string }[] = [
+  {
+    "source": "/press-room",
+    "destination": "/press-room"
+  }
+];
+
 export const LEGACY_PREFIX: { source: string; destination: string }[] = [
   {
     "source": "/2022-23-season",
@@ -773,10 +787,6 @@ export const LEGACY_PREFIX: { source: string; destination: string }[] = [
   {
     "source": "/events",
     "destination": "/concerts"
-  },
-  {
-    "source": "/press-room",
-    "destination": "/"
   },
   {
     "source": "/blog",
@@ -805,5 +815,6 @@ export const VALID_ROUTES: string[] = [
   "/about",
   "/get-involved",
   "/get-involved/board",
-  "/privacy"
+  "/privacy",
+  "/press-room"
 ];

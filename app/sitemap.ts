@@ -12,6 +12,7 @@ const STATIC_ROUTES = [
   "/about",
   "/get-involved",
   "/get-involved/board",
+  "/press-room",
   "/privacy",
 ];
 

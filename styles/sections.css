@@ -1419,3 +1419,61 @@
 .policy__table tbody tr:last-child td {
   border-bottom: 0;
 }
+
+/* ========================================================= Press room ====== */
+.press-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-6);
+}
+.press-item {
+  padding-bottom: var(--space-6);
+  border-bottom: var(--border-hairline) solid var(--border-subtle);
+}
+.press-list > .press-item:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.press-item__date {
+  display: block;
+  font: var(--type-eyebrow);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-accent);
+  margin-bottom: var(--space-2);
+}
+.press-item__title {
+  font: var(--type-h3);
+  color: var(--text-strong);
+  margin: 0 0 var(--space-2);
+  /* Release headlines are long; keep them from setting a wide measure. */
+  text-wrap: pretty;
+}
+.press-item__sub {
+  font: var(--type-body-m);
+  font-weight: var(--weight-semibold);
+  color: var(--text-body);
+  margin: 0 0 var(--space-2);
+}
+.press-item__excerpt {
+  font: var(--type-body-m);
+  color: var(--text-muted);
+  margin: 0 0 var(--space-3);
+}
+.press-item__link {
+  font: var(--type-body-s);
+  font-weight: var(--weight-semibold);
+  color: var(--text-accent);
+}
+.press-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  font: var(--type-body-l);
+}
+.press-contact span {
+  color: var(--text-muted);
+}

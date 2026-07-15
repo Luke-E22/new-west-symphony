@@ -1,5 +1,10 @@
 import type { NextConfig } from "next";
-import { LEGACY_EXACT, LEGACY_PREFIX, VALID_ROUTES } from "./lib/redirects";
+import {
+  LEGACY_CHILD_PREFIX,
+  LEGACY_EXACT,
+  LEGACY_PREFIX,
+  VALID_ROUTES,
+} from "./lib/redirects";
 
 /**
  * Security headers (audit H4). This is a fully static/SSG marketing site, so a
@@ -72,6 +77,12 @@ const nextConfig: NextConfig = {
       rules.push({ source, destination, statusCode: 301 });
       rules.push({ source: `${source}/`, destination, statusCode: 301 });
       rules.push({ source: `${source}/:path*`, destination, statusCode: 301 });
+    }
+    // Legacy sub-pages whose parent is a live route: collapse the children only.
+    // ":path+" (one or more) deliberately excludes the root, so /press-room
+    // still renders its page while /press-room/pr-jan-18-2023 redirects to it.
+    for (const { source, destination } of LEGACY_CHILD_PREFIX) {
+      rules.push({ source: `${source}/:path+`, destination, statusCode: 301 });
     }
     // Normalize a trailing slash on the live routes to the canonical form (one hop).
     for (const route of VALID_ROUTES) {

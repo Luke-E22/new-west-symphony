@@ -85,6 +85,9 @@ export default function Footer() {
                 Patron login
               </a>
             </li>
+            <li>
+              <Link href="/press-room">Press room</Link>
+            </li>
           </ul>
         </div>
 
