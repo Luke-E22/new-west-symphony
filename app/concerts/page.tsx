@@ -6,9 +6,9 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { splitSeason } from "@/lib/data";
 
 export const metadata: Metadata = buildMetadata({
-  title: "2026 Season",
+  title: "Concerts",
   description:
-    "Six Masterpiece concerts across the 2026 season, performed live in Thousand Oaks and Camarillo — browse the full lineup and choose your night.",
+    "Six Masterpiece concerts a season, performed live in Thousand Oaks and Camarillo — browse the 2026 and 2027 line-ups and choose your night.",
   path: "/concerts",
 });
 
@@ -32,10 +32,10 @@ export default function ConcertsPage() {
         </div>
         <div className="hero__scrim hero__scrim--bottom" />
         <div className="container hero__banner-title">
-          <h1 className="hero__title hero__title--md">The 2026 Season</h1>
+          <h1 className="hero__title hero__title--md">Concerts</h1>
           <p className="hero__lead">
-            Six Masterpiece concerts, one community — live orchestral music in
-            Thousand Oaks and Camarillo, from your first night out to your favorite.
+            Six Masterpiece concerts a season, one community — live orchestral music
+            in Thousand Oaks and Camarillo, from your first night out to your favorite.
           </p>
         </div>
       </section>

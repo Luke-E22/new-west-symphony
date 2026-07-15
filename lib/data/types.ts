@@ -41,6 +41,8 @@ export interface Concert {
   title: string;
   series: string; // "Masterpiece Series" | "Family Concert"
   tag: string; // badge label: "Masterpiece" | "Holiday" | "Family"
+  /** Calendar season the concert belongs to, e.g. 2026. Groups the listing. */
+  season: number;
   image: string; // /assets/photos/...
   poster: string; // /assets/concerts/poster-<slug>.jpg — official square concert art
   /** Human date range, e.g. "Jan 24 & 25, 2026". */

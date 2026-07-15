@@ -44,7 +44,11 @@ export default async function ConcertDetailPage({
   const concert = getConcert(slug);
   if (!concert) notFound();
 
-  const more = CONCERTS.filter((c) => c.slug !== concert.slug).slice(0, 3);
+  // "More this season" means this concert's season — otherwise a 2027 page
+  // would recommend 2026 concerts that have already happened.
+  const more = CONCERTS.filter(
+    (c) => c.slug !== concert.slug && c.season === concert.season,
+  ).slice(0, 3);
   const lowest = Math.min(...concert.priceTiers.map((t) => t.amount));
   // One buy per venue: Thousand Oaks and Camarillo ticket separately.
   const buys = ticketLinks(concert);
@@ -115,8 +119,8 @@ export default async function ConcertDetailPage({
             <p className="lead mt-6">{concert.blurb}</p>
             {concert.tbc && (
               <p className="footnote mt-4">
-                Conductor, guest artists, and full program for this concert are still being
-                confirmed from the program book.
+                Conductor, guest artists, and full program for this concert are still
+                to be confirmed.
               </p>
             )}
             <ul className="program-list">
@@ -176,7 +180,7 @@ export default async function ConcertDetailPage({
                     This concert has passed
                   </h2>
                   <p className="footnote mt-4">
-                    Browse the rest of the 2026 season for upcoming dates.
+                    Browse the season for upcoming dates.
                   </p>
                   <Button href="/concerts" variant="ghost" size="lg" fullWidth>
                     See upcoming concerts
@@ -188,7 +192,7 @@ export default async function ConcertDetailPage({
                   <h2 style={{ font: "var(--type-h2)", color: "var(--text-strong)", margin: "var(--space-2) 0 0" }}>
                     Choose your seats
                   </h2>
-                  {/* Seating tiers are real categories; the 2026 single-ticket
+                  {/* Seating tiers are real categories; per-season single-ticket
                       prices are unconfirmed (audit H7), so we show the tiers and
                       a "from" anchor but not hard per-tier prices. */}
                   <ul className="price-list">
@@ -199,8 +203,8 @@ export default async function ConcertDetailPage({
                     ))}
                   </ul>
                   <p className="footnote">
-                    Seating tiers are representative; 2026 single-ticket prices are
-                    subject to change.
+                    Seating tiers are representative; {concert.season} single-ticket
+                    prices are subject to change.
                   </p>
                   {buys.length > 1 && (
                     <p className="buy-options__note">

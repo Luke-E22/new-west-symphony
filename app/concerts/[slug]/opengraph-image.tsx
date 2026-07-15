@@ -57,7 +57,7 @@ export default async function Image({
           }}
         >
           <div style={{ color: "#D6A954", fontSize: 22, letterSpacing: 6, textTransform: "uppercase" }}>
-            {`${SITE.name} · 2026 Season`}
+            {concert ? `${SITE.name} · ${concert.season} Season` : SITE.name}
           </div>
           <div style={{ width: 84, height: 4, background: "#C0903F", margin: "26px 0" }} />
           <div style={{ color: "#FFFFFF", fontSize: 58, lineHeight: 1.05, fontWeight: 600 }}>

@@ -103,6 +103,21 @@ export default function VenueFilter({
   );
   const total = visUpcoming.length + visPast.length;
 
+  // Upcoming spans more than one season once a future one is announced, so it's
+  // grouped rather than run together. visUpcoming is already soonest-first, so
+  // each group keeps its order.
+  const upcomingSeasons = useMemo(() => {
+    const bySeason = new Map<number, Concert[]>();
+    for (const c of visUpcoming) {
+      const list = bySeason.get(c.season) ?? [];
+      list.push(c);
+      bySeason.set(c.season, list);
+    }
+    return [...bySeason.entries()]
+      .sort((a, b) => a[0] - b[0])
+      .map(([season, concerts]) => ({ season, concerts }));
+  }, [visUpcoming]);
+
   return (
     <>
       <div className="filter-bar">
@@ -125,22 +140,29 @@ export default function VenueFilter({
       </div>
 
       <div className="container section">
-        {visUpcoming.length > 0 && (
-          <section aria-labelledby="upcoming-heading" style={{ marginBottom: "var(--space-9)" }}>
+        {upcomingSeasons.map(({ season, concerts }) => (
+          <section
+            key={season}
+            aria-labelledby={`season-${season}-heading`}
+            style={{ marginBottom: "var(--space-9)" }}
+          >
             <div className="section-heading" style={{ marginBottom: "var(--space-6)" }}>
-              <div className="section-heading__eyebrow">On sale now</div>
+              {/* A season with nothing confirmed yet is a save-the-date, not a sale. */}
+              <div className="section-heading__eyebrow">
+                {concerts.every((c) => c.tbc) ? "Save the date" : "On sale now"}
+              </div>
               <hr className="section-heading__rule" />
-              <h2 className="section-heading__title" id="upcoming-heading">
-                Upcoming concerts
+              <h2 className="section-heading__title" id={`season-${season}-heading`}>
+                {season} Season
               </h2>
             </div>
             <div className="poster-grid">
-              {visUpcoming.map((c) => (
+              {concerts.map((c) => (
                 <PosterCard key={c.slug} c={c} past={false} venue={filter} />
               ))}
             </div>
           </section>
-        )}
+        ))}
 
         {visPast.length > 0 && (
           <section aria-labelledby="past-heading">

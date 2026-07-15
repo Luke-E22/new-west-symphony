@@ -26,12 +26,26 @@ export const PRICE_TIERS: PriceTier[] = [
  * confirmation from the program book (§8a). Concerts 4–6 keep their confirmed
  * details. All photography is placeholder (§Assets) — swap for real imagery.
  */
-const SEASON: Omit<Concert, "poster">[] = [
+/** A concert's poster is derived from its slug unless it names one (the 2027
+ *  placeholders share one "artwork to come" card). */
+type SeasonEntry = Omit<Concert, "poster"> & { poster?: string };
+
+/* Shared stand-ins for the unannounced 2027 season. Kept as named constants so
+   a real announcement is a per-concert edit, and so nothing here can be mistaken
+   for confirmed programming. */
+const TBA_POSTER_2027 = "/assets/concerts/poster-tba-2027.jpg";
+const TBA_CONDUCTOR = "Conductor to be announced";
+const TBA_GUESTS = "Guest artists to be announced";
+const TBA_PROGRAM = "Program to be announced.";
+const TBA_PROGRAM_LIST = ["Program to be announced"];
+
+const SEASON: SeasonEntry[] = [
   {
     slug: "rachmaninoff-gershwin",
     title: "Rachmaninoff & Gershwin",
     series: "Masterpiece Series",
     tag: "Masterpiece",
+    season: 2026,
     image: "/assets/photos/photo-c-rach.jpg",
     dateLabel: "Jan 24 & 25, 2026",
     railDate: { month: "JAN", day: "24", weekday: "Sat" },
@@ -59,6 +73,7 @@ const SEASON: Omit<Concert, "poster">[] = [
     title: "Mozart and American Voices",
     series: "Masterpiece Series",
     tag: "Masterpiece",
+    season: 2026,
     image: "/assets/photos/photo-c-vienna.jpg",
     dateLabel: "Mar 7 & 8, 2026",
     railDate: { month: "MAR", day: "7", weekday: "Sat" },
@@ -87,6 +102,7 @@ const SEASON: Omit<Concert, "poster">[] = [
     title: "Bernstein, Brahms & Blues",
     series: "Masterpiece Series",
     tag: "Masterpiece",
+    season: 2026,
     image: "/assets/photos/photo-c-family.jpg",
     dateLabel: "Apr 11 & 12, 2026",
     railDate: { month: "APR", day: "11", weekday: "Sat" },
@@ -116,6 +132,7 @@ const SEASON: Omit<Concert, "poster">[] = [
     title: "Beethoven & Copland",
     series: "Masterpiece Series",
     tag: "Masterpiece",
+    season: 2026,
     image: "/assets/photos/photo-c-beethoven.jpg",
     dateLabel: "Oct 3 & 4, 2026",
     railDate: { month: "OCT", day: "3", weekday: "Sat" },
@@ -142,6 +159,7 @@ const SEASON: Omit<Concert, "poster">[] = [
     title: "Symphony Goes to Cirque",
     series: "Masterpiece Series",
     tag: "Masterpiece",
+    season: 2026,
     image: "/assets/photos/photo-c-cirque.jpg",
     dateLabel: "Nov 7 & 8, 2026",
     railDate: { month: "NOV", day: "7", weekday: "Sat" },
@@ -169,6 +187,7 @@ const SEASON: Omit<Concert, "poster">[] = [
     title: "Too Hot to Handel",
     series: "Masterpiece Series",
     tag: "Holiday",
+    season: 2026,
     image: "/assets/photos/photo-c-handel.jpg",
     dateLabel: "Dec 5 & 6, 2026",
     railDate: { month: "DEC", day: "5", weekday: "Sat" },
@@ -190,13 +209,187 @@ const SEASON: Omit<Concert, "poster">[] = [
       "A soul-stirring gospel Messiah that turns the holidays into a community celebration.",
     priceTiers: PRICE_TIERS,
   },
+
+  /**
+   * 2027 Masterpiece Series — PLACEHOLDERS. Nothing here is announced: titles
+   * are the month, and conductor / guests / program are all TBA. Replace each
+   * as NWS confirms it (title, slug, poster, image, programList, blurb, tbc).
+   *
+   * Dates mirror the 2026 weekends. They are NOT the same calendar dates: every
+   * 2026 Saturday falls on a Sunday in 2027, so each weekend is shifted by one
+   * day (+364 days) to keep the Saturday-Thousand Oaks / Sunday-Camarillo
+   * pattern. Offsets follow US Pacific DST in 2027 (starts Mar 14, ends Nov 7)
+   * — note the Nov weekend straddles the change: Sat is PDT, Sun is PST.
+   */
+  {
+    slug: "2027-january",
+    title: "January 2027",
+    series: "Masterpiece Series",
+    tag: "Masterpiece",
+    season: 2027,
+    image: "/assets/photos/orchestra-performance.jpg",
+    poster: TBA_POSTER_2027,
+    dateLabel: "Jan 23 & 24, 2027",
+    railDate: { month: "JAN", day: "23", weekday: "Sat" },
+    timeLabel: "Sat 7 PM · Sun 3 PM",
+    performances: [
+      { startDate: "2027-01-23T19:00:00-08:00", venueKey: "to", timeLabel: "Sat 7 PM" },
+      { startDate: "2027-01-24T15:00:00-08:00", venueKey: "cam", timeLabel: "Sun 3 PM" },
+    ],
+    venueKeys: ["to", "cam"],
+    venuesLabel: "Thousand Oaks · Camarillo",
+    conductor: TBA_CONDUCTOR,
+    guests: TBA_GUESTS,
+    program: TBA_PROGRAM,
+    programList: TBA_PROGRAM_LIST,
+    blurb:
+      "The 2027 Masterpiece Series opens in January. The program, conductor, and guest artists will be announced — save the date.",
+    priceTiers: PRICE_TIERS,
+    tbc: true,
+  },
+  {
+    slug: "2027-march",
+    title: "March 2027",
+    series: "Masterpiece Series",
+    tag: "Masterpiece",
+    season: 2027,
+    image: "/assets/photos/orchestra-performance.jpg",
+    poster: TBA_POSTER_2027,
+    dateLabel: "Mar 6 & 7, 2027",
+    railDate: { month: "MAR", day: "6", weekday: "Sat" },
+    timeLabel: "Sat 7 PM · Sun 3 PM",
+    performances: [
+      { startDate: "2027-03-06T19:00:00-08:00", venueKey: "to", timeLabel: "Sat 7 PM" },
+      { startDate: "2027-03-07T15:00:00-08:00", venueKey: "cam", timeLabel: "Sun 3 PM" },
+    ],
+    venueKeys: ["to", "cam"],
+    venuesLabel: "Thousand Oaks · Camarillo",
+    conductor: TBA_CONDUCTOR,
+    guests: TBA_GUESTS,
+    program: TBA_PROGRAM,
+    programList: TBA_PROGRAM_LIST,
+    blurb:
+      "A March weekend with the orchestra in Thousand Oaks and Camarillo. The program, conductor, and guest artists will be announced — save the date.",
+    priceTiers: PRICE_TIERS,
+    tbc: true,
+  },
+  {
+    slug: "2027-april",
+    title: "April 2027",
+    series: "Masterpiece Series",
+    tag: "Masterpiece",
+    season: 2027,
+    image: "/assets/photos/orchestra-performance.jpg",
+    poster: TBA_POSTER_2027,
+    dateLabel: "Apr 10 & 11, 2027",
+    railDate: { month: "APR", day: "10", weekday: "Sat" },
+    timeLabel: "Sat 7 PM · Sun 3 PM",
+    performances: [
+      { startDate: "2027-04-10T19:00:00-07:00", venueKey: "to", timeLabel: "Sat 7 PM" },
+      { startDate: "2027-04-11T15:00:00-07:00", venueKey: "cam", timeLabel: "Sun 3 PM" },
+    ],
+    venueKeys: ["to", "cam"],
+    venuesLabel: "Thousand Oaks · Camarillo",
+    conductor: TBA_CONDUCTOR,
+    guests: TBA_GUESTS,
+    program: TBA_PROGRAM,
+    programList: TBA_PROGRAM_LIST,
+    blurb:
+      "The spring Masterpiece weekend. The program, conductor, and guest artists will be announced — save the date.",
+    priceTiers: PRICE_TIERS,
+    tbc: true,
+  },
+  {
+    slug: "2027-october",
+    title: "October 2027",
+    series: "Masterpiece Series",
+    tag: "Masterpiece",
+    season: 2027,
+    image: "/assets/photos/orchestra-performance.jpg",
+    poster: TBA_POSTER_2027,
+    dateLabel: "Oct 2 & 3, 2027",
+    railDate: { month: "OCT", day: "2", weekday: "Sat" },
+    timeLabel: "Sat 7 PM · Sun 3 PM",
+    performances: [
+      { startDate: "2027-10-02T19:00:00-07:00", venueKey: "to", timeLabel: "Sat 7 PM" },
+      { startDate: "2027-10-03T15:00:00-07:00", venueKey: "cam", timeLabel: "Sun 3 PM" },
+    ],
+    venueKeys: ["to", "cam"],
+    venuesLabel: "Thousand Oaks · Camarillo",
+    conductor: TBA_CONDUCTOR,
+    guests: TBA_GUESTS,
+    program: TBA_PROGRAM,
+    programList: TBA_PROGRAM_LIST,
+    blurb:
+      "The autumn season opener. The program, conductor, and guest artists will be announced — save the date.",
+    priceTiers: PRICE_TIERS,
+    tbc: true,
+  },
+  {
+    slug: "2027-november",
+    title: "November 2027",
+    series: "Masterpiece Series",
+    tag: "Masterpiece",
+    season: 2027,
+    image: "/assets/photos/orchestra-performance.jpg",
+    poster: TBA_POSTER_2027,
+    dateLabel: "Nov 6 & 7, 2027",
+    railDate: { month: "NOV", day: "6", weekday: "Sat" },
+    timeLabel: "Sat 7 PM · Sun 3 PM",
+    performances: [
+      // DST ends 2am Sun Nov 7 2027: Saturday is PDT, Sunday afternoon is PST.
+      { startDate: "2027-11-06T19:00:00-07:00", venueKey: "to", timeLabel: "Sat 7 PM" },
+      { startDate: "2027-11-07T15:00:00-08:00", venueKey: "cam", timeLabel: "Sun 3 PM" },
+    ],
+    venueKeys: ["to", "cam"],
+    venuesLabel: "Thousand Oaks · Camarillo",
+    conductor: TBA_CONDUCTOR,
+    guests: TBA_GUESTS,
+    program: TBA_PROGRAM,
+    programList: TBA_PROGRAM_LIST,
+    blurb:
+      "A November weekend with the orchestra. The program, conductor, and guest artists will be announced — save the date.",
+    priceTiers: PRICE_TIERS,
+    tbc: true,
+  },
+  {
+    slug: "2027-december",
+    title: "December 2027",
+    series: "Masterpiece Series",
+    tag: "Masterpiece",
+    season: 2027,
+    image: "/assets/photos/orchestra-performance.jpg",
+    poster: TBA_POSTER_2027,
+    dateLabel: "Dec 4 & 5, 2027",
+    railDate: { month: "DEC", day: "4", weekday: "Sat" },
+    timeLabel: "Sat 7 PM · Sun 3 PM",
+    performances: [
+      { startDate: "2027-12-04T19:00:00-08:00", venueKey: "to", timeLabel: "Sat 7 PM" },
+      { startDate: "2027-12-05T15:00:00-08:00", venueKey: "cam", timeLabel: "Sun 3 PM" },
+    ],
+    venueKeys: ["to", "cam"],
+    venuesLabel: "Thousand Oaks · Camarillo",
+    conductor: TBA_CONDUCTOR,
+    guests: TBA_GUESTS,
+    program: TBA_PROGRAM,
+    programList: TBA_PROGRAM_LIST,
+    blurb:
+      "The season closes in December. The program, conductor, and guest artists will be announced — save the date.",
+    priceTiers: PRICE_TIERS,
+    tbc: true,
+  },
 ];
 
 /** Each concert's official square poster lives at /assets/concerts/poster-<slug>.jpg. */
 export const CONCERTS: Concert[] = SEASON.map((c) => ({
   ...c,
-  poster: `/assets/concerts/poster-${c.slug}.jpg`,
+  poster: c.poster ?? `/assets/concerts/poster-${c.slug}.jpg`,
 }));
+
+/** Season years present in the data, soonest first (2026, 2027, …). */
+export const SEASON_YEARS: number[] = [...new Set(CONCERTS.map((c) => c.season))].sort(
+  (a, b) => a - b,
+);
 
 export const getConcert = (slug: string): Concert | undefined =>
   CONCERTS.find((c) => c.slug === slug);
