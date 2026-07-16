@@ -154,9 +154,9 @@ export default function VenueFilter({
             style={{ marginBottom: "var(--space-9)" }}
           >
             <div className="section-heading" style={{ marginBottom: "var(--space-6)" }}>
-              {/* A season with nothing confirmed yet is a save-the-date, not a sale. */}
+              {/* A season whose tickets aren't on sale is a save-the-date, not a sale. */}
               <div className="section-heading__eyebrow">
-                {concerts.every((c) => c.tbc) ? "Save the date" : "On sale now"}
+                {concerts.every((c) => c.ticketsComingSoon) ? "Save the date" : "On sale now"}
               </div>
               <hr className="section-heading__rule" />
               <h2 className="section-heading__title" id={`season-${season}-heading`}>

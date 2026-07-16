@@ -55,7 +55,8 @@ export interface Concert {
   venueKeys: VenueKey[];
   venuesLabel: string;
   conductor: string;
-  guests: string;
+  /** Guest artists / featured ensembles. Omit when the orchestra performs alone. */
+  guests?: string;
   program: string;
   /** Program broken into bullet lines for the detail page. */
   programList: string[];

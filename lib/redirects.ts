@@ -799,6 +799,30 @@ export const LEGACY_PREFIX: { source: string; destination: string }[] = [
   {
     "source": "/music-education",
     "destination": "/education"
+  },
+  {
+    "source": "/concerts/2027-january",
+    "destination": "/concerts/best-of-tchaikovsky"
+  },
+  {
+    "source": "/concerts/2027-march",
+    "destination": "/concerts/chopin-second"
+  },
+  {
+    "source": "/concerts/2027-april",
+    "destination": "/concerts/rossini-meets-beethoven"
+  },
+  {
+    "source": "/concerts/2027-october",
+    "destination": "/concerts/star-wars"
+  },
+  {
+    "source": "/concerts/2027-november",
+    "destination": "/concerts/beethoven-in-havana"
+  },
+  {
+    "source": "/concerts/2027-december",
+    "destination": "/concerts/winter-wonderland"
   }
 ];
 

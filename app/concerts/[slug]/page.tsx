@@ -128,9 +128,11 @@ export default async function ConcertDetailPage({
                 <li key={line}>{line}</li>
               ))}
             </ul>
-            <p className="lead">
-              <strong>Guests:</strong> {concert.guests}
-            </p>
+            {concert.guests && (
+              <p className="lead">
+                <strong>Guests:</strong> {concert.guests}
+              </p>
+            )}
             <div className="insight-note">
               <strong>Intermission Insights:</strong> join us one hour before curtain for a free
               pre-concert talk — the music makes more sense, and it&rsquo;s more fun.

@@ -30,14 +30,9 @@ export const PRICE_TIERS: PriceTier[] = [
  *  placeholders share one "artwork to come" card). */
 type SeasonEntry = Omit<Concert, "poster"> & { poster?: string };
 
-/* Shared stand-ins for the unannounced 2027 season. Kept as named constants so
-   a real announcement is a per-concert edit, and so nothing here can be mistaken
-   for confirmed programming. */
+/* Shared "artwork to come" poster for the 2027 season — swap per concert once
+   NWS supplies the official art. */
 const TBA_POSTER_2027 = "/assets/concerts/poster-tba-2027.jpg";
-const TBA_CONDUCTOR = "Conductor to be announced";
-const TBA_GUESTS = "Guest artists to be announced";
-const TBA_PROGRAM = "Program to be announced.";
-const TBA_PROGRAM_LIST = ["Program to be announced"];
 
 const SEASON: SeasonEntry[] = [
   {
@@ -211,46 +206,55 @@ const SEASON: SeasonEntry[] = [
   },
 
   /**
-   * 2027 Masterpiece Series — PLACEHOLDERS. Nothing here is announced: titles
-   * are the month, and conductor / guests / program are all TBA. Replace each
-   * as NWS confirms it (title, slug, poster, image, programList, blurb, tbc).
+   * The 2027 Masterpiece Series, from NWS's renewal programming sheet
+   * ("2027 Programming for renewal.docx", July 2026): six Saturday evenings
+   * 7 PM at BAPAC (Thousand Oaks) + six Sunday afternoons 3 PM at RCPAC
+   * (Camarillo). "All programming, guest artists and dates subject to change."
    *
-   * Dates mirror the 2026 weekends. They are NOT the same calendar dates: every
-   * 2026 Saturday falls on a Sunday in 2027, so each weekend is shifted by one
-   * day (+364 days) to keep the Saturday-Thousand Oaks / Sunday-Camarillo
-   * pattern. Offsets follow US Pacific DST in 2027 (starts Mar 14, ends Nov 7)
-   * — note the Nov weekend straddles the change: Sat is PDT, Sun is PST.
+   * Offsets follow US Pacific DST in 2027 (starts Mar 14, ends Nov 7) — the
+   * November weekend straddles the change: Sat is PDT, Sun is PST.
+   *
+   * Tickets are not on sale yet (ticketsComingSoon); official 2027 artwork is
+   * pending, so all six share the TBA poster. The renewal sheet lists the
+   * Tchaikovsky Violin Concerto as "Op. 64" — that opus is the Fifth Symphony's
+   * and the concerto is Op. 35, so the opus is omitted here rather than
+   * reproducing the typo.
    */
   {
-    slug: "2027-january",
-    title: "January 2027",
+    slug: "best-of-tchaikovsky",
+    title: "Best of Tchaikovsky",
     series: "Masterpiece Series",
     tag: "Masterpiece",
     season: 2027,
     image: "/assets/photos/orchestra-performance.jpg",
     poster: TBA_POSTER_2027,
     ticketsComingSoon: true,
-    dateLabel: "Jan 23 & 24, 2027",
-    railDate: { month: "JAN", day: "23", weekday: "Sat" },
+    dateLabel: "Jan 30 & 31, 2027",
+    railDate: { month: "JAN", day: "30", weekday: "Sat" },
     timeLabel: "Sat 7 PM · Sun 3 PM",
     performances: [
-      { startDate: "2027-01-23T19:00:00-08:00", venueKey: "to", timeLabel: "Sat 7 PM" },
-      { startDate: "2027-01-24T15:00:00-08:00", venueKey: "cam", timeLabel: "Sun 3 PM" },
+      { startDate: "2027-01-30T19:00:00-08:00", venueKey: "to", timeLabel: "Sat 7 PM" },
+      { startDate: "2027-01-31T15:00:00-08:00", venueKey: "cam", timeLabel: "Sun 3 PM" },
     ],
     venueKeys: ["to", "cam"],
     venuesLabel: "Thousand Oaks · Camarillo",
-    conductor: TBA_CONDUCTOR,
-    guests: TBA_GUESTS,
-    program: TBA_PROGRAM,
-    programList: TBA_PROGRAM_LIST,
+    conductor: "Michael Christie, conductor",
+    program:
+      "Musical favorites of Tchaikovsky — 1812 Overture, The Nutcracker, Swan Lake & more",
+    programList: [
+      "Tchaikovsky — 1812 Overture",
+      "Tchaikovsky — Music from The Nutcracker & Swan Lake",
+      "Tchaikovsky — Violin Concerto in D Major: Allegro vivacissimo",
+      "Tchaikovsky — Souvenir de Florence: Allegro moderato",
+      "Tchaikovsky — Symphony No. 5 in E Minor, Op. 64: Finale",
+    ],
     blurb:
-      "The 2027 Masterpiece Series opens in January. The program, conductor, and guest artists will be announced — save the date.",
+      "Three ballets, five concertos, seven symphonies, ten operas — it's hard to pick a favorite. Michael Christie leads a grand tour through the popular works of one of music's most revered and prolific composers.",
     priceTiers: PRICE_TIERS,
-    tbc: true,
   },
   {
-    slug: "2027-march",
-    title: "March 2027",
+    slug: "chopin-second",
+    title: "Chopin Second",
     series: "Masterpiece Series",
     tag: "Masterpiece",
     season: 2027,
@@ -266,18 +270,22 @@ const SEASON: SeasonEntry[] = [
     ],
     venueKeys: ["to", "cam"],
     venuesLabel: "Thousand Oaks · Camarillo",
-    conductor: TBA_CONDUCTOR,
-    guests: TBA_GUESTS,
-    program: TBA_PROGRAM,
-    programList: TBA_PROGRAM_LIST,
+    conductor: "Michael Christie, conductor",
+    guests: "Andrew von Oeyen, piano",
+    program: "Chopin: Piano Concerto No. 2 · Beethoven: Symphony No. 2",
+    programList: [
+      "Chopin — Piano Concerto No. 2 in F Minor, Op. 21",
+      "Bacewicz — Concerto for String Orchestra",
+      "Lutosławski — Six Children's Songs",
+      "Beethoven — Symphony No. 2 in D Major, Op. 36",
+    ],
     blurb:
-      "A March weekend with the orchestra in Thousand Oaks and Camarillo. The program, conductor, and guest artists will be announced — save the date.",
+      "Chopin's poetic Second Piano Concerto meets the early Beethoven symphony that spoke to his classical instincts — with internationally renowned, Malibu-based virtuoso Andrew von Oeyen at the piano and Polish masterworks in between.",
     priceTiers: PRICE_TIERS,
-    tbc: true,
   },
   {
-    slug: "2027-april",
-    title: "April 2027",
+    slug: "rossini-meets-beethoven",
+    title: "Rossini Meets Beethoven",
     series: "Masterpiece Series",
     tag: "Masterpiece",
     season: 2027,
@@ -293,45 +301,50 @@ const SEASON: SeasonEntry[] = [
     ],
     venueKeys: ["to", "cam"],
     venuesLabel: "Thousand Oaks · Camarillo",
-    conductor: TBA_CONDUCTOR,
-    guests: TBA_GUESTS,
-    program: TBA_PROGRAM,
-    programList: TBA_PROGRAM_LIST,
+    conductor: "Michael Christie, conductor",
+    guests: "New West Symphony Chorus",
+    program:
+      "Rossini: The Barber of Seville & William Tell · Beethoven: “Ode to Joy”",
+    programList: [
+      "Rossini — Overture to The Barber of Seville",
+      "Rossini — Scenes from The Barber of Seville",
+      "Rossini — Overture to William Tell",
+      "Beethoven — Symphony No. 9 in D Minor, Op. 125, IV: “Ode to Joy”",
+    ],
     blurb:
-      "The spring Masterpiece weekend. The program, conductor, and guest artists will be announced — save the date.",
+      "Two musical titans who admired each other from very different lives — one feted in grand palaces, the other working away in a leaking attic. Rossini's pinnacle overtures beside the immortal “Ode to Joy” finale of Beethoven's Ninth.",
     priceTiers: PRICE_TIERS,
-    tbc: true,
   },
   {
-    slug: "2027-october",
-    title: "October 2027",
+    slug: "star-wars",
+    title: "Star Wars",
     series: "Masterpiece Series",
     tag: "Masterpiece",
     season: 2027,
     image: "/assets/photos/orchestra-performance.jpg",
     poster: TBA_POSTER_2027,
     ticketsComingSoon: true,
-    dateLabel: "Oct 2 & 3, 2027",
-    railDate: { month: "OCT", day: "2", weekday: "Sat" },
+    dateLabel: "Oct 9 & 10, 2027",
+    railDate: { month: "OCT", day: "9", weekday: "Sat" },
     timeLabel: "Sat 7 PM · Sun 3 PM",
     performances: [
-      { startDate: "2027-10-02T19:00:00-07:00", venueKey: "to", timeLabel: "Sat 7 PM" },
-      { startDate: "2027-10-03T15:00:00-07:00", venueKey: "cam", timeLabel: "Sun 3 PM" },
+      { startDate: "2027-10-09T19:00:00-07:00", venueKey: "to", timeLabel: "Sat 7 PM" },
+      { startDate: "2027-10-10T15:00:00-07:00", venueKey: "cam", timeLabel: "Sun 3 PM" },
     ],
     venueKeys: ["to", "cam"],
     venuesLabel: "Thousand Oaks · Camarillo",
-    conductor: TBA_CONDUCTOR,
-    guests: TBA_GUESTS,
-    program: TBA_PROGRAM,
-    programList: TBA_PROGRAM_LIST,
+    conductor: "Michael Christie, conductor",
+    program: "John Williams' music from all nine episodes of the Skywalker saga",
+    programList: [
+      "Williams — Music from The Phantom Menace, Attack of the Clones, Revenge of the Sith, A New Hope, The Empire Strikes Back, Return of the Jedi, The Force Awakens, The Last Jedi, and The Rise of Skywalker",
+    ],
     blurb:
-      "The autumn season opener. The program, conductor, and guest artists will be announced — save the date.",
+      "It's hard to believe Star Wars premiered 50 years ago in 1977 — relive all nine episodes of the Skywalker saga in two hours of John Williams' Academy Award, BAFTA, Golden Globe, Grammy, and Saturn award-winning scores.",
     priceTiers: PRICE_TIERS,
-    tbc: true,
   },
   {
-    slug: "2027-november",
-    title: "November 2027",
+    slug: "beethoven-in-havana",
+    title: "Beethoven in Havana",
     series: "Masterpiece Series",
     tag: "Masterpiece",
     season: 2027,
@@ -348,20 +361,24 @@ const SEASON: SeasonEntry[] = [
     ],
     venueKeys: ["to", "cam"],
     venuesLabel: "Thousand Oaks · Camarillo",
-    conductor: TBA_CONDUCTOR,
-    guests: TBA_GUESTS,
-    program: TBA_PROGRAM,
-    programList: TBA_PROGRAM_LIST,
+    conductor: "Michael Christie, conductor",
+    guests: "Joachim Horsley, piano",
+    program: "Horsley: Beethoven in Havana · Beethoven: Symphony No. 7",
+    programList: [
+      "Key / Smith — The Star-Spangled Banner",
+      "Wendel — Armed Forces March",
+      "Horsley — Beethoven in Havana",
+      "Beethoven — Symphony No. 7 in A Major, Op. 92",
+    ],
     blurb:
-      "A November weekend with the orchestra. The program, conductor, and guest artists will be announced — save the date.",
+      "Beethoven's joyful Seventh Symphony and a tribute to American military veterans — with Latin Grammy-nominated composer-pianist Joachim Horsley bringing Classical and Afro-Caribbean cultures together with utter delight.",
     priceTiers: PRICE_TIERS,
-    tbc: true,
   },
   {
-    slug: "2027-december",
-    title: "December 2027",
+    slug: "winter-wonderland",
+    title: "Winter Wonderland",
     series: "Masterpiece Series",
-    tag: "Masterpiece",
+    tag: "Holiday",
     season: 2027,
     image: "/assets/photos/orchestra-performance.jpg",
     poster: TBA_POSTER_2027,
@@ -375,14 +392,16 @@ const SEASON: SeasonEntry[] = [
     ],
     venueKeys: ["to", "cam"],
     venuesLabel: "Thousand Oaks · Camarillo",
-    conductor: TBA_CONDUCTOR,
-    guests: TBA_GUESTS,
-    program: TBA_PROGRAM,
-    programList: TBA_PROGRAM_LIST,
+    conductor: "Michael Christie, conductor",
+    guests: "New West Symphony Chorus · Los Robles Children's Choir",
+    program: "Winter Spectacular — symphonic favorites meet holiday spirit",
+    programList: [
+      "Winter-inspired symphonic favorites and holiday classics",
+      "Featuring the New West Symphony Chorus and Los Robles Children's Choir",
+    ],
     blurb:
-      "The season closes in December. The program, conductor, and guest artists will be announced — save the date.",
+      "An annual New West Symphony holiday favorite — winter-inspired symphonic favorites meet holiday spirit in a program to launch the season, featuring the New West Symphony Chorus and Los Robles Children's Choir.",
     priceTiers: PRICE_TIERS,
-    tbc: true,
   },
 ];
 
