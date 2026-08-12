@@ -1743,3 +1743,42 @@
     display: none;
   }
 }
+
+/* ============================ Board advisors / past chairs ================= */
+/* Understated companions to the director roster: names only, no photos, no
+   cards — neither group sits on the governing board. */
+.board-extra {
+  display: grid;
+  gap: var(--space-7);
+  margin-top: var(--space-8);
+  text-align: center;
+}
+.board-extra ul {
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  color: var(--text-body);
+}
+.board-extra__inline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  font: var(--type-body-m);
+}
+/* Dot between names, never trailing. */
+.board-extra__inline li + li::before {
+  content: "·";
+  color: var(--text-muted);
+  margin-inline-end: var(--space-2);
+}
+.board-extra__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: var(--space-3) var(--space-5);
+  font: var(--type-body-s);
+}
+.board-extra__years {
+  color: var(--text-muted);
+  white-space: nowrap;
+}

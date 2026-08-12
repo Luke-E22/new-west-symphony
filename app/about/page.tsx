@@ -7,10 +7,12 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { SITE } from "@/lib/config";
 import {
   ABOUT_STATS,
+  BOARD_OF_ADVISORS,
   CHRISTIE,
   CHORUS,
   ORCHESTRA_SECTIONS,
   ORCHESTRA_OPERATIONS,
+  PAST_CHAIRS,
   STAFF,
 } from "@/lib/data";
 
@@ -103,6 +105,31 @@ export default function AboutPage() {
           <div className="mt-6">
             <BoardRoster />
           </div>
+
+          {/* Advisors and past chairs: names only, deliberately understated —
+              neither group sits on the governing board. */}
+          <div className="board-extra">
+            <div>
+              <h3 className="minilabel">Board of Advisors</h3>
+              <ul className="board-extra__inline">
+                {BOARD_OF_ADVISORS.map((name) => (
+                  <li key={name}>{name}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="minilabel">Honored Past Presidents &amp; Chairs</h3>
+              <ul className="board-extra__grid">
+                {PAST_CHAIRS.map((chair) => (
+                  <li key={`${chair.name}-${chair.years}`}>
+                    {chair.name}{" "}
+                    <span className="board-extra__years">({chair.years})</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
           <div className="hero__actions mt-6" style={{ justifyContent: "center" }}>
             <Button href="/get-involved/board" variant="ghost">
               Join Our Board →
