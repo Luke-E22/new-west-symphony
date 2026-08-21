@@ -151,7 +151,7 @@ export const ORCHESTRA_OPERATIONS: StaffMember[] = [
 ];
 
 export const STAFF: StaffMember[] = [
-  { name: "Alexander Gurevich", title: "Deputy Director" },
+  { name: "Elsje Kibler-Vermaas", title: "Interim Chief Executive Officer" },
   { name: "Sue McDonald", title: "Development Services Manager" },
   { name: "Patricia Jones", title: "Director of Special Projects" },
   { name: "Loliepop Mena-Hamilton", title: "Patron Services Manager" },
