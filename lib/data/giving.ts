@@ -61,16 +61,21 @@ export const GIVING_PROGRAMS: GivingProgram[] = [
     name: "The 30 Club",
     blurb:
       "A monthly giving circle — $30 a month keeps music education thriving year-round.",
+    href: "https://newwestsymphony.my.salesforce-sites.com/donate/?dfId=a0nPB00000EGOXlYAP",
   },
   {
     name: "The Baton Society",
     blurb:
       "Our leadership circle for gifts of $2,500+, with Maestro's-table experiences.",
+    href: "https://newwestsymphony.my.salesforce-sites.com/donate/?dfId=a0nPB000007vHmbYAE",
   },
   {
     name: "The Legacy Society",
     blurb:
       "Remember the symphony in your estate plans and help keep live music here for generations.",
+    // Enrollment is a declaration-of-intent PDF, mirrored locally — the old
+    // WordPress /wp-content/ path it lived at dies at launch.
+    href: "/assets/support/legacy-society-enrollment-form.pdf",
     isLegacy: true,
   },
 ];

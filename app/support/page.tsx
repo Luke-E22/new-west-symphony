@@ -95,7 +95,7 @@ export default function SupportPage() {
                 </div>
                 <p className="on-dark-muted mt-4">{legacy.blurb}</p>
                 <div className="hero__actions">
-                  <Button href={EXTERNAL.donate} variant="ghost" onDark track="donate_click" trackParams={{ location: "support-legacy" }}>
+                  <Button href={legacy.href ?? EXTERNAL.donate} variant="ghost" onDark track="donate_click" trackParams={{ location: "support-legacy" }}>
                     Plan your legacy
                   </Button>
                 </div>

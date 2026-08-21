@@ -158,9 +158,6 @@ export default function MembershipPage() {
             NextGen is for high-school &amp; college students; Family is for households with
             kids under 18. {CAMARILLO_CAP_NOTE}
           </p>
-          <p id="purchase-tbc" className="anchor-target footnote">
-            Online membership purchase opens soon — call the box office to join now.
-          </p>
         </div>
       </section>
 

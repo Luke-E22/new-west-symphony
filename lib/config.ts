@@ -47,32 +47,26 @@ export const SOCIAL = {
 } as const;
 
 /**
- * LAUNCH BLOCKER (§1, resolved as: placeholder constant, flagged TBC).
- *
- * NWS's only membership purchase URL today is the Salesforce DONATE form with a
- * membership code — but the hard rule (§13, DoD) is that membership CTAs must
- * NEVER hit the donation form. Until NWS stands up a real membership purchase
- * flow (separate Salesforce object/form), every "Become a Member" / "Choose
- * {tier}" CTA points HERE — an internal, clearly-temporary anchor — never the
- * donate form. A Playwright test asserts this value is not the donate URL.
- *
- * TODO(NWS): replace with the real Salesforce membership purchase URL.
+ * The real 2026 Membership purchase form (launch blocker §1/§13, RESOLVED
+ * Aug 2026). It lives on the same Salesforce donate app as the giving forms
+ * but is its OWN form (dfId a0nPB00000J62aTYAR) — the §13 rule stands:
+ * membership CTAs must never point at the charitable-donation form
+ * (EXTERNAL.donate, a different dfId). Session _gl tracking tokens stripped.
  */
-export const MEMBERSHIP_PURCHASE_URL = "/membership#purchase-tbc";
+export const MEMBERSHIP_PURCHASE_URL =
+  "https://newwestsymphony.my.salesforce-sites.com/donate/?dfId=a0nPB00000J62aTYAR";
 
 /** External ticketing & giving providers (the site links out; it sells nothing). */
 export const EXTERNAL = {
-  // Tickets — venue-level fallbacks only. The two halls sell separately, so
-  // each concert can carry a link per venue: TODO(NWS): set Concert.ticketUrls
-  // = { to, cam } on each concert, and these stop being used. The Thousand Oaks
-  // value is a provider HOMEPAGE placeholder, not an event page (audit M1); the
-  // header's "Buy Tickets" routes to /concerts instead, so only the per-venue
-  // concert buttons fall back to these.
+  // Tickets — venue-level fallbacks only. Every on-sale concert now carries
+  // its real per-venue links (Concert.ticketUrls), so these are only reached
+  // by a future concert that goes on sale before its links are entered.
   ticketsThousandOaks: "https://www.ticketmaster.com/",
-  ticketsCamarillo: "https://nws.my.salesforce-sites.com/tickets",
-  // Donations — the Salesforce donation form (the separate, tax-deductible flow).
-  // TODO(NWS): confirm this is the live donation URL.
-  donate: "https://nws.my.salesforce-sites.com/donate",
+  ticketsCamarillo: "https://newwestsymphony.my.salesforce-sites.com/ticket/",
+  // Donations — the real regular-donation form (Salesforce dfId; the
+  // GivingModule appends amount/frequency to it).
+  donate:
+    "https://newwestsymphony.my.salesforce-sites.com/donate/?dfId=a0n1J00001703lCQAQ",
   // Adopt-A-Musician campaign form — the real Salesforce form with the
   // campaign's dfId, taken from the live page (/support/adopt-a-musician/).
   adoptAMusician:

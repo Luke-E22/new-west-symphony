@@ -62,10 +62,11 @@ export interface Concert {
   programList: string[];
   blurb: string;
   priceTiers: PriceTier[];
-  /** Real per-concert ticketing URLs, keyed by venue — Thousand Oaks and
-   *  Camarillo sell through separate pages, so a concert can have two (audit
-   *  M1). TODO(NWS): set these on each concert; until then each venue falls
-   *  back to its provider URL. Use ticketLinks(concert) to resolve. */
+  /** Real per-concert ticketing URLs, keyed by venue — Thousand Oaks
+   *  (Ticketmaster) and Camarillo (Salesforce) sell separately, so a concert
+   *  carries one per venue (audit M1, resolved Aug 2026 for the on-sale 2026
+   *  concerts). Add each 2027 concert's links when its tickets go on sale.
+   *  Use ticketLinks(concert) to resolve; unset venues fall back per venue. */
   ticketUrls?: Partial<Record<VenueKey, string>>;
   /** True while single tickets are not yet on sale (the 2027 placeholders):
    *  every buy surface shows "Tickets coming soon" instead of buy buttons.
@@ -96,7 +97,8 @@ export interface MembershipTier {
 export interface GivingProgram {
   name: string;
   blurb: string;
-  /** Internal campaign page, when the program has one (else the donate form). */
+  /** The program's own destination — an internal campaign page, its Salesforce
+   *  form, or a local PDF. Falls back to the general donate form when unset. */
   href?: string;
   isLegacy?: boolean;
 }

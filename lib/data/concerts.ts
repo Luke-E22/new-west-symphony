@@ -124,6 +124,11 @@ const SEASON: SeasonEntry[] = [
   },
   {
     slug: "beethoven-copland",
+    // Real per-venue ticketing (Ticketmaster / Salesforce; _gl tokens stripped).
+    ticketUrls: {
+      to: "https://www.ticketmaster.com/new-west-symphony-beethoven-copland-thousand-oaks-california-10-03-2026/event/0B00635AD1933956",
+      cam: "https://newwestsymphony.my.salesforce-sites.com/ticket/#/instances/a0FPB000002hyNx2AI",
+    },
     title: "Beethoven & Copland",
     series: "Masterpiece Series",
     tag: "Masterpiece",
@@ -151,6 +156,11 @@ const SEASON: SeasonEntry[] = [
   },
   {
     slug: "symphony-goes-to-cirque",
+    // Real per-venue ticketing (Ticketmaster / Salesforce; _gl tokens stripped).
+    ticketUrls: {
+      to: "https://www.ticketmaster.com/event/0B00635AD196395D",
+      cam: "https://newwestsymphony.my.salesforce-sites.com/ticket/#/instances/a0FPB000002hypN2AQ",
+    },
     title: "Symphony Goes to Cirque",
     series: "Masterpiece Series",
     tag: "Masterpiece",
@@ -179,6 +189,11 @@ const SEASON: SeasonEntry[] = [
   },
   {
     slug: "too-hot-to-handel",
+    // Real per-venue ticketing (Ticketmaster / Salesforce; _gl tokens stripped).
+    ticketUrls: {
+      to: "https://www.ticketmaster.com/event/0B00635AD1983961",
+      cam: "https://newwestsymphony.my.salesforce-sites.com/ticket/#/instances/a0FPB000002iVYP2A2",
+    },
     title: "Too Hot to Handel",
     series: "Masterpiece Series",
     tag: "Holiday",

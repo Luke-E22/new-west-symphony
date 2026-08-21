@@ -47,7 +47,10 @@ function classes(
     .join(" ");
 }
 
-const isInternal = (href: string) => href.startsWith("/");
+// A leading-slash path is an app route unless it points at a file (e.g. the
+// Legacy Society PDF) — documents must be plain anchors, not client routing.
+const isInternal = (href: string) =>
+  href.startsWith("/") && !href.split("/").pop()!.includes(".");
 const isAnchor = (href: string) => href.startsWith("#");
 
 /**
