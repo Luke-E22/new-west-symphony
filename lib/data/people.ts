@@ -7,7 +7,12 @@ import type { Person } from "./types";
 export const BOARD_MEMBERS: Person[] = [
   { name: "Anthony Vasquez", role: "Chair", photo: "/assets/board/anthony-vasquez.jpg" },
   { name: "Cathy Lichtenberger, Ed.D.", role: "Director", photo: "/assets/board/cathy-lichtenberger.jpg" },
-  { name: "Phil Lichtenberger", role: "Director", photo: "/assets/board/phil-lichtenberger.jpg" },
+  {
+    name: "Phil Lichtenberger",
+    role: "Director",
+    photo: "/assets/board/phil-lichtenberger-v2.jpg",
+    links: [{ kind: "linkedin", href: "https://www.linkedin.com/in/plichtenberger/" }],
+  },
   {
     name: "Luke Erickson",
     role: "Director",
