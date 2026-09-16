@@ -10,7 +10,7 @@ export const BOARD_MEMBERS: Person[] = [
   {
     name: "Phil Lichtenberger",
     role: "Director",
-    photo: "/assets/board/phil-lichtenberger-v2.jpg",
+    photo: "/assets/board/phil-lichtenberger-v3.jpg",
     links: [{ kind: "linkedin", href: "https://www.linkedin.com/in/plichtenberger/" }],
   },
   {
@@ -25,7 +25,7 @@ export const BOARD_MEMBERS: Person[] = [
   },
   { name: "Marijane Unter", role: "Director", photo: "/assets/board/marijane-unter.png" },
   { name: "Gary Wartik", role: "Director", photo: "/assets/board/gary-wartik-v5.jpg" },
-  { name: "Erin Pohl", role: "Director", photo: "/assets/board/erin-pohl.png" },
+  { name: "Erin Pohl", role: "Director", photo: "/assets/board/erin-pohl-v2.jpg" },
 ];
 
 /**
