@@ -18,6 +18,27 @@ export const CHRISTIE = {
   ],
 };
 
+/**
+ * Interim CEO — from NWS's supplied bio (Sept 2026). The doc ships a SHORT and
+ * a LONG bio: `intro` is the short bio's opener (always visible on /about) and
+ * `bioMore` is the long bio minus its first paragraph, which restates the
+ * intro — together they read as one continuous text behind "Learn more".
+ * Headshot is the supplied 358×411 original; display it ≤180px wide so it
+ * stays sharp on retina screens.
+ */
+export const KIBLER_VERMAAS = {
+  name: "Elsje Kibler-Vermaas, MBA",
+  title: "Interim Chief Executive Officer",
+  portrait: "/assets/photos/kibler-vermaas-portrait.jpg",
+  intro:
+    "Elsje Kibler-Vermaas is an orchestra executive and music education leader with more than two decades of experience in the arts. She currently serves as Interim CEO of New West Symphony.",
+  bioMore: [
+    "Prior to joining New West Symphony, Kibler-Vermaas spent nearly a decade on the senior leadership team of the Los Angeles Philharmonic as Vice President of Learning. In that role, she led the LA Phil’s music education and community learning initiatives, including YOLA (Youth Orchestra Los Angeles), and contributed to the artistic development of the orchestra’s Youth and Family Concerts. She also oversaw the planning, development, and opening of the Judith and Thomas L. Beckmen YOLA Center, designed by architect Frank Gehry.",
+    "Her career has spanned orchestras, higher education, museums, and international cultural organizations. She previously directed the Los Angeles campus of Longy School of Music of Bard College and has held positions with the J. Paul Getty Museum, the Royal Concertgebouw in Amsterdam, and the Hartford Symphony Orchestra. Through her consulting practice, EKV ARTS, she advises arts, cultural, and educational organizations on strategy, leadership, governance, fundraising, and organizational development. Her broader work has included national and international initiatives, including youth music education and facility planning in Abu Dhabi.",
+    "A frequent speaker and guest lecturer on music education, arts leadership, and the role of cultural organizations in their communities, Kibler-Vermaas is also a classically trained pianist and music educator. Originally from the Netherlands, she holds a degree in Music Education from the Utrecht Conservatory and an Executive MBA in Arts & Innovation from the Global Leaders Institute.",
+  ],
+};
+
 export const ORCHESTRA_SECTIONS: OrchestraSection[] = [
   {
     section: "Violin I",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import SectionHeading from "@/components/brand/SectionHeading";
 import Button from "@/components/core/Button";
+import BioExpander from "@/components/sections/BioExpander";
 import BoardRoster from "@/components/sections/BoardRoster";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { SITE } from "@/lib/config";
@@ -10,6 +11,7 @@ import {
   BOARD_OF_ADVISORS,
   CHRISTIE,
   CHORUS,
+  KIBLER_VERMAAS,
   ORCHESTRA_SECTIONS,
   ORCHESTRA_OPERATIONS,
   PAST_CHAIRS,
@@ -90,6 +92,31 @@ export default function AboutPage() {
                 </p>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2b — Interim CEO (white, compact): small portrait, short bio, and a
+          "Learn more" that expands the long bio in place. */}
+      <section className="section-tight">
+        <div className="container ceo-bio">
+          <div className="ceo-bio__photo">
+            <Image
+              src={KIBLER_VERMAAS.portrait}
+              alt={`${KIBLER_VERMAAS.name}, ${KIBLER_VERMAAS.title}`}
+              width={358}
+              height={411}
+              sizes="180px"
+            />
+          </div>
+          <div>
+            <SectionHeading
+              eyebrow="Executive leadership"
+              title={KIBLER_VERMAAS.name}
+              subtitle={KIBLER_VERMAAS.title}
+            />
+            <p className="lead mt-4">{KIBLER_VERMAAS.intro}</p>
+            <BioExpander paragraphs={KIBLER_VERMAAS.bioMore} firstName="Elsje" />
           </div>
         </div>
       </section>

@@ -1782,3 +1782,68 @@
   color: var(--text-muted);
   white-space: nowrap;
 }
+
+/* ================================================= Bio "Learn more" ======== */
+/* Compact executive-bio block (/about interim CEO): small portrait beside the
+   heading + intro; the long bio expands with the FAQ collapse pattern. */
+.ceo-bio {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--space-7);
+  align-items: start;
+}
+.ceo-bio__photo img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+.bio-more {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  /* visibility:hidden keeps the collapsed bio out of the accessibility tree
+     while it stays in layout for the max-height animation (FAQ pattern). */
+  visibility: hidden;
+  transition: max-height var(--duration-base) ease, opacity var(--duration-base) ease,
+    visibility 0s linear var(--duration-base);
+}
+.bio-more[data-open="true"] {
+  max-height: 80rem; /* generous cap so the long bio never clips on phones */
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+.bio-more__inner {
+  padding-top: var(--space-4);
+}
+.bio-toggle {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-2);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font: 600 0.9375rem/1 var(--font-sans);
+  color: var(--text-accent);
+}
+.bio-toggle:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (max-width: 640px) {
+  .ceo-bio {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+  .ceo-bio__photo {
+    max-width: 160px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bio-more {
+    transition: none;
+  }
+}
