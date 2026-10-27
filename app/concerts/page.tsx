@@ -5,6 +5,14 @@ import VenueFilter from "@/components/sections/VenueFilter";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { splitSeason } from "@/lib/data";
 
+/**
+ * ISR: this page is prerendered, so the upcoming/past split (computed from the
+ * date at render time) would otherwise stay frozen at the last deploy. Regenerate
+ * at most hourly so a concert moves to “Past concerts” within an hour of its final performance
+ * without a redeploy; between regenerations it is served from cache as before.
+ */
+export const revalidate = 3600;
+
 export const metadata: Metadata = buildMetadata({
   title: "Concerts",
   description:

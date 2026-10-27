@@ -12,6 +12,14 @@ import { concertJsonLd } from "@/lib/seo/jsonld";
 import { CONCERTS, VENUES, getConcert, isConcertPast, ticketLinks } from "@/lib/data";
 import { MEMBERSHIP_PURCHASE_URL } from "@/lib/config";
 
+/**
+ * ISR: this page is prerendered, so the upcoming/past split (computed from the
+ * date at render time) would otherwise stay frozen at the last deploy. Regenerate
+ * at most hourly so the buy buttons give way to “Past concert” within an hour of the final performance
+ * without a redeploy; between regenerations it is served from cache as before.
+ */
+export const revalidate = 3600;
+
 export function generateStaticParams() {
   return CONCERTS.map((c) => ({ slug: c.slug }));
 }

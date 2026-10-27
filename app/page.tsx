@@ -9,6 +9,14 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { EXTERNAL, MEMBERSHIP_PURCHASE_URL, SITE } from "@/lib/config";
 import { upcomingConcerts, EDUCATION_CHIPS, IMPACT_STATS } from "@/lib/data";
 
+/**
+ * ISR: this page is prerendered, so the upcoming/past split (computed from the
+ * date at render time) would otherwise stay frozen at the last deploy. Regenerate
+ * at most hourly so the season strip drops a concert within an hour of its final performance
+ * without a redeploy; between regenerations it is served from cache as before.
+ */
+export const revalidate = 3600;
+
 export const metadata: Metadata = buildMetadata({
   title: `${SITE.name} — ${SITE.tagline}`,
   description: SITE.description,
