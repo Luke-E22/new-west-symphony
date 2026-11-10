@@ -9,6 +9,8 @@ import { EXTERNAL, MEMBERSHIP_PURCHASE_URL, NAV } from "@/lib/config";
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
+  // The events calendar is a tab within Concerts.
+  if (href === "/concerts" && pathname.startsWith("/events")) return true;
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 

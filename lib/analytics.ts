@@ -13,6 +13,7 @@ export type GaEvent =
   | "buy_tickets_click"
   | "become_member_click"
   | "subscribe_click"
+  | "add_to_calendar"
   | "donate_click"
   | "donation_amount_selected"
   | "membership_tier_selected";

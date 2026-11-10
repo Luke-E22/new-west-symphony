@@ -63,8 +63,12 @@ export const BOARD_SKILLS = [
 
 export const VISIT_PERKS = [
   {
+    t: "Hear & Now Live",
+    b: "A free 30-minute talk for ticket holders, one hour before each performance — the music makes more sense, and it's more fun.",
+  },
+  {
     t: "Intermission Insights",
-    b: "A free pre-concert talk one hour before curtain — the music makes more sense, and it's more fun.",
+    b: "At each concert, Michael Christie leads a relaxed 10-minute Q&A with the artists.",
   },
   {
     t: "Dine nearby",
@@ -83,18 +87,21 @@ export const INVOLVED_ROUTES = [
     // Ushers are provided by the concert halls — don't offer ushering here.
     desc: "Help in the NWS office, at street fairs and fundraising events, or with community outreach. Flexible, friendly, and fun.",
     cta: "Volunteer with us",
+    href: "mailto:symphony@newwestsymphony.org?subject=Volunteering%20with%20New%20West%20Symphony",
   },
   {
     k: "Partner",
     name: "Become a Sponsor",
     desc: "Put your business behind live music and education with corporate and foundation sponsorships.",
     cta: "Explore sponsorship",
+    href: "/support/sponsors#become",
   },
   {
     k: "Join us",
     name: "Careers & Auditions",
     desc: "Open staff positions and musician auditions for the New West Symphony and Chorus.",
     cta: "See opportunities",
+    href: "mailto:symphony@newwestsymphony.org?subject=Careers%20and%20auditions",
   },
 ];
 

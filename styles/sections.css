@@ -2045,3 +2045,267 @@
     margin-bottom: 2px;
   }
 }
+
+/* =============================================== Concerts / events tabs ==== */
+.page-tabs {
+  background: var(--surface-page);
+  border-bottom: var(--border-hairline) solid var(--border-subtle);
+}
+.page-tabs__inner {
+  display: flex;
+  gap: var(--space-6);
+  overflow-x: auto;
+}
+.page-tabs__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+  font: 600 13px/1 var(--font-sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: var(--border-thick) solid transparent;
+}
+.page-tabs__link:hover {
+  color: var(--text-strong);
+}
+.page-tabs__link[aria-current="page"] {
+  color: var(--text-strong);
+  border-bottom-color: var(--nws-gold);
+}
+
+/* ==================================================== Add to calendar ====== */
+.save-date {
+  background: var(--surface-band);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-7);
+}
+.save-date--panel {
+  background: transparent;
+  border-top: var(--border-hairline) solid var(--border-subtle);
+  border-radius: 0;
+  padding: var(--space-4) 0 0;
+  margin: var(--space-5) 0 var(--space-4);
+}
+.add-cal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0 var(--space-4);
+}
+.add-cal + .add-cal {
+  border-top: var(--border-hairline) solid var(--border-subtle);
+  margin-top: var(--space-2);
+  padding-top: var(--space-2);
+}
+.add-cal__when {
+  font: var(--type-body-s);
+  color: var(--text-body);
+}
+.add-cal__links {
+  display: inline-flex;
+  gap: var(--space-4);
+}
+/* Primary phone action for an older audience: keep the full 44px target. */
+.add-cal .btn--link {
+  min-height: 44px;
+  font: 600 13px/1.2 var(--font-sans);
+}
+
+/* ======================================== Concert-page extras / programs === */
+.concert-extra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  border: var(--border-hairline) solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+  margin-top: var(--space-5);
+}
+.concert-extra__title {
+  font: var(--type-h3);
+  color: var(--text-strong);
+  margin: 0;
+}
+.concert-extra .muted {
+  font: var(--type-body-s);
+  margin: 2px 0 0;
+}
+.concert-extra > div {
+  flex: 1 1 240px;
+}
+.program-column {
+  max-width: 760px;
+}
+.program-head__dates {
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  font: var(--type-body-m);
+  color: var(--text-on-dark);
+}
+.program-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+  font: 600 14px/1.4 var(--font-sans);
+}
+.program-note {
+  margin-top: var(--space-7);
+}
+.program-note__title {
+  font: 600 1.625rem/1.2 var(--font-display);
+  color: var(--text-strong);
+  margin: 0;
+}
+.program-note__by {
+  font: var(--type-body-s);
+  color: var(--text-accent);
+  margin: var(--space-1) 0 var(--space-4);
+}
+.artist-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.artist-card {
+  display: flex;
+  gap: var(--space-5);
+  align-items: flex-start;
+}
+.artist-card + .artist-card {
+  border-top: var(--border-hairline) solid var(--border-subtle);
+  padding-top: var(--space-6);
+}
+.artist-card__photo {
+  position: relative;
+  flex: none;
+  width: 96px;
+  height: 96px;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  background: var(--surface-band);
+}
+.artist-card__body {
+  flex: 1;
+  min-width: 0;
+}
+.artist-card__name {
+  font: 600 1.5rem/1.2 var(--font-display);
+  color: var(--text-strong);
+  margin: 0;
+}
+.artist-card__role {
+  font: var(--type-body-s);
+  color: var(--text-accent);
+  margin: 2px 0 0;
+}
+.artist-card__bio {
+  font: var(--type-body-m);
+  color: var(--text-body);
+  margin: var(--space-3) 0 0;
+}
+@media (max-width: 560px) {
+  .artist-card {
+    flex-direction: column;
+  }
+}
+
+/* ============================================================== Events ===== */
+.past-events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.past-events li {
+  display: grid;
+  grid-template-columns: 8rem 1fr 1fr;
+  gap: var(--space-2) var(--space-4);
+  align-items: baseline;
+  padding: var(--space-3) 0;
+  border-bottom: var(--border-hairline) solid var(--border-subtle);
+}
+.past-events li:last-child {
+  border-bottom: 0;
+}
+.past-events__date {
+  font: 600 0.8125rem/1.4 var(--font-sans);
+  color: var(--text-accent);
+}
+.past-events__title {
+  font: var(--type-body-m);
+  color: var(--text-strong);
+}
+.past-events__title a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.past-events__where {
+  font: var(--type-body-s);
+  color: var(--text-muted);
+}
+.sponsor-perks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font: var(--type-body-s);
+  color: var(--text-body);
+}
+/* On phones the way to buy comes before the description. */
+@media (max-width: 960px) {
+  .event-body .ticket-panel {
+    order: -1;
+  }
+}
+@media (max-width: 640px) {
+  .past-events li {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================= Sponsors ==== */
+.sponsor-jump {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+}
+.sponsor-jump .filter-chip {
+  text-decoration: none;
+}
+.sponsor-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.sponsor-list {
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-3) var(--space-6);
+  font: var(--type-body-m);
+  color: var(--text-strong);
+}
+.sponsor-list--featured {
+  font: 600 1.625rem/1.25 var(--font-display);
+  grid-template-columns: 1fr;
+}
+.sponsor-list__note {
+  display: block;
+  font: var(--type-caption);
+  font-style: italic;
+  color: var(--text-muted);
+}

@@ -27,8 +27,21 @@ function cardBuy(c: Concert, venue: Filter) {
   return undefined;
 }
 
-function PosterCard({ c, past, venue }: { c: Concert; past: boolean; venue: Filter }) {
+function PosterCard({
+  c,
+  past,
+  venue,
+  hasProgram,
+}: {
+  c: Concert;
+  past: boolean;
+  venue: Filter;
+  hasProgram: boolean;
+}) {
   const buyHref = cardBuy(c, venue) ?? `/concerts/${c.slug}`;
+  // Only promise program notes where some have actually been posted.
+  const moreHref = hasProgram ? `/concerts/${c.slug}/program` : `/concerts/${c.slug}`;
+  const moreLabel = hasProgram ? "Program & notes" : "Concert details";
   return (
     <article className={past ? "poster-card poster-card--past" : "poster-card"}>
       <a href={`/concerts/${c.slug}`} className="poster-card__media">
@@ -54,8 +67,8 @@ function PosterCard({ c, past, venue }: { c: Concert; past: boolean; venue: Filt
         <div className="poster-card__venues">{c.venuesLabel}</div>
         <div className="poster-card__cta">
           {past ? (
-            <Button href={`/concerts/${c.slug}`} variant="ghost" size="sm">
-              Program notes
+            <Button href={moreHref} variant="ghost" size="sm">
+              {moreLabel}
             </Button>
           ) : c.ticketsComingSoon ? (
             <>
@@ -75,8 +88,8 @@ function PosterCard({ c, past, venue }: { c: Concert; past: boolean; venue: Filt
               >
                 Buy Tickets
               </Button>
-              <Button href={`/concerts/${c.slug}`} variant="link" size="sm">
-                Program notes →
+              <Button href={moreHref} variant="link" size="sm">
+                {moreLabel} →
               </Button>
             </>
           )}
@@ -94,9 +107,12 @@ function PosterCard({ c, past, venue }: { c: Concert; past: boolean; venue: Filt
 export default function VenueFilter({
   upcoming,
   past,
+  programSlugs,
 }: {
   upcoming: Concert[];
   past: Concert[];
+  /** Concerts with a posted program or notes. */
+  programSlugs: string[];
 }) {
   const [filter, setFilter] = useState<Filter>("all");
 
@@ -165,7 +181,7 @@ export default function VenueFilter({
             </div>
             <div className="poster-grid">
               {concerts.map((c) => (
-                <PosterCard key={c.slug} c={c} past={false} venue={filter} />
+                <PosterCard key={c.slug} c={c} past={false} venue={filter} hasProgram={programSlugs.includes(c.slug)} />
               ))}
             </div>
           </section>
@@ -182,7 +198,7 @@ export default function VenueFilter({
             </div>
             <div className="poster-grid">
               {visPast.map((c) => (
-                <PosterCard key={c.slug} c={c} past venue={filter} />
+                <PosterCard key={c.slug} c={c} past venue={filter} hasProgram={programSlugs.includes(c.slug)} />
               ))}
             </div>
           </section>

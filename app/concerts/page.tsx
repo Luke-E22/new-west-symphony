@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Button from "@/components/core/Button";
+import ConcertTabs from "@/components/sections/ConcertTabs";
 import VenueFilter from "@/components/sections/VenueFilter";
 import { buildMetadata } from "@/lib/seo/metadata";
-import { splitSeason } from "@/lib/data";
+import { concertSlugs, splitSeason } from "@/lib/data";
+import { hasProgramDocs } from "@/lib/data/programs";
 
 /**
  * ISR: this page is prerendered, so the upcoming/past split (computed from the
@@ -48,6 +50,8 @@ export default function ConcertsPage() {
         </div>
       </section>
 
+      <ConcertTabs active="concerts" />
+
       {/* 2 — Membership upsell */}
       <section className="section">
         <div className="container">
@@ -78,7 +82,7 @@ export default function ConcertsPage() {
       </section>
 
       {/* 3 — Venue filter + Upcoming / Past poster galleries */}
-      <VenueFilter upcoming={upcoming} past={past} />
+      <VenueFilter upcoming={upcoming} past={past} programSlugs={concertSlugs().filter(hasProgramDocs)} />
     </>
   );
 }

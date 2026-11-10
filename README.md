@@ -28,7 +28,7 @@ app/                     routes (App Router)
   layout.tsx             tokens + fonts, header/footer, skip link, RouteFocus, Organization JSON-LD
   page.tsx               Home
   concerts/              season listing (+ [slug] detail with MusicEvent JSON-LD + opengraph-image)
-  membership/ subscriptions/ support/ visit/ education/ about/
+  membership/ subscriptions/ events/ program/ calendar/ support/ visit/ education/ about/
   get-involved/ get-involved/board/   hub + Join Our Board (form → server action)
   privacy/ not-found.tsx sitemap.ts robots.ts manifest.ts
 components/ core/ brand/ layout/ sections/   7 DS components + shell + interactive sections

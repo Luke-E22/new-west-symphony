@@ -112,6 +112,24 @@ export default function SupportPage() {
         </div>
       </section>
 
+      {/* 2b — Sponsor recognition */}
+      <section className="section-tight">
+        <div className="container">
+          <div className="upsell">
+            <span className="medallion" aria-hidden="true">
+              ♪
+            </span>
+            <p className="upsell__text">
+              Individuals, businesses, and foundations make every season possible. See
+              who&rsquo;s behind the music, or become a sponsor yourself.
+            </p>
+            <Button href="/support/sponsors" variant="ghost" size="lg">
+              Our Sponsors
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* 3 — Stewardship & trust */}
       <section className="section band-cream">
         <div className="container trust-band text-center">

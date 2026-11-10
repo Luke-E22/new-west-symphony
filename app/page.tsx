@@ -7,7 +7,7 @@ import Button from "@/components/core/Button";
 import HeroCarousel from "@/components/sections/HeroCarousel";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { EXTERNAL, MEMBERSHIP_PURCHASE_URL, SITE } from "@/lib/config";
-import { upcomingConcerts, EDUCATION_CHIPS, IMPACT_STATS, SEASON_YEARS } from "@/lib/data";
+import { calendarItems, upcomingConcerts, EDUCATION_CHIPS, IMPACT_STATS, SEASON_YEARS } from "@/lib/data";
 
 /**
  * ISR: this page is prerendered, so the upcoming/past split (computed from the
@@ -25,9 +25,9 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function HomePage() {
-  const season = upcomingConcerts().slice(0, 3);
+  const comingUp = calendarItems().upcoming.slice(0, 3);
   // Follows the data so the labels roll over on their own when a season ends.
-  const seasonYear = season[0]?.season ?? SEASON_YEARS[SEASON_YEARS.length - 1];
+  const seasonYear = upcomingConcerts()[0]?.season ?? SEASON_YEARS[SEASON_YEARS.length - 1];
 
   return (
     <>
@@ -194,22 +194,22 @@ export default function HomePage() {
         <div className="container">
           <div className="section-head-row">
             <SectionHeading eyebrow="On Stage · Coming up" title="Three nights to gather" />
-            <Button href="/concerts" variant="link">
-              View the full season →
+            <Button href="/events" variant="link">
+              See the full calendar →
             </Button>
           </div>
           <div className="grid grid-3">
-            {season.map((c) => (
+            {comingUp.map((item) => (
               <EventCard
-                key={c.slug}
-                series={c.tag}
-                title={c.title}
-                composers={c.program}
-                date={c.railDate}
-                time={c.dateLabel}
-                venue={c.venuesLabel}
-                href={`/concerts/${c.slug}`}
-                ctaLabel={c.ticketsComingSoon ? "Tickets coming soon" : undefined}
+                key={item.key}
+                series={item.kind}
+                title={item.title}
+                composers={item.summary}
+                date={item.railDate}
+                time={item.when}
+                venue={item.where}
+                href={item.href}
+                ctaLabel={item.ctaLabel}
               />
             ))}
           </div>

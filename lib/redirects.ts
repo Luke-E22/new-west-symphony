@@ -4,6 +4,106 @@
 // TODO(NWS): if any /wp-content PDFs are migrated, point those rules at the real asset.
 export const LEGACY_EXACT: { source: string; destination: string }[] = [
   {
+    "source": "/hot-winters-night",
+    "destination": "/events/hot-winters-night"
+  },
+  {
+    "source": "/winterfest-2025",
+    "destination": "/events"
+  },
+  {
+    "source": "/summerfest-2025",
+    "destination": "/events"
+  },
+  {
+    "source": "/summerfest-2025-know-before-you-go",
+    "destination": "/events"
+  },
+  {
+    "source": "/summerfest-2024-dinner-menu",
+    "destination": "/events"
+  },
+  {
+    "source": "/summerfest-2024/sponsorships",
+    "destination": "/events"
+  },
+  {
+    "source": "/summer",
+    "destination": "/events"
+  },
+  {
+    "source": "/30for30",
+    "destination": "/support/sponsors#anniversary"
+  },
+  {
+    "source": "/support/education-sponsors",
+    "destination": "/support/sponsors#foundations"
+  },
+  {
+    "source": "/2026-masterpiece-series/rachmaninoff-gershwin",
+    "destination": "/concerts/rachmaninoff-gershwin"
+  },
+  {
+    "source": "/2026-masterpiece-series/rachmaninoff-2nd-piano-concerto",
+    "destination": "/concerts/rachmaninoff-gershwin"
+  },
+  {
+    "source": "/2026-masterpiece-series/happy-250th-birthday-america",
+    "destination": "/concerts/rachmaninoff-gershwin"
+  },
+  {
+    "source": "/2026-masterpiece-series/mozart-and-american-voices",
+    "destination": "/concerts/mozart-american-voices"
+  },
+  {
+    "source": "/2026-masterpiece-series/bernstein-brahms-blues",
+    "destination": "/concerts/bernstein-brahms-blues"
+  },
+  {
+    "source": "/2026-masterpiece-series/beethoven-copland",
+    "destination": "/concerts/beethoven-copland"
+  },
+  {
+    "source": "/2026-masterpiece-series/symphony-goes-to-cirque",
+    "destination": "/concerts/symphony-goes-to-cirque"
+  },
+  {
+    "source": "/2026-masterpiece-series/too-hot-to-handel",
+    "destination": "/concerts/too-hot-to-handel"
+  },
+  {
+    "source": "/2026-masterpiece-series/program-notes/rachmaninoff-gershwin",
+    "destination": "/concerts/rachmaninoff-gershwin"
+  },
+  {
+    "source": "/2026-masterpiece-series/program-notes/bernstein-brahms-blues",
+    "destination": "/concerts/bernstein-brahms-blues"
+  },
+  {
+    "source": "/2026-masterpiece-series/program-notes/beethoven-copland",
+    "destination": "/concerts/beethoven-copland"
+  },
+  {
+    "source": "/2026-masterpiece-series/program-notes/symphony-goes-to-cirque",
+    "destination": "/concerts/symphony-goes-to-cirque"
+  },
+  {
+    "source": "/2026-masterpiece-series/program-notes/too-hot-to-handel",
+    "destination": "/concerts/too-hot-to-handel"
+  },
+  {
+    "source": "/2026-masterpiece-series/program-notes/mozart-and-american-voices",
+    "destination": "/concerts/mozart-american-voices"
+  },
+  {
+    "source": "/2026-masterpiece-series/digital-program/beethoven-copland",
+    "destination": "/concerts/beethoven-copland"
+  },
+  {
+    "source": "/2026-masterpiece-series/digital-program/november-december-2026-program",
+    "destination": "/concerts/too-hot-to-handel"
+  },
+  {
     "source": "/2024-season-subscription",
     "destination": "/subscriptions"
   },
@@ -221,7 +321,7 @@ export const LEGACY_EXACT: { source: string; destination: string }[] = [
   },
   {
     "source": "/enhance-your-concert-experience",
-    "destination": "/visit"
+    "destination": "/events#around-every-concert"
   },
   {
     "source": "/enluis-montes-olivar-living-the-dream-and-more",
@@ -241,7 +341,7 @@ export const LEGACY_EXACT: { source: string; destination: string }[] = [
   },
   {
     "source": "/foundation-partners",
-    "destination": "/support"
+    "destination": "/support/sponsors#foundations"
   },
   {
     "source": "/four-seasons-concert-event",
@@ -389,7 +489,7 @@ export const LEGACY_EXACT: { source: string; destination: string }[] = [
   },
   {
     "source": "/meet-the-artists",
-    "destination": "/concerts"
+    "destination": "/events#around-every-concert"
   },
   {
     "source": "/melody-wilson",
@@ -665,27 +765,27 @@ export const LEGACY_EXACT: { source: string; destination: string }[] = [
   },
   {
     "source": "/summerfest-2024-know-before-you-go",
-    "destination": "/concerts"
+    "destination": "/events"
   },
   {
     "source": "/summerfest-2024",
-    "destination": "/concerts"
+    "destination": "/events"
   },
   {
     "source": "/summerfest-2024/summerfest-bios",
-    "destination": "/concerts"
+    "destination": "/events"
   },
   {
     "source": "/support/concert-sponsorship",
-    "destination": "/support"
+    "destination": "/support/sponsors#become"
   },
   {
     "source": "/support/season-sponsors",
-    "destination": "/support"
+    "destination": "/support/sponsors#season"
   },
   {
     "source": "/support/summerfest-sponsors",
-    "destination": "/support"
+    "destination": "/support/sponsors#summerfest"
   },
   {
     "source": "/tales-of-winter-photo-submission-contest",
@@ -729,19 +829,19 @@ export const LEGACY_EXACT: { source: string; destination: string }[] = [
   },
   {
     "source": "/winterfest-2023",
-    "destination": "/concerts"
+    "destination": "/events"
   },
   {
     "source": "/winterfest-silent-auction-2023",
-    "destination": "/concerts"
+    "destination": "/events"
   },
   {
     "source": "/winterfest",
-    "destination": "/concerts"
+    "destination": "/events"
   },
   {
     "source": "/winterfest/honoring-cindy-and-paul-idell",
-    "destination": "/concerts"
+    "destination": "/events"
   },
   {
     "source": "/wu-man",
@@ -797,10 +897,6 @@ export const LEGACY_PREFIX: { source: string; destination: string }[] = [
     "destination": "/concerts"
   },
   {
-    "source": "/events",
-    "destination": "/concerts"
-  },
-  {
     "source": "/blog",
     "destination": "/"
   },
@@ -846,6 +942,9 @@ export const VALID_ROUTES: string[] = [
   "/concerts",
   "/membership",
   "/subscriptions",
+  "/events",
+  "/program",
+  "/support/sponsors",
   "/support",
   "/visit",
   "/education",

@@ -1,6 +1,7 @@
 import { SITE, SOCIAL } from "@/lib/config";
 import { VENUES } from "@/lib/data";
-import type { Concert } from "@/lib/data";
+import { eventEndIso } from "@/lib/data";
+import type { Concert, SiteEvent } from "@/lib/data";
 
 const abs = (path: string) => `${SITE.url}${path.startsWith("/") ? path : `/${path}`}`;
 
@@ -95,6 +96,46 @@ export function concertJsonLd(concert: Concert) {
       },
     };
   });
+}
+
+/** A fundraiser or community event, eligible for Google event results. */
+export function eventJsonLd(event: SiteEvent) {
+  const { venue } = event;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: event.title,
+    description: event.summary,
+    startDate: event.startDate,
+    endDate: eventEndIso(event),
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    url: abs(`/events/${event.slug}`),
+    image: [abs("/assets/photos/nws-chorus.jpg")],
+    location: {
+      "@type": "Place",
+      name: venue.name,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: venue.street,
+        addressLocality: venue.city,
+        addressRegion: venue.region,
+        postalCode: venue.postalCode,
+        addressCountry: "US",
+      },
+    },
+    organizer: { "@type": "Organization", name: SITE.legalName, url: SITE.url },
+    ...(event.cta
+      ? {
+          offers: {
+            "@type": "Offer",
+            url: event.cta.href,
+            availability: "https://schema.org/InStock",
+            ...(event.price ? { price: event.price, priceCurrency: "USD" } : {}),
+          },
+        }
+      : {}),
+  };
 }
 
 /** FAQPage markup for a list of visible Q&As (audit SEO P2). */

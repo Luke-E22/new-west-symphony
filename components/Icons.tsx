@@ -82,6 +82,9 @@ const BENEFIT_ICONS: Record<string, LucideIcon> = {
   "Lost ticket replacement": TicketCheck,
   "A seat upgrade each season": CircleArrowUp,
   "Discounts for guests": Users,
+  "Meet the Artists": Users,
+  "Hear & Now Live": Mic,
+  "Intermission Insights": CalendarHeart,
 };
 
 export function BenefitIcon({ title, size = 24 }: { title: string; size?: number }) {

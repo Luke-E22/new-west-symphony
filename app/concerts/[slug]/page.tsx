@@ -7,9 +7,20 @@ import Badge from "@/components/core/Badge";
 import Button from "@/components/core/Button";
 import Card from "@/components/core/Card";
 import JsonLd from "@/components/JsonLd";
+import AddToCalendar from "@/components/sections/AddToCalendar";
+import { upcomingConcertEntries } from "@/lib/calendar";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { concertJsonLd } from "@/lib/seo/jsonld";
-import { CONCERTS, VENUES, getConcert, isConcertPast, ticketLinks } from "@/lib/data";
+import {
+  CONCERTS,
+  VENUES,
+  eventBeforeConcert,
+  eventDateLabel,
+  getConcert,
+  isConcertPast,
+  ticketLinks,
+} from "@/lib/data";
+import { hasProgramDocs } from "@/lib/data/programs";
 import { MEMBERSHIP_PURCHASE_URL } from "@/lib/config";
 
 /**
@@ -61,6 +72,11 @@ export default async function ConcertDetailPage({
   // One buy per venue: Thousand Oaks and Camarillo ticket separately.
   const buys = ticketLinks(concert);
   const isPast = isConcertPast(concert);
+  const calendarEntries = upcomingConcertEntries(concert);
+  const eventBefore = eventBeforeConcert(concert.slug);
+  // Upcoming concerts always have artists and a works list worth opening; a
+  // past one only earns the link if its program or notes were posted.
+  const showProgram = !isPast || hasProgramDocs(concert.slug);
 
   return (
     <>
@@ -123,6 +139,15 @@ export default async function ConcertDetailPage({
               </div>
             </div>
 
+            {calendarEntries.length > 0 && (
+              <div className="save-date">
+                <div className="minilabel">Add to your calendar</div>
+                {calendarEntries.map((entry) => (
+                  <AddToCalendar key={entry.id} entry={entry} />
+                ))}
+              </div>
+            )}
+
             <SectionHeading eyebrow="The Program" title="What to expect" />
             <p className="lead mt-6">{concert.blurb}</p>
             {concert.tbc && (
@@ -142,9 +167,41 @@ export default async function ConcertDetailPage({
               </p>
             )}
             <div className="insight-note">
-              <strong>Intermission Insights:</strong> join us one hour before curtain for a free
-              pre-concert talk — the music makes more sense, and it&rsquo;s more fun.
+              <strong>Hear &amp; Now Live:</strong> a free 30-minute talk for ticket holders, one
+              hour before each performance. <strong>Intermission Insights:</strong>{" "}
+              Michael Christie&rsquo;s relaxed 10-minute Q&amp;A with the artists at each concert.
             </div>
+
+            {eventBefore && (
+              <div className="concert-extra">
+                <div>
+                  <div className="minilabel">Make it an evening</div>
+                  <p className="concert-extra__title">{eventBefore.title}</p>
+                  <p className="muted">
+                    {eventDateLabel(eventBefore)}
+                    {eventBefore.timeLabel && ` · ${eventBefore.timeLabel}`} ·{" "}
+                    {eventBefore.venue.name}
+                  </p>
+                </div>
+                <Button href={`/events/${eventBefore.slug}`} variant="ghost">
+                  Event Details
+                </Button>
+              </div>
+            )}
+
+            {showProgram && (
+              <div className="concert-extra">
+                <div>
+                  <div className="minilabel">Concert night</div>
+                  <p className="muted">
+                    The digital program, program notes, and artist bios, ready on your phone.
+                  </p>
+                </div>
+                <Button href={`/concerts/${concert.slug}/program`} variant="ghost">
+                  Program &amp; Artists
+                </Button>
+              </div>
+            )}
 
             <div className="getting-there">
               <div>

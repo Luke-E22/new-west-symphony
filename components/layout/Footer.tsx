@@ -89,6 +89,12 @@ export default function Footer() {
               <Link href="/subscriptions#renew">Renew a subscription</Link>
             </li>
             <li>
+              <Link href="/events">Calendar of events</Link>
+            </li>
+            <li>
+              <Link href="/support/sponsors">Our sponsors</Link>
+            </li>
+            <li>
               <Link href="/press-room">Press room</Link>
             </li>
           </ul>

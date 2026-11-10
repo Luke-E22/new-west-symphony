@@ -515,6 +515,17 @@ export function upcomingConcerts(now: Date = new Date()): Concert[] {
   return splitSeason(now).upcoming;
 }
 
+/** How long a concert stays "tonight's program" after its final show begins. */
+const PROGRAM_GRACE_MS = 6 * 60 * 60 * 1000;
+
+/** The concert the permanent /program link should open right now. */
+export function currentProgramConcert(now: Date = new Date()): Concert | undefined {
+  const t = now.getTime();
+  return [...CONCERTS]
+    .sort((a, b) => concertStart(a) - concertStart(b))
+    .find((c) => concertEnd(c) + PROGRAM_GRACE_MS >= t);
+}
+
 /** True once a concert's final performance has passed. */
 export function isConcertPast(c: Concert, now: Date = new Date()): boolean {
   return concertEnd(c) < now.getTime();

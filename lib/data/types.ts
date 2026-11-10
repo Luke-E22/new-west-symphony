@@ -79,6 +79,31 @@ export interface Concert {
   seoDescription?: string;
 }
 
+/** A person or ensemble credited on a concert. */
+export interface ConcertArtist {
+  name: string;
+  role?: string;
+  /** Approved bio paragraphs; the first shows, the rest sit behind "Learn more". */
+  bio?: string[];
+  photo?: string;
+}
+
+export interface ProgramNote {
+  /** The work, e.g. "1812 Overture". */
+  title: string;
+  composer?: string;
+  paragraphs: string[];
+}
+
+/** Concert-night materials for /concerts/<slug>/program. All optional. */
+export interface ConcertProgram {
+  /** PDF of the program book: /assets/programs/<file>.pdf or a full URL. */
+  digitalProgram?: string;
+  notes?: ProgramNote[];
+  /** e.g. "Program notes by …" */
+  notesCredit?: string;
+}
+
 export interface MembershipTier {
   name: string;
   priceYear: string; // "$600"

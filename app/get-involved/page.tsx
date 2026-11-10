@@ -69,7 +69,13 @@ export default function GetInvolvedPage() {
                   {route.name}
                 </h3>
                 <p className="muted">{route.desc}</p>
-                <Button variant="link">{route.cta} →</Button>
+                <Button
+                  variant="link"
+                  href={route.href}
+                  target={route.href.startsWith("mailto:") ? "_self" : undefined}
+                >
+                  {route.cta} →
+                </Button>
               </Card>
             ))}
           </div>

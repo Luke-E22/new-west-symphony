@@ -1,12 +1,15 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/config";
-import { concertSlugs } from "@/lib/data";
+import { concertSlugs, eventPageSlugs } from "@/lib/data";
+import { hasProgramDocs } from "@/lib/data/programs";
 
 const STATIC_ROUTES = [
   "",
   "/concerts",
   "/membership",
   "/subscriptions",
+  "/events",
+  "/support/sponsors",
   "/support",
   "/visit",
   "/education",
@@ -34,5 +37,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticEntries, ...concertEntries];
+  const eventEntries: MetadataRoute.Sitemap = eventPageSlugs().map((slug) => ({
+    url: `${SITE.url}/events/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.7,
+  }));
+
+  // Only programs with real content; the rest are noindexed until posted.
+  const programEntries: MetadataRoute.Sitemap = concertSlugs().filter(hasProgramDocs).map((slug) => ({
+    url: `${SITE.url}/concerts/${slug}/program`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.6,
+  }));
+
+  return [...staticEntries, ...concertEntries, ...eventEntries, ...programEntries];
 }
