@@ -16,7 +16,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = buildMetadata({
   title: "Concerts",
   description:
-    "Six Masterpiece concerts a season, performed live in Thousand Oaks and Camarillo — browse the 2026 and 2027 line-ups and choose your night.",
+    "Six Masterpiece concerts a season, performed live in Thousand Oaks and Camarillo — browse what's coming up and choose your night.",
   path: "/concerts",
 });
 
@@ -57,10 +57,22 @@ export default function ConcertsPage() {
             </span>
             <p className="upsell__text">
               Going to more than two concerts this season? A membership pays for itself.
+              Coming to all six? Subscribe and keep the same seats.
             </p>
-            <Button href="/membership" variant="gold" size="lg">
-              Explore Membership
-            </Button>
+            <div className="upsell__actions">
+              <Button href="/membership" variant="gold" size="lg">
+                Explore Membership
+              </Button>
+              <Button
+                href="/subscriptions"
+                variant="ghost"
+                size="lg"
+                track="subscribe_click"
+                trackParams={{ location: "concerts-upsell" }}
+              >
+                Explore Subscriptions
+              </Button>
+            </div>
           </div>
         </div>
       </section>

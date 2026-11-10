@@ -7,7 +7,7 @@ import Button from "@/components/core/Button";
 import HeroCarousel from "@/components/sections/HeroCarousel";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { EXTERNAL, MEMBERSHIP_PURCHASE_URL, SITE } from "@/lib/config";
-import { upcomingConcerts, EDUCATION_CHIPS, IMPACT_STATS } from "@/lib/data";
+import { upcomingConcerts, EDUCATION_CHIPS, IMPACT_STATS, SEASON_YEARS } from "@/lib/data";
 
 /**
  * ISR: this page is prerendered, so the upcoming/past split (computed from the
@@ -26,6 +26,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default function HomePage() {
   const season = upcomingConcerts().slice(0, 3);
+  // Follows the data so the labels roll over on their own when a season ends.
+  const seasonYear = season[0]?.season ?? SEASON_YEARS[SEASON_YEARS.length - 1];
 
   return (
     <>
@@ -39,7 +41,7 @@ export default function HomePage() {
       <HeroCarousel
         slides={[
           {
-            label: "The 2026 season",
+            label: `The ${seasonYear} season`,
             content: (
               <section className="hero">
                 <div className="hero__media">
@@ -69,7 +71,7 @@ export default function HomePage() {
                     </p>
                     <div className="hero__actions">
                       <Button href="/concerts" variant="gold" size="lg">
-                        Explore the 2026 Season
+                        Explore the {seasonYear} Season
                       </Button>
                       <Button href="/visit" variant="ghost" size="lg" onDark>
                         Plan Your Visit
@@ -140,7 +142,7 @@ export default function HomePage() {
                 <div className="hero__scrim" />
                 <div className="container hero__inner">
                   <div className="hero__content">
-                    <div className="hero__eyebrow">Membership · New for 2026</div>
+                    <div className="hero__eyebrow">Membership · Your Symphony, Your Choice</div>
                     <hr className="hero__rule" />
                     <p className="hero__title hero__title--md">
                       The most flexible way to hear it all
@@ -191,7 +193,7 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <div className="section-head-row">
-            <SectionHeading eyebrow="On Stage · 2026" title="Three nights to gather" />
+            <SectionHeading eyebrow="On Stage · Coming up" title="Three nights to gather" />
             <Button href="/concerts" variant="link">
               View the full season →
             </Button>
@@ -221,7 +223,7 @@ export default function HomePage() {
             <div className="feature-panel__body">
               <SectionHeading
                 onDark
-                eyebrow="Membership · New for 2026"
+                eyebrow="Membership · Your Symphony, Your Choice"
                 title="The most flexible way to hear it all"
               />
               <p className="on-dark-muted lead">
@@ -250,6 +252,9 @@ export default function HomePage() {
                   Compare tiers
                 </Button>
               </div>
+              <Link href="/subscriptions" className="quiet-link quiet-link--on-dark">
+                Want the same seats at every concert? See subscriptions →
+              </Link>
             </div>
             <div className="feature-panel__media">
               <Image

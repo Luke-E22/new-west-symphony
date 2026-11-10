@@ -86,6 +86,9 @@ export default function Footer() {
               </a>
             </li>
             <li>
+              <Link href="/subscriptions#renew">Renew a subscription</Link>
+            </li>
+            <li>
               <Link href="/press-room">Press room</Link>
             </li>
           </ul>
@@ -101,7 +104,7 @@ export default function Footer() {
 
       <div className="container site-footer__bottom">
         <span>
-          © 2026 {SITE.legalName} · A {SITE.nonprofitStatus} nonprofit · EIN{" "}
+          © {new Date().getFullYear()} {SITE.legalName} · A {SITE.nonprofitStatus} nonprofit · EIN{" "}
           {SITE.ein} · <Link href="/privacy">Privacy</Link>
         </span>
         <span>

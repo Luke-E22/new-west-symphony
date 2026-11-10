@@ -24,7 +24,7 @@ export default function NotFound() {
           style={{ justifyContent: "center", marginTop: "var(--space-7)" }}
         >
           <Button href="/concerts" variant="gold" size="lg">
-            See the 2026 Season
+            See Upcoming Concerts
           </Button>
           <Button href="/" variant="ghost" size="lg">
             Back to Home

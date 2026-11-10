@@ -8,10 +8,11 @@ export const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 export const CONSENT_KEY = "nws-analytics-consent";
 export type ConsentState = "granted" | "denied";
 
-/** The five conversion events the site reports (spec §9). */
+/** The conversion events the site reports (spec §9, plus subscriptions). */
 export type GaEvent =
   | "buy_tickets_click"
   | "become_member_click"
+  | "subscribe_click"
   | "donate_click"
   | "donation_amount_selected"
   | "membership_tier_selected";

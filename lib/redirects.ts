@@ -5,7 +5,23 @@
 export const LEGACY_EXACT: { source: string; destination: string }[] = [
   {
     "source": "/2024-season-subscription",
-    "destination": "/support"
+    "destination": "/subscriptions"
+  },
+  {
+    "source": "/subscribe-today",
+    "destination": "/subscriptions"
+  },
+  {
+    "source": "/2024-sub-first-look",
+    "destination": "/subscriptions"
+  },
+  {
+    "source": "/renew-your-subscription-online",
+    "destination": "/subscriptions#renew"
+  },
+  {
+    "source": "/2026-memberships",
+    "destination": "/membership"
   },
   {
     "source": "/30-club",
@@ -829,6 +845,7 @@ export const LEGACY_PREFIX: { source: string; destination: string }[] = [
 export const VALID_ROUTES: string[] = [
   "/concerts",
   "/membership",
+  "/subscriptions",
   "/support",
   "/visit",
   "/education",

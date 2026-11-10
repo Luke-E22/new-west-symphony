@@ -204,12 +204,24 @@ export default async function ConcertDetailPage({
                   </h2>
                   <p className="footnote mt-4">
                     Single tickets for this concert aren&rsquo;t on sale yet. Join the
-                    e-news below for on-sale dates, or explore membership for the
-                    season.
+                    e-news below for on-sale dates, or get the whole season with a
+                    subscription or membership.
                   </p>
-                  <Button href="/membership" variant="ghost" size="lg" fullWidth>
-                    Explore Membership
-                  </Button>
+                  <div className="buy-options mt-4">
+                    <Button
+                      href="/subscriptions"
+                      variant="ghost"
+                      size="lg"
+                      fullWidth
+                      track="subscribe_click"
+                      trackParams={{ location: "concert-coming-soon", concert: concert.slug }}
+                    >
+                      Explore Subscriptions
+                    </Button>
+                    <Button href="/membership" variant="ghost" size="lg" fullWidth>
+                      Explore Membership
+                    </Button>
+                  </div>
                 </>
               ) : (
                 <>

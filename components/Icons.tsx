@@ -1,6 +1,10 @@
 import {
   Armchair,
+  BadgePercent,
   BellRing,
+  CircleArrowUp,
+  Repeat,
+  TicketCheck,
   CalendarHeart,
   Store,
   TicketPercent,
@@ -72,6 +76,12 @@ const BENEFIT_ICONS: Record<string, LucideIcon> = {
   "Local business perks": Store,
   "Discounts on extra tickets": TicketPercent,
   "Use it at either venue": MapPin,
+  "Same seats, guaranteed": Armchair,
+  "Substantial savings": BadgePercent,
+  "Free ticket exchanges": Repeat,
+  "Lost ticket replacement": TicketCheck,
+  "A seat upgrade each season": CircleArrowUp,
+  "Discounts for guests": Users,
 };
 
 export function BenefitIcon({ title, size = 24 }: { title: string; size?: number }) {

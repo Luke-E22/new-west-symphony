@@ -452,7 +452,7 @@ const MONTHS_SHORT = [
  * the string, so the date part is the local one — slice it rather than building
  * a Date, which would re-interpret the instant in the runtime's timezone.
  */
-function localDateLabel(iso: string): string {
+export function localDateLabel(iso: string): string {
   const [, month, day] = iso.slice(0, 10).split("-");
   return `${MONTHS_SHORT[Number(month) - 1]} ${Number(day)}`;
 }

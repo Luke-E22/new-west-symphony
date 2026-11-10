@@ -127,6 +127,10 @@ export const MEMBER_FAQS = [
     a: "Once you're a member, you reserve seats at a flat $20 each whenever you'd like to attend a Masterpiece concert — up to your tier's seat count. Just contact your concierge or reserve online; there are no fixed performance dates tied to your membership.",
   },
   {
+    q: "Do I get the same seats every time?",
+    a: "They aren't guaranteed. Only subscribers are guaranteed the same seats for every concert. Members who reserve early may be able to get the same seats, and the flexibility lets you move around the hall and hear the orchestra from different seats.",
+  },
+  {
     q: "Are the seats free?",
     a: "No. Membership is an attend product, not a donation — your tier fee unlocks the right to reserve seats at the discounted $20 price. It's the flexible middle path between single tickets and a full subscription.",
   },

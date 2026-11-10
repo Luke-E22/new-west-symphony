@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import SectionHeading from "@/components/brand/SectionHeading";
 import Badge from "@/components/core/Badge";
 import Button from "@/components/core/Button";
@@ -9,7 +10,7 @@ import JsonLd from "@/components/JsonLd";
 import { BenefitIcon } from "@/components/Icons";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { faqJsonLd } from "@/lib/seo/jsonld";
-import { MEMBERSHIP_PURCHASE_URL } from "@/lib/config";
+import { MEMBERSHIP_PURCHASE_URL, SITE } from "@/lib/config";
 import {
   MEMBERSHIP_TIERS,
   MEMBER_STEPS,
@@ -158,6 +159,11 @@ export default function MembershipPage() {
             NextGen is for high-school &amp; college students; Family is for households with
             kids under 18. {CAMARILLO_CAP_NOTE}
           </p>
+          <p className="text-center mt-4">
+            <Link href="/subscriptions" className="quiet-link">
+              Want the same seats at every concert? See subscriptions →
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -186,6 +192,13 @@ export default function MembershipPage() {
           <div className="mt-6">
             <FaqAccordion items={MEMBER_FAQS} />
           </div>
+          <p className="footnote mt-6 text-center">
+            Questions, or ready to reserve? Call your membership concierge at{" "}
+            <a href={`tel:+1${SITE.membershipConciergePhone.replace(/\D/g, "")}`}>
+              {SITE.membershipConciergePhone}
+            </a>{" "}
+            or email <a href={`mailto:${SITE.membershipEmail}`}>{SITE.membershipEmail}</a>.
+          </p>
           <JsonLd data={faqJsonLd(MEMBER_FAQS)} />
         </div>
       </section>

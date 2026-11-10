@@ -13,12 +13,12 @@
 .site-header__bar {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
   min-height: 72px;
   padding-block: var(--space-3);
   /* The header needs more room than the 1200 content container for the
-     brand + 7-item nav + action cluster, so it spans a little wider. */
-  max-width: 1340px;
+     brand + 8-item nav + action cluster, so it spans wider. */
+  max-width: 1500px;
 }
 .brand-lockup {
   display: inline-flex;
@@ -41,7 +41,7 @@
 .site-nav {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: 14px;
   margin-inline: auto;
 }
 .site-nav__link {
@@ -144,13 +144,27 @@
 
 /* Buy Tickets (the lowest-priority action) only appears when the bar is wide
    enough for all three; below that, Become a Member + Donate stay visible. */
-@media (max-width: 1340px) {
+@media (max-width: 1439px) {
   .site-header__actions .action--buy {
     display: none;
   }
 }
+/* Trimmed side padding is what lets all three actions fit on a 1440 laptop. */
+@media (min-width: 1241px) and (max-width: 1520px) {
+  .site-header__bar {
+    padding-inline: var(--space-5);
+  }
+}
+/* Just above the hamburger breakpoint the full nav only fits without the
+   wordmark; the logo mark stays and still links home. */
+@media (min-width: 1241px) and (max-width: 1299px) {
+  .brand-lockup__wordmark,
+  .brand-lockup__divider {
+    display: none;
+  }
+}
 /* Collapse the nav to a hamburger before the nav + buttons would crowd
-   (the 7-item nav + Member + Donate needs ~1240px to fit). */
+   (the 8-item nav + Member + Donate needs ~1170px once the wordmark drops). */
 @media (max-width: 1240px) {
   .site-nav {
     display: none;

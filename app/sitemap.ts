@@ -6,6 +6,7 @@ const STATIC_ROUTES = [
   "",
   "/concerts",
   "/membership",
+  "/subscriptions",
   "/support",
   "/visit",
   "/education",
@@ -23,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE.url}${path}`,
     lastModified: now,
     changeFrequency: path === "" || path === "/concerts" ? "weekly" : "monthly",
-    priority: path === "" ? 1 : path === "/concerts" || path === "/membership" ? 0.9 : 0.7,
+    priority: path === "" ? 1 : path === "/concerts" || path === "/membership" || path === "/subscriptions" ? 0.9 : 0.7,
   }));
 
   const concertEntries: MetadataRoute.Sitemap = concertSlugs().map((slug) => ({

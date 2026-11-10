@@ -1,3 +1,5 @@
+import type { VenueKey } from "@/lib/data/types";
+
 /**
  * New West Symphony — site configuration & external integration points.
  *
@@ -37,6 +39,11 @@ export const SITE = {
   ticketOfficeHours: "Tue–Fri 10–4",
   ticketOfficePhone: "(805) 497-5800",
   ticketOfficeEmail: "boxoffice@newwestsymphony.org",
+  // The number NWS publishes on its ticketing, renewal, and membership pages.
+  ticketOfficeTollFree: "(866) 776-8400",
+  generalEmail: "symphony@newwestsymphony.org",
+  membershipConciergePhone: "(805) 435-2787",
+  membershipEmail: "membership@newwestsymphony.org",
 } as const;
 
 export const SOCIAL = {
@@ -56,6 +63,29 @@ export const SOCIAL = {
 export const MEMBERSHIP_PURCHASE_URL =
   "https://newwestsymphony.my.salesforce-sites.com/donate/?dfId=a0nPB00000J62aTYAR";
 
+/** The season the subscriptions page sells. Advance it once a year. */
+export const SUBSCRIPTION_SEASON = 2027;
+
+export interface SubscriptionPurchase {
+  href: string;
+  /** Short caption under the button, e.g. which plan to pick at checkout. */
+  note?: string;
+}
+
+/**
+ * Where each venue's season subscription is sold. Leave a venue out until its
+ * series is on sale: the page then shows "opening soon" and the Ticket Office
+ * number. Thousand Oaks sells through Ticketmaster's plan list, Camarillo through
+ * a Salesforce series event (the 2026 series was .../ticket/#/events/a0SPB000001qLe52AE):
+ *
+ *   to: { href: "https://am.ticketmaster.com/thousandoaks/buy",
+ *         note: "On Ticketmaster, choose New West Symphony 2027 Season." },
+ *   cam: { href: "https://newwestsymphony.my.salesforce-sites.com/ticket/#/events/<id>" },
+ *
+ * TODO(NWS): add both when the 2027 series go on sale.
+ */
+export const SUBSCRIPTION_PURCHASE: Partial<Record<VenueKey, SubscriptionPurchase>> = {};
+
 /** External ticketing & giving providers (the site links out; it sells nothing). */
 export const EXTERNAL = {
   // Tickets — venue-level fallbacks only. Every on-sale concert now carries
@@ -71,8 +101,10 @@ export const EXTERNAL = {
   // campaign's dfId, taken from the live page (/support/adopt-a-musician/).
   adoptAMusician:
     "https://newwestsymphony.my.salesforce-sites.com/donate/?dfId=a0n5c00001DHwaBAAT",
-  // Existing Salesforce patron portal (kept live through cutover, §11).
-  patronLogin: "https://nws.my.salesforce-sites.com/patron",
+  // Salesforce patron portal, as linked from the current site's navigation.
+  patronLogin: "https://newwestsymphony.my.salesforce-sites.com/ticket#/?promptForLogin",
+  // Opens the portal's subscription renewal tab (prompts for login first).
+  patronRenewal: "https://newwestsymphony.my.salesforce-sites.com/ticket/#/portal/pendingRenewals",
   // Watch & Listen.
   watchListen: SOCIAL.youtube,
   // E-news provider (Mailchimp) — the real NWS list (us11).
@@ -86,10 +118,11 @@ export const EXTERNAL = {
   boardInterestEmail: "boxoffice@newwestsymphony.org",
 } as const;
 
-/** Primary navigation — 6 core items + Membership beside Concerts (§global arch). */
+/** Primary navigation — core items, with Membership and Subscriptions beside Concerts (§global arch). */
 export const NAV = [
   { label: "Concerts", href: "/concerts" },
   { label: "Membership", href: "/membership" },
+  { label: "Subscribe", href: "/subscriptions" },
   { label: "Visit", href: "/visit" },
   { label: "Support", href: "/support" },
   { label: "Get Involved", href: "/get-involved" },

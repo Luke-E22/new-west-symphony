@@ -165,10 +165,10 @@ p {
   color: var(--text-on-dark);
 }
 
-/* Anchor offset for smooth-scroll targets that need finer control than the
-   global scroll-padding (used on #memberTiers, #memberHow, #eoi). */
+/* html's scroll-padding-top already clears the header; a margin here adds to
+   it, so targets stay at 0 unless one needs finer control. */
 .anchor-target {
-  scroll-margin-top: 110px;
+  scroll-margin-top: 0;
 }
 
 /* Fluid display headline helper. */
