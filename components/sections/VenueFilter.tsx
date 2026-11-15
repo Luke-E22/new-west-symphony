@@ -188,7 +188,7 @@ export default function VenueFilter({
         ))}
 
         {visPast.length > 0 && (
-          <section aria-labelledby="past-heading">
+          <section aria-labelledby="past-heading" id="past" style={{ scrollMarginTop: 64 }}>
             <div className="section-heading" style={{ marginBottom: "var(--space-6)" }}>
               <div className="section-heading__eyebrow">From the season</div>
               <hr className="section-heading__rule" />

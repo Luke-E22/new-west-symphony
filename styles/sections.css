@@ -237,6 +237,10 @@
 .stat__num--navy {
   color: var(--nws-navy);
 }
+/* Navy numerals sit on light grounds, where the on-dark label color fails contrast. */
+.stat__num--navy + .stat__label {
+  color: var(--text-muted);
+}
 .stat__label {
   font: var(--type-body-s);
   color: var(--text-on-dark-muted);

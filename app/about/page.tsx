@@ -70,7 +70,7 @@ export default function AboutPage() {
       </section>
 
       {/* 2 — Music Director: Michael Christie (cream) */}
-      <section className="section band-cream">
+      <section className="section band-cream" id="music-director">
         <div className="container split">
           <div>
             <div className="maestro-portrait">
@@ -98,7 +98,7 @@ export default function AboutPage() {
 
       {/* 2b — Interim CEO (white, compact): small portrait, short bio, and a
           "Learn more" that expands the long bio in place. */}
-      <section className="section-tight">
+      <section className="section-tight" id="leadership">
         <div className="container ceo-bio">
           <div className="ceo-bio__photo">
             <Image
@@ -122,7 +122,7 @@ export default function AboutPage() {
       </section>
 
       {/* 3 — Board of Directors (white) */}
-      <section className="section">
+      <section className="section" id="board">
         <div className="container">
           <SectionHeading
             eyebrow="Leadership"
@@ -215,7 +215,7 @@ export default function AboutPage() {
       </section>
 
       {/* 5 — New West Symphony Chorus (white) */}
-      <section className="section">
+      <section className="section" id="chorus">
         <div className="container split">
           <div className="media-frame">
             <Image
@@ -244,7 +244,7 @@ export default function AboutPage() {
       </section>
 
       {/* 6 — Symphony staff (cream) */}
-      <section className="section band-cream">
+      <section className="section band-cream" id="staff">
         <div className="container">
           <SectionHeading eyebrow="Behind the scenes" title="Symphony staff" />
           <div className="staff-grid mt-6">

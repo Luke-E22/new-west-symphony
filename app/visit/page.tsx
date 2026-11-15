@@ -112,7 +112,7 @@ export default function VisitPage() {
             </ul>
           </div>
           <div>
-            <Card accent padding="var(--space-7)">
+            <Card accent padding="var(--space-7)" id="families">
               <SectionHeading
                 eyebrow="Welcome"
                 title="Families & students welcome"

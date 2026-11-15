@@ -57,7 +57,7 @@ export default function GetInvolvedPage() {
         <div className="container">
           <div className="grid grid-3">
             {INVOLVED_ROUTES.map((route) => (
-              <Card key={route.name} interactive>
+              <Card key={route.name} id={route.id} interactive>
                 <div className="minilabel">{route.k}</div>
                 <h3
                   style={{

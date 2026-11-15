@@ -118,14 +118,4 @@ export const EXTERNAL = {
   boardInterestEmail: "boxoffice@newwestsymphony.org",
 } as const;
 
-/** Primary navigation — core items, with Membership and Subscriptions beside Concerts (§global arch). */
-export const NAV = [
-  { label: "Concerts", href: "/concerts" },
-  { label: "Membership", href: "/membership" },
-  { label: "Subscribe", href: "/subscriptions" },
-  { label: "Visit", href: "/visit" },
-  { label: "Support", href: "/support" },
-  { label: "Get Involved", href: "/get-involved" },
-  { label: "Education", href: "/education" },
-  { label: "About", href: "/about" },
-] as const;
+/* Primary navigation lives in lib/navigation.ts (menus and dropdown links). */

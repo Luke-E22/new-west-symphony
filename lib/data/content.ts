@@ -82,6 +82,7 @@ export const VISIT_PERKS = [
 
 export const INVOLVED_ROUTES = [
   {
+    id: "volunteer",
     k: "Give time",
     name: "Volunteer",
     // Ushers are provided by the concert halls — don't offer ushering here.
@@ -90,6 +91,7 @@ export const INVOLVED_ROUTES = [
     href: "mailto:symphony@newwestsymphony.org?subject=Volunteering%20with%20New%20West%20Symphony",
   },
   {
+    id: "sponsor",
     k: "Partner",
     name: "Become a Sponsor",
     desc: "Put your business behind live music and education with corporate and foundation sponsorships.",
@@ -97,6 +99,7 @@ export const INVOLVED_ROUTES = [
     href: "/support/sponsors#become",
   },
   {
+    id: "careers",
     k: "Join us",
     name: "Careers & Auditions",
     desc: "Open staff positions and musician auditions for the New West Symphony and Chorus.",
