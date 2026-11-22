@@ -118,6 +118,11 @@ export default function Footer() {
           built by{" "}
           <a href="https://lukeerickson.com" target="_blank" rel="noopener noreferrer">
             Luke Erickson
+          </a>{" "}
+          {/* Non-breaking spaces keep "via The Website Grant" on one line when it wraps. */}
+          via{"\u00a0"}
+          <a href="https://thewebsitegrant.com" target="_blank" rel="noopener noreferrer">
+            {"The\u00a0Website\u00a0Grant"}
           </a>
         </span>
       </div>
