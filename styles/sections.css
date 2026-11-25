@@ -1008,7 +1008,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* Tight column gap so all 7 directors sit in one desktop row (Luke centered). */
+  /* Tight column gap so seven directors fit one desktop row (Luke centered). */
   gap: var(--space-5) var(--space-4);
 }
 .roster-person {

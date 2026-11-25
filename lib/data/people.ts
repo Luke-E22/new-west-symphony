@@ -2,7 +2,9 @@ import type { Person } from "./types";
 
 /**
  * Board of Directors — the real roster (headshots pulled from
- * newwestsymphony.org/about/board). Order centers Luke Erickson (4th of 7).
+ * newwestsymphony.org/about/board). The first seven fill one desktop row with
+ * Luke Erickson centered (4th of 7); newer directors follow on the next row.
+ * Immanuel Portus has no headshot yet, so he shows the gradient fallback.
  */
 export const BOARD_MEMBERS: Person[] = [
   { name: "Anthony Vasquez", role: "Chair", photo: "/assets/board/anthony-vasquez.jpg" },
@@ -26,6 +28,8 @@ export const BOARD_MEMBERS: Person[] = [
   { name: "Marijane Unter", role: "Director", photo: "/assets/board/marijane-unter.png" },
   { name: "Gary Wartik", role: "Director", photo: "/assets/board/gary-wartik-v5.jpg" },
   { name: "Erin Pohl", role: "Director", photo: "/assets/board/erin-pohl-v2.jpg" },
+  { name: "Immanuel Portus", role: "Director" },
+  { name: "Mike Houser", role: "Director", photo: "/assets/board/mike-houser.jpg" },
 ];
 
 /**

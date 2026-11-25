@@ -11,7 +11,8 @@ const LINK_LABELS = {
 
 /**
  * Board of Directors roster with real headshots. The data order centers Luke
- * Erickson (4th of 7) and the centered flex layout keeps him mid-row.
+ * Erickson in the first desktop row (4th of 7) and the centered flex layout
+ * keeps him mid-row; later directors wrap to a centered second row.
  */
 export default function BoardRoster() {
   return (
